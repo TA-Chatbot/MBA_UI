@@ -189,10 +189,10 @@ function TabStrip({ active, onSelect, top }) {
     refs.current[next.id]?.focus();
   };
   return (
-    <div className="perf-tabbar sticky z-30 mt-4" style={{ top }}>
+    <div className="perf-tabbar sticky z-30 mt-4 bg-white rounded-lg shadow-lg px-2 py-2" style={{ top }}>
       <div
         ref={scrollerRef}
-        className={`perf-tabs-scroll bg-white rounded-lg shadow-lg px-2 py-2 flex gap-1 overflow-x-auto${
+        className={`perf-tabs-scroll flex gap-1 overflow-x-auto${
           fade.left ? ' perf-fade-left' : ''}${fade.right ? ' perf-fade-right' : ''}`}
         role="tablist"
         aria-label="Nội dung báo cáo"

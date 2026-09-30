@@ -49,7 +49,7 @@ export default function Heatmap({
   }`;
 
   return (
-    <div className="perf-heatmap overflow-x-auto" role="table" aria-label={label}>
+    <div className="perf-heatmap relative overflow-x-auto" role="table" aria-label={label}>
       <div className="grid gap-[2px] text-[11px]" style={{ gridTemplateColumns: template, minWidth: printing ? 0 : nCols * (cellWidth + 2) + 120 }}>
         <div role="row" className="contents">
         <div role="columnheader" />
@@ -75,7 +75,7 @@ export default function Heatmap({
                   <div
                     key={`c${j}`}
                     role="cell"
-                    className="perf-heat-cell h-7 rounded flex items-center justify-center tabular-nums"
+                    className="perf-heat-cell relative h-7 rounded flex items-center justify-center tabular-nums"
                     style={style}
                     title={cellTitle ? cellTitle(i, j, v) : undefined}
                   >
