@@ -223,7 +223,7 @@ const AdminPerformance = () => {
     <PrintContext.Provider value={printing}>
       <div
         ref={rootRef}
-        className="perf-page bg-gradient-to-br from-red-100 to-pink-100 flex flex-col min-h-screen"
+        className="perf-page bg-gradient-to-br from-red-100 to-pink-100 flex flex-col min-h-screen shrink-0"
         style={{ paddingTop: offsets.nav, '--perf-scroll-offset': `${offsets.nav + offsets.bar + 12}px` }}
       >
         <Navbar />
