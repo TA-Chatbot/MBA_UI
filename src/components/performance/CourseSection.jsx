@@ -1,9 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   fmtInt, fmtPercent, fmtSeconds, fmtUsd, fmtChange, TONE_CLASS, WEEKDAYS, WEEKDAY_NAMES, DASH,
 } from './format';
 import { Section, Block, EmptyNote, ShareBar, list } from './common';
 import Heatmap from './Heatmap';
+
+// Long tails (60+ courses, 30+ cohorts) bury the rows the meeting cares about:
+// show the top rows plus one "others" total, with a toggle for the full list.
+const COURSE_LIMIT = 15;
+const COHORT_LIMIT = 12;
+
+const sum = (rows, key) => rows.reduce((acc, r) => acc + (Number(r?.[key]) || 0), 0);
+
+function ShowAllToggle({ total, limit, expanded, onToggle, noun }) {
+  if (total <= limit) return null;
+  return (
+    <button
+      type="button"
+      onClick={onToggle}
+      aria-expanded={expanded}
+      className="perf-no-print mt-2 text-sm font-medium text-red-700 hover:underline"
+    >
+      {expanded ? 'Thu gọn' : `Xem tất cả ${fmtInt(total)} ${noun}`}
+    </button>
+  );
+}
 
 function CourseName({ source, name }) {
   if (!source) return <span>{name || DASH}</span>;
@@ -17,12 +38,18 @@ function CourseName({ source, name }) {
 }
 
 export default function CourseSection({ courses }) {
+  const [allCourses, setAllCourses] = useState(false);
+  const [allCohorts, setAllCohorts] = useState(false);
   const rows = list(courses?.rows);
+  const shownRows = allCourses ? rows : rows.slice(0, COURSE_LIMIT);
+  const restRows = allCourses ? [] : rows.slice(COURSE_LIMIT);
   const matrix = courses?.weekday_matrix || null;
   const matrixRows = list(matrix?.rows);
   const sources = list(matrix?.sources);
   const names = list(matrix?.names);
   const cohorts = list(courses?.cohorts);
+  const shownCohorts = allCohorts ? cohorts : cohorts.slice(0, COHORT_LIMIT);
+  const restCohorts = allCohorts ? [] : cohorts.slice(COHORT_LIMIT);
 
   const matrixLabels = matrixRows.map((_, i) => {
     const src = sources[i];
@@ -56,7 +83,7 @@ export default function CourseSection({ courses }) {
                 </tr>
               </thead>
               <tbody>
-                {rows.map((c, i) => {
+                {shownRows.map((c, i) => {
                   const change = fmtChange(c.change_pct, 'higher-better');
                   return (
                     <tr key={c.source || i}>
@@ -78,10 +105,31 @@ export default function CourseSection({ courses }) {
                     </tr>
                   );
                 })}
+                {restRows.length > 0 && (
+                  <tr className="text-gray-600" data-testid="course-others">
+                    <td>{fmtInt(restRows.length)} môn khác</td>
+                    <td className="num font-semibold">{fmtInt(sum(restRows, 'requests'))}</td>
+                    <td className="num">{fmtPercent(sum(restRows, 'share'))}</td>
+                    <td className="num">{DASH}</td>
+                    <td className="num text-gray-500">{fmtInt(sum(restRows, 'previous_requests'))}</td>
+                    <td className="num">{DASH}</td>
+                    <td className="num">{DASH}</td>
+                    <td className="num">{DASH}</td>
+                    <td className="num">{DASH}</td>
+                    <td className="num">{fmtUsd(sum(restRows, 'cost'))}</td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>
         )}
+        <ShowAllToggle
+          total={rows.length}
+          limit={COURSE_LIMIT}
+          expanded={allCourses}
+          onToggle={() => setAllCourses((v) => !v)}
+          noun="môn"
+        />
       </Block>
 
       <Block title="Requests theo môn × thứ trong tuần" note="Giúp trả lời: thứ nào cao hơn, do lớp nào.">
@@ -113,7 +161,7 @@ export default function CourseSection({ courses }) {
                 </tr>
               </thead>
               <tbody>
-                {cohorts.map((c, i) => (
+                {shownCohorts.map((c, i) => (
                   <tr key={c.key || i}>
                     <td className="font-medium text-gray-900">{c.key || DASH}</td>
                     <td className="num">{c.intake ?? DASH}</td>
@@ -128,10 +176,27 @@ export default function CourseSection({ courses }) {
                     </td>
                   </tr>
                 ))}
+                {restCohorts.length > 0 && (
+                  <tr className="text-gray-600" data-testid="cohort-others">
+                    <td>{fmtInt(restCohorts.length)} khóa khác</td>
+                    <td className="num">{DASH}</td>
+                    <td>{DASH}</td>
+                    <td className="num">{fmtInt(sum(restCohorts, 'users'))}</td>
+                    <td className="num font-semibold">{fmtInt(sum(restCohorts, 'requests'))}</td>
+                    <td className="num">{fmtPercent(sum(restCohorts, 'share'))}</td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>
         )}
+        <ShowAllToggle
+          total={cohorts.length}
+          limit={COHORT_LIMIT}
+          expanded={allCohorts}
+          onToggle={() => setAllCohorts((v) => !v)}
+          noun="khóa"
+        />
       </Block>
     </Section>
   );

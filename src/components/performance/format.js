@@ -296,7 +296,7 @@ export const MISSING_FIELD_LABELS = {
   latency: 'Thiếu latency',
   ttft: 'Thiếu TTFT',
   output_tokens: 'Thiếu output tokens',
-  cost: 'Thiếu chi phí (Langfuse)',
+  cost: 'Chưa tính được chi phí',
   session_id: 'Thiếu session_id',
 };
 

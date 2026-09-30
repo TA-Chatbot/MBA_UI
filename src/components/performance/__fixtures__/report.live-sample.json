@@ -1,0 +1,7192 @@
+{
+ "meta": {
+  "project_id": "mba-api",
+  "timezone": "Asia/Ho_Chi_Minh",
+  "from": "2026-09-23",
+  "to": "2026-09-30",
+  "days": 8,
+  "start": "2026-09-23T00:00:00+07:00",
+  "end": "2026-10-01T00:00:00+07:00",
+  "includes_today": false,
+  "today": "2026-10-01",
+  "previous": {
+   "from": "2026-09-15",
+   "to": "2026-09-22"
+  },
+  "generated_at": "2026-10-01T02:41:24+07:00",
+  "cached": false,
+  "trace_url_base": "https://lang.dinhmanhhung.net/project/mba-api/traces/",
+  "history_start": "2026-09-03",
+  "excluded_users": [
+   "ptit:*"
+  ]
+ },
+ "kpis": {
+  "users": {
+   "value": 489,
+   "previous": 230,
+   "change_pct": 112.6086956521739
+  },
+  "requests": {
+   "value": 2170,
+   "previous": 1010,
+   "change_pct": 114.85148514851485
+  },
+  "latency_mean": {
+   "value": 6.914545161290324,
+   "previous": 7.630274257425739,
+   "change_pct": -9.38012281064304
+  },
+  "ttft_mean": {
+   "value": 4.297746518105857,
+   "previous": 4.229485600794449,
+   "change_pct": 1.613929535511029
+  },
+  "latency_p95": {
+   "value": 14.046350000000011,
+   "previous": 12.110349999999999,
+   "change_pct": 15.986325746159382
+  },
+  "error_rate": {
+   "value": 0.0,
+   "previous": 0.0,
+   "change_pct": null
+  },
+  "sessions": {
+   "value": 730,
+   "previous": 317,
+   "change_pct": 130.2839116719243
+  },
+  "total_tokens": {
+   "value": 3839841,
+   "previous": 2118179,
+   "change_pct": 81.28028839866697
+  },
+  "cost": {
+   "value": 0.5666858999389996,
+   "previous": 0.3807034498529999,
+   "change_pct": 48.8523154066013,
+   "incomplete": false
+  }
+ },
+ "usage": {
+  "slots": [
+   "00:00-08:00",
+   "08:00-13:00",
+   "13:00-18:00",
+   "18:00-24:00"
+  ],
+  "days": [
+   {
+    "date": "2026-09-23",
+    "weekday": 2,
+    "partial": false,
+    "requests": 376,
+    "users": 103,
+    "slot_requests": [
+     0,
+     258,
+     107,
+     11
+    ],
+    "slot_users": [
+     0,
+     58,
+     38,
+     7
+    ],
+    "hour_requests": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     30,
+     1,
+     138,
+     89,
+     0,
+     5,
+     26,
+     76,
+     0,
+     0,
+     0,
+     0,
+     3,
+     5,
+     2,
+     1
+    ],
+    "hour_users": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     9,
+     1,
+     46,
+     28,
+     0,
+     2,
+     20,
+     30,
+     0,
+     0,
+     0,
+     0,
+     3,
+     2,
+     1,
+     1
+    ]
+   },
+   {
+    "date": "2026-09-24",
+    "weekday": 3,
+    "partial": false,
+    "requests": 118,
+    "users": 45,
+    "slot_requests": [
+     0,
+     3,
+     60,
+     55
+    ],
+    "slot_users": [
+     0,
+     3,
+     16,
+     26
+    ],
+    "hour_requests": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     2,
+     1,
+     0,
+     0,
+     0,
+     1,
+     18,
+     33,
+     2,
+     6,
+     0,
+     1,
+     2,
+     30,
+     12,
+     10
+    ],
+    "hour_users": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     2,
+     1,
+     0,
+     0,
+     0,
+     1,
+     10,
+     9,
+     2,
+     1,
+     0,
+     1,
+     1,
+     11,
+     5,
+     8
+    ]
+   },
+   {
+    "date": "2026-09-25",
+    "weekday": 4,
+    "partial": false,
+    "requests": 425,
+    "users": 108,
+    "slot_requests": [
+     4,
+     224,
+     172,
+     25
+    ],
+    "slot_users": [
+     4,
+     58,
+     41,
+     6
+    ],
+    "hour_requests": [
+     3,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     1,
+     0,
+     1,
+     93,
+     128,
+     2,
+     0,
+     80,
+     91,
+     0,
+     1,
+     0,
+     2,
+     0,
+     15,
+     6,
+     2
+    ],
+    "hour_users": [
+     3,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     1,
+     0,
+     1,
+     38,
+     43,
+     2,
+     0,
+     33,
+     27,
+     0,
+     1,
+     0,
+     1,
+     0,
+     2,
+     3,
+     1
+    ]
+   },
+   {
+    "date": "2026-09-26",
+    "weekday": 5,
+    "partial": false,
+    "requests": 28,
+    "users": 15,
+    "slot_requests": [
+     5,
+     8,
+     15,
+     0
+    ],
+    "slot_users": [
+     4,
+     4,
+     7,
+     0
+    ],
+    "hour_requests": [
+     3,
+     1,
+     0,
+     0,
+     0,
+     0,
+     0,
+     1,
+     1,
+     0,
+     3,
+     2,
+     2,
+     0,
+     9,
+     2,
+     2,
+     2,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    "hour_users": [
+     2,
+     1,
+     0,
+     0,
+     0,
+     0,
+     0,
+     1,
+     1,
+     0,
+     2,
+     1,
+     1,
+     0,
+     3,
+     2,
+     1,
+     2,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ]
+   },
+   {
+    "date": "2026-09-27",
+    "weekday": 6,
+    "partial": false,
+    "requests": 31,
+    "users": 8,
+    "slot_requests": [
+     0,
+     0,
+     7,
+     24
+    ],
+    "slot_users": [
+     0,
+     0,
+     5,
+     3
+    ],
+    "hour_requests": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     1,
+     3,
+     2,
+     0,
+     1,
+     0,
+     0,
+     0,
+     11,
+     13,
+     0
+    ],
+    "hour_users": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     1,
+     2,
+     2,
+     0,
+     1,
+     0,
+     0,
+     0,
+     3,
+     2,
+     0
+    ]
+   },
+   {
+    "date": "2026-09-28",
+    "weekday": 0,
+    "partial": false,
+    "requests": 110,
+    "users": 31,
+    "slot_requests": [
+     6,
+     62,
+     19,
+     23
+    ],
+    "slot_users": [
+     3,
+     16,
+     7,
+     6
+    ],
+    "hour_requests": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     6,
+     5,
+     50,
+     7,
+     0,
+     0,
+     0,
+     18,
+     1,
+     0,
+     0,
+     0,
+     6,
+     8,
+     0,
+     2,
+     7
+    ],
+    "hour_users": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     3,
+     3,
+     12,
+     3,
+     0,
+     0,
+     0,
+     6,
+     1,
+     0,
+     0,
+     0,
+     2,
+     2,
+     0,
+     2,
+     1
+    ]
+   },
+   {
+    "date": "2026-09-29",
+    "weekday": 1,
+    "partial": false,
+    "requests": 604,
+    "users": 126,
+    "slot_requests": [
+     19,
+     344,
+     134,
+     107
+    ],
+    "slot_users": [
+     2,
+     72,
+     34,
+     28
+    ],
+    "hour_requests": [
+     13,
+     0,
+     0,
+     0,
+     0,
+     0,
+     5,
+     1,
+     2,
+     8,
+     170,
+     149,
+     15,
+     21,
+     29,
+     13,
+     18,
+     53,
+     4,
+     9,
+     4,
+     19,
+     53,
+     18
+    ],
+    "hour_users": [
+     1,
+     0,
+     0,
+     0,
+     0,
+     0,
+     1,
+     1,
+     1,
+     4,
+     46,
+     36,
+     6,
+     13,
+     8,
+     5,
+     10,
+     8,
+     4,
+     2,
+     4,
+     6,
+     5,
+     8
+    ]
+   },
+   {
+    "date": "2026-09-30",
+    "weekday": 2,
+    "partial": false,
+    "requests": 478,
+    "users": 110,
+    "slot_requests": [
+     104,
+     141,
+     199,
+     34
+    ],
+    "slot_users": [
+     28,
+     40,
+     39,
+     13
+    ],
+    "hour_requests": [
+     5,
+     0,
+     3,
+     0,
+     0,
+     0,
+     1,
+     95,
+     23,
+     102,
+     3,
+     2,
+     11,
+     143,
+     30,
+     11,
+     5,
+     10,
+     3,
+     10,
+     0,
+     12,
+     4,
+     5
+    ],
+    "hour_users": [
+     2,
+     0,
+     1,
+     0,
+     0,
+     0,
+     1,
+     25,
+     9,
+     29,
+     1,
+     2,
+     4,
+     26,
+     11,
+     3,
+     1,
+     2,
+     3,
+     4,
+     0,
+     4,
+     3,
+     2
+    ]
+   }
+  ],
+  "slot_totals": [
+   138,
+   1040,
+   713,
+   279
+  ],
+  "heatmap": [
+   [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    6,
+    5,
+    50,
+    7,
+    0,
+    0,
+    0,
+    18,
+    1,
+    0,
+    0,
+    0,
+    6,
+    8,
+    0,
+    2,
+    7
+   ],
+   [
+    13,
+    0,
+    0,
+    0,
+    0,
+    0,
+    5,
+    1,
+    2,
+    8,
+    170,
+    149,
+    15,
+    21,
+    29,
+    13,
+    18,
+    53,
+    4,
+    9,
+    4,
+    19,
+    53,
+    18
+   ],
+   [
+    5,
+    0,
+    3,
+    0,
+    0,
+    0,
+    1,
+    95,
+    53,
+    103,
+    141,
+    91,
+    11,
+    148,
+    56,
+    87,
+    5,
+    10,
+    3,
+    10,
+    3,
+    17,
+    6,
+    6
+   ],
+   [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    2,
+    1,
+    0,
+    0,
+    0,
+    1,
+    18,
+    33,
+    2,
+    6,
+    0,
+    1,
+    2,
+    30,
+    12,
+    10
+   ],
+   [
+    3,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    1,
+    93,
+    128,
+    2,
+    0,
+    80,
+    91,
+    0,
+    1,
+    0,
+    2,
+    0,
+    15,
+    6,
+    2
+   ],
+   [
+    3,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    0,
+    3,
+    2,
+    2,
+    0,
+    9,
+    2,
+    2,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    3,
+    2,
+    0,
+    1,
+    0,
+    0,
+    0,
+    11,
+    13,
+    0
+   ]
+  ],
+  "weekdays": [
+   {
+    "weekday": 0,
+    "days": 1,
+    "requests": 110,
+    "avg_requests": 110.0,
+    "avg_users": 31.0
+   },
+   {
+    "weekday": 1,
+    "days": 1,
+    "requests": 604,
+    "avg_requests": 604.0,
+    "avg_users": 126.0
+   },
+   {
+    "weekday": 2,
+    "days": 2,
+    "requests": 854,
+    "avg_requests": 427.0,
+    "avg_users": 106.5
+   },
+   {
+    "weekday": 3,
+    "days": 1,
+    "requests": 118,
+    "avg_requests": 118.0,
+    "avg_users": 45.0
+   },
+   {
+    "weekday": 4,
+    "days": 1,
+    "requests": 425,
+    "avg_requests": 425.0,
+    "avg_users": 108.0
+   },
+   {
+    "weekday": 5,
+    "days": 1,
+    "requests": 28,
+    "avg_requests": 28.0,
+    "avg_users": 15.0
+   },
+   {
+    "weekday": 6,
+    "days": 1,
+    "requests": 31,
+    "avg_requests": 31.0,
+    "avg_users": 8.0
+   }
+  ]
+ },
+ "courses": {
+  "rows": [
+   {
+    "source": "BSA12117",
+    "name": "Pháp luật và sở hữu trí tuệ",
+    "requests": 1056,
+    "share": 48.663594470046085,
+    "users": 268,
+    "previous_requests": 556,
+    "change_pct": 89.92805755395683,
+    "latency_mean": 7.647638257575765,
+    "latency_p95": 15.5415,
+    "ttft_mean": 4.09779408960915,
+    "cost": 0.32899999994600043
+   },
+   {
+    "source": "MAR1408",
+    "name": "Phân tích web",
+    "requests": 387,
+    "share": 17.83410138248848,
+    "users": 74,
+    "previous_requests": 0,
+    "change_pct": null,
+    "latency_mean": 5.038346253229976,
+    "latency_p95": 8.5323,
+    "ttft_mean": 4.330917098445594,
+    "cost": 0.06903920000000001
+   },
+   {
+    "source": "MAR1406",
+    "name": "Marketing qua phương tiện truyền thông xã hội",
+    "requests": 94,
+    "share": 4.331797235023042,
+    "users": 32,
+    "previous_requests": 0,
+    "change_pct": null,
+    "latency_mean": 5.457521276595745,
+    "latency_p95": 11.614649999999992,
+    "ttft_mean": 3.5223516483516497,
+    "cost": 0.0175107
+   },
+   {
+    "source": "BSA1310",
+    "name": "Kinh tế vi mô 1",
+    "requests": 86,
+    "share": 3.9631336405529956,
+    "users": 13,
+    "previous_requests": 108,
+    "change_pct": -20.37037037037037,
+    "latency_mean": 6.7713604651162775,
+    "latency_p95": 10.2385,
+    "ttft_mean": 4.7012650602409645,
+    "cost": 0.021186499999999997
+   },
+   {
+    "source": "MAR1471_CLC",
+    "name": "Chuyên đề: Xu hướng công nghệ marketing số (Perspectives of Digital Marketing Technologies)",
+    "requests": 70,
+    "share": 3.225806451612903,
+    "users": 11,
+    "previous_requests": 0,
+    "change_pct": null,
+    "latency_mean": 5.243628571428571,
+    "latency_p95": 7.95655,
+    "ttft_mean": 3.343357142857143,
+    "cost": 0.0146711
+   },
+   {
+    "source": "MAR1323",
+    "name": "Thương mại điện tử",
+    "requests": 48,
+    "share": 2.2119815668202767,
+    "users": 21,
+    "previous_requests": 0,
+    "change_pct": null,
+    "latency_mean": 5.896833333333333,
+    "latency_p95": 9.334150000000001,
+    "ttft_mean": 4.429625000000001,
+    "cost": 0.011382699999999999
+   },
+   {
+    "source": "MAR1438",
+    "name": "Khai phá dữ liệu trong Marketing",
+    "requests": 37,
+    "share": 1.705069124423963,
+    "users": 11,
+    "previous_requests": 0,
+    "change_pct": null,
+    "latency_mean": 6.174756756756756,
+    "latency_p95": 8.622200000000007,
+    "ttft_mean": 3.871243243243243,
+    "cost": 0.007528600000000001
+   },
+   {
+    "source": "BSA1236",
+    "name": "Tâm lý quản lý",
+    "requests": 24,
+    "share": 1.1059907834101383,
+    "users": 6,
+    "previous_requests": 11,
+    "change_pct": 118.18181818181819,
+    "latency_mean": 7.7448749999999995,
+    "latency_p95": 15.185350000000007,
+    "ttft_mean": 4.6700833333333325,
+    "cost": 0.005461849997
+   },
+   {
+    "source": "BSA1311",
+    "name": "Kinh tế vĩ mô 1",
+    "requests": 23,
+    "share": 1.0599078341013826,
+    "users": 7,
+    "previous_requests": 47,
+    "change_pct": -51.06382978723404,
+    "latency_mean": 6.162347826086956,
+    "latency_p95": 12.834199999999996,
+    "ttft_mean": 4.517869565217392,
+    "cost": 0.005353600000000002
+   },
+   {
+    "source": "MAR1361_CLC",
+    "name": "Quản trị dự án marketing (Marketing project management)",
+    "requests": 23,
+    "share": 1.0599078341013826,
+    "users": 5,
+    "previous_requests": 0,
+    "change_pct": null,
+    "latency_mean": 8.883956521739131,
+    "latency_p95": 22.665499999999994,
+    "ttft_mean": 4.228434782608694,
+    "cost": 0.0072196000000000005
+   },
+   {
+    "source": "MAR1425_CLC",
+    "name": "Marketing dịch vụ (service marketing)",
+    "requests": 23,
+    "share": 1.0599078341013826,
+    "users": 2,
+    "previous_requests": 1,
+    "change_pct": 2200.0,
+    "latency_mean": 11.566565217391304,
+    "latency_p95": 17.755300000000002,
+    "ttft_mean": 5.176045454545456,
+    "cost": 0.0080986
+   },
+   {
+    "source": "BSA1328",
+    "name": "Quản trị học",
+    "requests": 20,
+    "share": 0.9216589861751152,
+    "users": 8,
+    "previous_requests": 31,
+    "change_pct": -35.483870967741936,
+    "latency_mean": 6.720000000000001,
+    "latency_p95": 10.930950000000008,
+    "ttft_mean": 4.560500000000001,
+    "cost": 0.0045946
+   },
+   {
+    "source": "BSA1241",
+    "name": "Toán kinh tế",
+    "requests": 19,
+    "share": 0.8755760368663594,
+    "users": 4,
+    "previous_requests": 17,
+    "change_pct": 11.764705882352942,
+    "latency_mean": 6.530263157894737,
+    "latency_p95": 8.753400000000005,
+    "ttft_mean": 5.073526315789474,
+    "cost": 0.005348800000000001
+   },
+   {
+    "source": "MAR1401",
+    "name": "Chiến lược phương tiện truyền thông",
+    "requests": 19,
+    "share": 0.8755760368663594,
+    "users": 6,
+    "previous_requests": 0,
+    "change_pct": null,
+    "latency_mean": 6.481526315789473,
+    "latency_p95": 10.874100000000002,
+    "ttft_mean": 4.376842105263158,
+    "cost": 0.004211500000000001
+   },
+   {
+    "source": "MAR1405",
+    "name": "Marketing bằng công cụ tìm kiếm",
+    "requests": 19,
+    "share": 0.8755760368663594,
+    "users": 8,
+    "previous_requests": 0,
+    "change_pct": null,
+    "latency_mean": 5.490842105263159,
+    "latency_p95": 7.744000000000001,
+    "ttft_mean": 4.971263157894737,
+    "cost": 0.0035089999999999995
+   },
+   {
+    "source": "MAR1322",
+    "name": "Marketing căn bản",
+    "requests": 17,
+    "share": 0.783410138248848,
+    "users": 6,
+    "previous_requests": 14,
+    "change_pct": 21.428571428571427,
+    "latency_mean": 8.144882352941176,
+    "latency_p95": 13.547,
+    "ttft_mean": 4.423764705882354,
+    "cost": 0.0036009
+   },
+   {
+    "source": "MAR1413",
+    "name": "Tổng quan biên tập web",
+    "requests": 16,
+    "share": 0.7373271889400922,
+    "users": 8,
+    "previous_requests": 0,
+    "change_pct": null,
+    "latency_mean": 5.527125,
+    "latency_p95": 9.229,
+    "ttft_mean": 5.093437499999999,
+    "cost": 0.0026061
+   },
+   {
+    "source": "BSA1392",
+    "name": "Kinh tế học đại cương",
+    "requests": 15,
+    "share": 0.6912442396313364,
+    "users": 8,
+    "previous_requests": 64,
+    "change_pct": -76.5625,
+    "latency_mean": 8.454666666666668,
+    "latency_p95": 14.713000000000005,
+    "ttft_mean": 6.034400000000001,
+    "cost": 0.0031279000000000003
+   },
+   {
+    "source": "MAR1410",
+    "name": "Quản trị quảng cáo",
+    "requests": 14,
+    "share": 0.6451612903225806,
+    "users": 6,
+    "previous_requests": 0,
+    "change_pct": null,
+    "latency_mean": 10.984785714285712,
+    "latency_p95": 24.9623,
+    "ttft_mean": 6.886285714285714,
+    "cost": 0.004104
+   },
+   {
+    "source": "MAR1485",
+    "name": "Phương tiện truyền thông trong quan hệ công chúng",
+    "requests": 14,
+    "share": 0.6451612903225806,
+    "users": 5,
+    "previous_requests": 0,
+    "change_pct": null,
+    "latency_mean": 6.57442857142857,
+    "latency_p95": 9.46905,
+    "ttft_mean": 5.0013571428571435,
+    "cost": 0.0024866999999999997
+   },
+   {
+    "source": "FIA1439",
+    "name": "Ngân Hàng và nghiệp vụ ngân hàng",
+    "requests": 12,
+    "share": 0.5529953917050692,
+    "users": 2,
+    "previous_requests": 16,
+    "change_pct": -25.0,
+    "latency_mean": 7.009250000000001,
+    "latency_p95": 14.98815,
+    "ttft_mean": 4.791083333333333,
+    "cost": 0.0050236
+   },
+   {
+    "source": "FIA1465",
+    "name": "Đầu tư Tài chính",
+    "requests": 11,
+    "share": 0.5069124423963134,
+    "users": 3,
+    "previous_requests": 13,
+    "change_pct": -15.384615384615385,
+    "latency_mean": 9.04581818181818,
+    "latency_p95": 13.89,
+    "ttft_mean": 5.615454545454546,
+    "cost": 0.004083399999
+   },
+   {
+    "source": "FIA1374",
+    "name": "Xuất nhập khẩu và Thanh toán Quốc tế",
+    "requests": 10,
+    "share": 0.4608294930875576,
+    "users": 5,
+    "previous_requests": 1,
+    "change_pct": 900.0,
+    "latency_mean": 10.3928,
+    "latency_p95": 15.8021,
+    "ttft_mean": 5.312999999999999,
+    "cost": 0.00261255
+   },
+   {
+    "source": "MAR1329_CLC",
+    "name": "Quản trị bán hàng (sales management)",
+    "requests": 10,
+    "share": 0.4608294930875576,
+    "users": 5,
+    "previous_requests": 0,
+    "change_pct": null,
+    "latency_mean": 11.3028,
+    "latency_p95": 29.419600000000003,
+    "ttft_mean": 5.741899999999999,
+    "cost": 0.0033748
+   },
+   {
+    "source": "MAR1437",
+    "name": "Phân tích Marketing",
+    "requests": 9,
+    "share": 0.4147465437788018,
+    "users": 4,
+    "previous_requests": 0,
+    "change_pct": null,
+    "latency_mean": 6.398888888888889,
+    "latency_p95": 8.9182,
+    "ttft_mean": 5.828222222222223,
+    "cost": 0.0016479
+   },
+   {
+    "source": "BSA1393",
+    "name": "Nguyên lý cơ bản về logistics và quản lý chuỗi cung ứng",
+    "requests": 7,
+    "share": 0.3225806451612903,
+    "users": 3,
+    "previous_requests": 13,
+    "change_pct": -46.15384615384615,
+    "latency_mean": 5.591285714285715,
+    "latency_p95": 8.3987,
+    "ttft_mean": 4.557142857142858,
+    "cost": 0.0011385000000000002
+   },
+   {
+    "source": "MAR1314",
+    "name": "Truyền thông marketing tích hợp",
+    "requests": 7,
+    "share": 0.3225806451612903,
+    "users": 7,
+    "previous_requests": 0,
+    "change_pct": null,
+    "latency_mean": 7.881571428571428,
+    "latency_p95": 12.5523,
+    "ttft_mean": 6.5967142857142855,
+    "cost": 0.0018664999999999999
+   },
+   {
+    "source": "MAR1402",
+    "name": "Đề án: Kế hoạch Internet marketing",
+    "requests": 7,
+    "share": 0.3225806451612903,
+    "users": 4,
+    "previous_requests": 0,
+    "change_pct": null,
+    "latency_mean": 5.059714285714286,
+    "latency_p95": 8.4313,
+    "ttft_mean": 4.681857142857142,
+    "cost": 0.0011167
+   },
+   {
+    "source": "BSA1309",
+    "name": "Kinh tế lượng",
+    "requests": 6,
+    "share": 0.2764976958525346,
+    "users": 3,
+    "previous_requests": 46,
+    "change_pct": -86.95652173913044,
+    "latency_mean": 7.103999999999999,
+    "latency_p95": 10.02575,
+    "ttft_mean": 4.778333333333333,
+    "cost": 0.0014340000000000004
+   },
+   {
+    "source": "FIA13126",
+    "name": "Định giá doanh nghiệp",
+    "requests": 6,
+    "share": 0.2764976958525346,
+    "users": 2,
+    "previous_requests": 4,
+    "change_pct": 50.0,
+    "latency_mean": 8.094833333333334,
+    "latency_p95": 10.975249999999999,
+    "ttft_mean": 7.474166666666666,
+    "cost": 0.0012771499990000001
+   },
+   {
+    "source": "MAR1383",
+    "name": "Marketing quan hệ",
+    "requests": 6,
+    "share": 0.2764976958525346,
+    "users": 1,
+    "previous_requests": 0,
+    "change_pct": null,
+    "latency_mean": 12.754833333333336,
+    "latency_p95": 22.05125,
+    "ttft_mean": 6.583833333333334,
+    "cost": 0.0028304999999999997
+   },
+   {
+    "source": "MAR1467_CLC",
+    "name": "Phát triển sản phẩm mới và cải tiến (New Product Development & Innovation)",
+    "requests": 6,
+    "share": 0.2764976958525346,
+    "users": 2,
+    "previous_requests": 0,
+    "change_pct": null,
+    "latency_mean": 5.967166666666667,
+    "latency_p95": 6.704000000000001,
+    "ttft_mean": 5.335333333333334,
+    "cost": 0.0010955999999999997
+   },
+   {
+    "source": "FIA1389",
+    "name": "Kế toán trong kinh doanh",
+    "requests": 5,
+    "share": 0.2304147465437788,
+    "users": 1,
+    "previous_requests": 0,
+    "change_pct": null,
+    "latency_mean": 5.0006,
+    "latency_p95": 7.0486,
+    "ttft_mean": 4.489,
+    "cost": 0.0009675000000000002
+   },
+   {
+    "source": "MAR1419",
+    "name": "Truyền thông nội bộ trong tổ chức",
+    "requests": 5,
+    "share": 0.2304147465437788,
+    "users": 2,
+    "previous_requests": 0,
+    "change_pct": null,
+    "latency_mean": 4.045,
+    "latency_p95": 6.342,
+    "ttft_mean": 3.2014000000000005,
+    "cost": 0.0006139
+   },
+   {
+    "source": "BSA1338",
+    "name": "Thống kê doanh nghiệp",
+    "requests": 4,
+    "share": 0.18433179723502305,
+    "users": 3,
+    "previous_requests": 0,
+    "change_pct": null,
+    "latency_mean": 7.336,
+    "latency_p95": 10.33615,
+    "ttft_mean": 5.04875,
+    "cost": 0.000605649998
+   },
+   {
+    "source": "FIA1402",
+    "name": "CFA",
+    "requests": 4,
+    "share": 0.18433179723502305,
+    "users": 1,
+    "previous_requests": 2,
+    "change_pct": 100.0,
+    "latency_mean": 6.9365000000000006,
+    "latency_p95": 8.7478,
+    "ttft_mean": 5.14375,
+    "cost": 0.0006448000000000001
+   },
+   {
+    "source": "FIA1495_CLC",
+    "name": "Kiểm toán và dịch vụ đảm bảo - ACCA",
+    "requests": 4,
+    "share": 0.18433179723502305,
+    "users": 2,
+    "previous_requests": 0,
+    "change_pct": null,
+    "latency_mean": 7.494,
+    "latency_p95": 9.36775,
+    "ttft_mean": 6.8955,
+    "cost": 0.0008033999999999999
+   },
+   {
+    "source": "MAR1439",
+    "name": "Trí tuệ Marketing",
+    "requests": 4,
+    "share": 0.18433179723502305,
+    "users": 3,
+    "previous_requests": 0,
+    "change_pct": null,
+    "latency_mean": 5.797499999999999,
+    "latency_p95": 6.15905,
+    "ttft_mean": 5.324,
+    "cost": 0.0007141
+   },
+   {
+    "source": "FIA14114",
+    "name": "Phân Tích và lập kế hoạch tài chính",
+    "requests": 3,
+    "share": 0.1382488479262673,
+    "users": 2,
+    "previous_requests": 15,
+    "change_pct": -80.0,
+    "latency_mean": 7.1193333333333335,
+    "latency_p95": 8.0389,
+    "ttft_mean": 5.627666666666666,
+    "cost": 0.00047975
+   },
+   {
+    "source": "MAR1309",
+    "name": "Phương pháp nghiên cứu marketing",
+    "requests": 3,
+    "share": 0.1382488479262673,
+    "users": 2,
+    "previous_requests": 0,
+    "change_pct": null,
+    "latency_mean": 8.472666666666667,
+    "latency_p95": 9.1893,
+    "ttft_mean": 4.5136666666666665,
+    "cost": 0.0006465
+   },
+   {
+    "source": "MAR1358_CLC",
+    "name": "Đạo đức Marketing (Marketing Ethics)",
+    "requests": 3,
+    "share": 0.1382488479262673,
+    "users": 1,
+    "previous_requests": 0,
+    "change_pct": null,
+    "latency_mean": 6.472333333333334,
+    "latency_p95": 7.6324,
+    "ttft_mean": 3.066333333333333,
+    "cost": 0.0005475
+   },
+   {
+    "source": "MAR1406_CLC",
+    "name": "Marketing qua phương tiện truyền thông xã hội (Social Media Marketing)",
+    "requests": 3,
+    "share": 0.1382488479262673,
+    "users": 1,
+    "previous_requests": 0,
+    "change_pct": null,
+    "latency_mean": 4.713666666666666,
+    "latency_p95": 5.8608,
+    "ttft_mean": 3.0366666666666666,
+    "cost": 0.0005057
+   },
+   {
+    "source": "MAR1424",
+    "name": "Quản trị marketing",
+    "requests": 3,
+    "share": 0.1382488479262673,
+    "users": 2,
+    "previous_requests": 11,
+    "change_pct": -72.72727272727273,
+    "latency_mean": 13.253333333333332,
+    "latency_p95": 13.9552,
+    "ttft_mean": 7.8116666666666665,
+    "cost": 0.00127515
+   },
+   {
+    "source": "BSA1310_CLC",
+    "name": "Kinh tế vi mô",
+    "requests": 1,
+    "share": 0.04608294930875576,
+    "users": 1,
+    "previous_requests": 0,
+    "change_pct": null,
+    "latency_mean": 4.118,
+    "latency_p95": 4.118,
+    "ttft_mean": 3.684,
+    "cost": 0.0001179
+   },
+   {
+    "source": "BSA13141",
+    "name": "Nhập môn công nghệ logistics và quản lý chuỗi cung ứng",
+    "requests": 1,
+    "share": 0.04608294930875576,
+    "users": 1,
+    "previous_requests": 1,
+    "change_pct": 0.0,
+    "latency_mean": 3.982,
+    "latency_p95": 3.982,
+    "ttft_mean": 3.119,
+    "cost": 0.0001099
+   },
+   {
+    "source": "BSA1351",
+    "name": "Logicstics căn bản",
+    "requests": 1,
+    "share": 0.04608294930875576,
+    "users": 1,
+    "previous_requests": 11,
+    "change_pct": -90.9090909090909,
+    "latency_mean": 11.184,
+    "latency_p95": 11.184,
+    "ttft_mean": 8.097,
+    "cost": 0.0001818
+   },
+   {
+    "source": "FIA1393_CLC-FIA1394_CLC",
+    "name": "Kế toán quản trị 1,2 - ACCA",
+    "requests": 1,
+    "share": 0.04608294930875576,
+    "users": 1,
+    "previous_requests": 0,
+    "change_pct": null,
+    "latency_mean": 9.823,
+    "latency_p95": 9.823,
+    "ttft_mean": 9.391,
+    "cost": 0.0001704
+   },
+   {
+    "source": "MAR1323_CLC",
+    "name": "Thương mại điện tử (e_commerce)",
+    "requests": 1,
+    "share": 0.04608294930875576,
+    "users": 1,
+    "previous_requests": 0,
+    "change_pct": null,
+    "latency_mean": 5.221,
+    "latency_p95": 5.221,
+    "ttft_mean": 4.715,
+    "cost": 0.0001594
+   },
+   {
+    "source": "MAR1359_CLC",
+    "name": "Khởi sự doanh nghiệp",
+    "requests": 1,
+    "share": 0.04608294930875576,
+    "users": 1,
+    "previous_requests": 0,
+    "change_pct": null,
+    "latency_mean": 5.479,
+    "latency_p95": 5.479,
+    "ttft_mean": 4.814,
+    "cost": 0.0001757
+   },
+   {
+    "source": "MAR1407",
+    "name": "Marketing trực tiếp",
+    "requests": 1,
+    "share": 0.04608294930875576,
+    "users": 1,
+    "previous_requests": 0,
+    "change_pct": null,
+    "latency_mean": 9.317,
+    "latency_p95": 9.317,
+    "ttft_mean": 8.618,
+    "cost": 0.0002425
+   },
+   {
+    "source": "MAR1472_CLC",
+    "name": "Đề án Kế hoạch Internet Marketing (Internet Marketing Plan Capstone)",
+    "requests": 1,
+    "share": 0.04608294930875576,
+    "users": 1,
+    "previous_requests": 0,
+    "change_pct": null,
+    "latency_mean": 5.32,
+    "latency_p95": 5.32,
+    "ttft_mean": 4.872,
+    "cost": 0.00018119999999999999
+   }
+  ],
+  "weekday_matrix": {
+   "sources": [
+    "BSA12117",
+    "MAR1408",
+    "MAR1406",
+    "BSA1310",
+    "MAR1471_CLC",
+    "MAR1323",
+    "MAR1438",
+    "BSA1236",
+    "BSA1311",
+    "MAR1361_CLC",
+    "MAR1425_CLC",
+    "BSA1328",
+    "Khác"
+   ],
+   "names": [
+    "Pháp luật và sở hữu trí tuệ",
+    "Phân tích web",
+    "Marketing qua phương tiện truyền thông xã hội",
+    "Kinh tế vi mô 1",
+    "Chuyên đề: Xu hướng công nghệ marketing số (Perspectives of Digital Marketing Technologies)",
+    "Thương mại điện tử",
+    "Khai phá dữ liệu trong Marketing",
+    "Tâm lý quản lý",
+    "Kinh tế vĩ mô 1",
+    "Quản trị dự án marketing (Marketing project management)",
+    "Marketing dịch vụ (service marketing)",
+    "Quản trị học",
+    "Khác"
+   ],
+   "rows": [
+    [
+     68,
+     78,
+     394,
+     90,
+     410,
+     13,
+     3
+    ],
+    [
+     0,
+     151,
+     236,
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     27,
+     67,
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     13,
+     38,
+     23,
+     0,
+     1,
+     9,
+     2
+    ],
+    [
+     0,
+     70,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     40,
+     8,
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     34,
+     3,
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     9,
+     0,
+     11,
+     4,
+     0,
+     0
+    ],
+    [
+     0,
+     14,
+     0,
+     0,
+     1,
+     0,
+     8
+    ],
+    [
+     0,
+     21,
+     2,
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     23,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     10,
+     5,
+     1,
+     0,
+     1,
+     1,
+     2
+    ],
+    [
+     19,
+     94,
+     120,
+     17,
+     8,
+     5,
+     16
+    ]
+   ]
+  },
+  "cohorts": [
+   {
+    "key": "B23·MR",
+    "intake": 2023,
+    "major": "MR",
+    "users": 104,
+    "requests": 661,
+    "share": 30.46082949308756
+   },
+   {
+    "key": "B26·TT",
+    "intake": 2026,
+    "major": "TT",
+    "users": 82,
+    "requests": 410,
+    "share": 18.89400921658986
+   },
+   {
+    "key": "B26·QT",
+    "intake": 2026,
+    "major": "QT",
+    "users": 57,
+    "requests": 245,
+    "share": 11.290322580645162
+   },
+   {
+    "key": "B26·TM",
+    "intake": 2026,
+    "major": "TM",
+    "users": 38,
+    "requests": 138,
+    "share": 6.359447004608295
+   },
+   {
+    "key": "B26·MR",
+    "intake": 2026,
+    "major": "MR",
+    "users": 22,
+    "requests": 106,
+    "share": 4.88479262672811
+   },
+   {
+    "key": "B26·LQ",
+    "intake": 2026,
+    "major": "LQ",
+    "users": 8,
+    "requests": 63,
+    "share": 2.903225806451613
+   },
+   {
+    "key": "B24·ME",
+    "intake": 2024,
+    "major": "ME",
+    "users": 8,
+    "requests": 61,
+    "share": 2.8110599078341014
+   },
+   {
+    "key": "B25·DT",
+    "intake": 2025,
+    "major": "DT",
+    "users": 19,
+    "requests": 61,
+    "share": 2.8110599078341014
+   },
+   {
+    "key": "B24·MR",
+    "intake": 2024,
+    "major": "MR",
+    "users": 21,
+    "requests": 49,
+    "share": 2.2580645161290325
+   },
+   {
+    "key": "B26·TN",
+    "intake": 2026,
+    "major": "TN",
+    "users": 12,
+    "requests": 34,
+    "share": 1.566820276497696
+   },
+   {
+    "key": "B26·VM",
+    "intake": 2026,
+    "major": "VM",
+    "users": 6,
+    "requests": 33,
+    "share": 1.5207373271889402
+   },
+   {
+    "key": "B25·QT",
+    "intake": 2025,
+    "major": "QT",
+    "users": 11,
+    "requests": 31,
+    "share": 1.4285714285714286
+   },
+   {
+    "key": "B24·QC",
+    "intake": 2024,
+    "major": "QC",
+    "users": 8,
+    "requests": 28,
+    "share": 1.2903225806451613
+   },
+   {
+    "key": "B25·MR",
+    "intake": 2025,
+    "major": "MR",
+    "users": 7,
+    "requests": 25,
+    "share": 1.152073732718894
+   },
+   {
+    "key": "B25·CN",
+    "intake": 2025,
+    "major": "CN",
+    "users": 10,
+    "requests": 24,
+    "share": 1.1059907834101383
+   },
+   {
+    "key": "B25·QC",
+    "intake": 2025,
+    "major": "QC",
+    "users": 7,
+    "requests": 21,
+    "share": 0.967741935483871
+   },
+   {
+    "key": "B26·TV",
+    "intake": 2026,
+    "major": "TV",
+    "users": 8,
+    "requests": 21,
+    "share": 0.967741935483871
+   },
+   {
+    "key": "KQT",
+    "intake": null,
+    "major": null,
+    "users": 3,
+    "requests": 21,
+    "share": 0.967741935483871
+   },
+   {
+    "key": "B26·TC",
+    "intake": 2026,
+    "major": "TC",
+    "users": 5,
+    "requests": 17,
+    "share": 0.783410138248848
+   },
+   {
+    "key": "Khác",
+    "intake": null,
+    "major": null,
+    "users": 13,
+    "requests": 17,
+    "share": 0.783410138248848
+   },
+   {
+    "key": "B24·TC",
+    "intake": 2024,
+    "major": "TC",
+    "users": 5,
+    "requests": 14,
+    "share": 0.6451612903225806
+   },
+   {
+    "key": "B26·KT",
+    "intake": 2026,
+    "major": "KT",
+    "users": 5,
+    "requests": 14,
+    "share": 0.6451612903225806
+   },
+   {
+    "key": "B22·MR",
+    "intake": 2022,
+    "major": "MR",
+    "users": 2,
+    "requests": 12,
+    "share": 0.5529953917050692
+   },
+   {
+    "key": "B24·KT",
+    "intake": 2024,
+    "major": "KT",
+    "users": 2,
+    "requests": 12,
+    "share": 0.5529953917050692
+   },
+   {
+    "key": "B25·TC",
+    "intake": 2025,
+    "major": "TC",
+    "users": 5,
+    "requests": 10,
+    "share": 0.4608294930875576
+   },
+   {
+    "key": "B25·GA",
+    "intake": 2025,
+    "major": "GA",
+    "users": 5,
+    "requests": 7,
+    "share": 0.3225806451612903
+   },
+   {
+    "key": "B25·KT",
+    "intake": 2025,
+    "major": "KT",
+    "users": 2,
+    "requests": 6,
+    "share": 0.2764976958525346
+   },
+   {
+    "key": "B24·AC",
+    "intake": 2024,
+    "major": "AC",
+    "users": 3,
+    "requests": 5,
+    "share": 0.2304147465437788
+   },
+   {
+    "key": "B24·QT",
+    "intake": 2024,
+    "major": "QT",
+    "users": 1,
+    "requests": 5,
+    "share": 0.2304147465437788
+   },
+   {
+    "key": "B26·DT",
+    "intake": 2026,
+    "major": "DT",
+    "users": 2,
+    "requests": 5,
+    "share": 0.2304147465437788
+   },
+   {
+    "key": "B25·TM",
+    "intake": 2025,
+    "major": "TM",
+    "users": 2,
+    "requests": 4,
+    "share": 0.18433179723502305
+   },
+   {
+    "key": "VKT",
+    "intake": null,
+    "major": null,
+    "users": 1,
+    "requests": 4,
+    "share": 0.18433179723502305
+   },
+   {
+    "key": "B26·DL",
+    "intake": 2026,
+    "major": "DL",
+    "users": 3,
+    "requests": 3,
+    "share": 0.1382488479262673
+   },
+   {
+    "key": "B25·LQ",
+    "intake": 2025,
+    "major": "LQ",
+    "users": 1,
+    "requests": 2,
+    "share": 0.09216589861751152
+   },
+   {
+    "key": "B26·ME",
+    "intake": 2026,
+    "major": "ME",
+    "users": 1,
+    "requests": 1,
+    "share": 0.04608294930875576
+   }
+  ]
+ },
+ "models": {
+  "rows": [
+   {
+    "model": "gpt-6-luna",
+    "requests": 1683,
+    "share": 77.55760368663594,
+    "users": 367,
+    "latency_mean": 6.791981580510997,
+    "latency_p95": 14.820500000000001,
+    "ttft_mean": 4.373124625524272,
+    "tps_median": 22.506476683937823,
+    "input_tokens": 2613796,
+    "output_tokens": 256825,
+    "cost": 0.38979210000000025,
+    "cost_source": "estimated",
+    "errors": 0
+   },
+   {
+    "model": "gpt-4o-mini",
+    "requests": 487,
+    "share": 22.442396313364057,
+    "users": 139,
+    "latency_mean": 7.338106776180693,
+    "latency_p95": 11.973399999999996,
+    "ttft_mean": 4.038352577319589,
+    "tps_median": 19.36558009113214,
+    "input_tokens": 899196,
+    "output_tokens": 70024,
+    "cost": 0.17689379993899992,
+    "cost_source": "langfuse",
+    "errors": 0
+   }
+  ],
+  "stats": [
+   {
+    "metric": "latency",
+    "n": 2170,
+    "mean": 6.914545161290324,
+    "std": 3.8124801800314185,
+    "median": 6.0675,
+    "p90": 11.225099999999996,
+    "p95": 14.046350000000011,
+    "p99": 21.201849999999965,
+    "min": 1.834,
+    "max": 40.282
+   },
+   {
+    "metric": "ttft",
+    "n": 2154,
+    "mean": 4.297746518105857,
+    "std": 1.7964831067937448,
+    "median": 3.8064999999999998,
+    "p90": 6.5052,
+    "p95": 7.416399999999999,
+    "p99": 9.714609999999988,
+    "min": 1.648,
+    "max": 38.707
+   },
+   {
+    "metric": "tps",
+    "n": 2170,
+    "mean": 22.525203517355816,
+    "std": 8.08687276199472,
+    "median": 21.608495198037904,
+    "p90": 31.660251174778402,
+    "p95": 34.99070894988192,
+    "p99": 50.55090477895326,
+    "min": 0.0,
+    "max": 89.41218130311616
+   },
+   {
+    "metric": "input_tokens",
+    "n": 2170,
+    "mean": 1618.8903225806453,
+    "std": 1053.5727724551432,
+    "median": 1172.0,
+    "p90": 3187.5999999999995,
+    "p95": 4009.6500000000005,
+    "p99": 4877.539999999998,
+    "min": 0,
+    "max": 10620
+   },
+   {
+    "metric": "output_tokens",
+    "n": 2170,
+    "mean": 150.6216589861751,
+    "std": 92.12914238172662,
+    "median": 127.0,
+    "p90": 264.0,
+    "p95": 338.5500000000002,
+    "p99": 516.31,
+    "min": 0,
+    "max": 701
+   }
+  ]
+ },
+ "latency": {
+  "histogram": {
+   "bin_width": 0.5,
+   "latency": [
+    0,
+    0,
+    0,
+    1,
+    29,
+    115,
+    121,
+    136,
+    141,
+    146,
+    184,
+    186,
+    176,
+    151,
+    123,
+    104,
+    83,
+    67,
+    50,
+    45,
+    44,
+    39,
+    26,
+    15,
+    32,
+    14,
+    17,
+    14,
+    17,
+    7,
+    6,
+    14,
+    6,
+    5,
+    3,
+    6,
+    1,
+    3,
+    4,
+    4,
+    8,
+    4,
+    1,
+    4,
+    4,
+    14
+   ],
+   "ttft": [
+    0,
+    0,
+    0,
+    8,
+    119,
+    345,
+    409,
+    292,
+    207,
+    184,
+    150,
+    120,
+    103,
+    65,
+    51,
+    30,
+    25,
+    9,
+    9,
+    12,
+    4,
+    5,
+    2,
+    1,
+    1,
+    1,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "last_bin_open": true
+  },
+  "scatter": [
+   [
+    8.38,
+    10.57
+   ],
+   [
+    4.011,
+    5.843
+   ],
+   [
+    3.552,
+    5.569
+   ],
+   [
+    2.963,
+    5.718
+   ],
+   [
+    2.955,
+    6.102
+   ],
+   [
+    3.903,
+    8.671
+   ],
+   [
+    6.651,
+    9.897
+   ],
+   [
+    2.902,
+    6.601
+   ],
+   [
+    3.192,
+    4.747
+   ],
+   [
+    3.822,
+    5.523
+   ],
+   [
+    5.275,
+    7.499
+   ],
+   [
+    3.905,
+    5.252
+   ],
+   [
+    3.816,
+    6.082
+   ],
+   [
+    3.803,
+    6.399
+   ],
+   [
+    3.649,
+    7.002
+   ],
+   [
+    6.687,
+    8.376
+   ],
+   [
+    5.899,
+    8.695
+   ],
+   [
+    2.714,
+    4.319
+   ],
+   [
+    2.237,
+    2.571
+   ],
+   [
+    5.751,
+    9.423
+   ],
+   [
+    4.105,
+    5.948
+   ],
+   [
+    4.416,
+    7.301
+   ],
+   [
+    3.081,
+    6.456
+   ],
+   [
+    3.102,
+    5.523
+   ],
+   [
+    3.401,
+    7.503
+   ],
+   [
+    3.413,
+    5.09
+   ],
+   [
+    3.246,
+    4.524
+   ],
+   [
+    2.602,
+    5.455
+   ],
+   [
+    3.057,
+    6.64
+   ],
+   [
+    4.401,
+    8.035
+   ],
+   [
+    4.864,
+    9.501
+   ],
+   [
+    2.77,
+    5.35
+   ],
+   [
+    2.907,
+    5.173
+   ],
+   [
+    4.969,
+    8.341
+   ],
+   [
+    3.099,
+    5.886
+   ],
+   [
+    2.911,
+    4.352
+   ],
+   [
+    3.35,
+    4.99
+   ],
+   [
+    3.316,
+    6.563
+   ],
+   [
+    2.815,
+    5.297
+   ],
+   [
+    2.798,
+    7.383
+   ],
+   [
+    2.732,
+    4.808
+   ],
+   [
+    3.157,
+    5.973
+   ],
+   [
+    3.058,
+    5.314
+   ],
+   [
+    2.846,
+    4.863
+   ],
+   [
+    5.328,
+    8.609
+   ],
+   [
+    3.22,
+    6.985
+   ],
+   [
+    2.92,
+    5.566
+   ],
+   [
+    3.452,
+    7.617
+   ],
+   [
+    3.077,
+    5.557
+   ],
+   [
+    3.276,
+    5.385
+   ],
+   [
+    1.961,
+    2.322
+   ],
+   [
+    2.884,
+    6.053
+   ],
+   [
+    3.411,
+    4.962
+   ],
+   [
+    3.018,
+    4.88
+   ],
+   [
+    3.12,
+    4.851
+   ],
+   [
+    3.377,
+    6.573
+   ],
+   [
+    3.029,
+    5.633
+   ],
+   [
+    2.661,
+    5.455
+   ],
+   [
+    3.195,
+    4.698
+   ],
+   [
+    3.37,
+    6.487
+   ],
+   [
+    3.81,
+    7.558
+   ],
+   [
+    3.057,
+    5.838
+   ],
+   [
+    2.843,
+    5.23
+   ],
+   [
+    3.168,
+    5.282
+   ],
+   [
+    2.781,
+    5.349
+   ],
+   [
+    2.797,
+    5.258
+   ],
+   [
+    3.439,
+    5.233
+   ],
+   [
+    3.089,
+    5.065
+   ],
+   [
+    2.714,
+    3.946
+   ],
+   [
+    2.84,
+    5.429
+   ],
+   [
+    3.327,
+    5.446
+   ],
+   [
+    2.787,
+    5.592
+   ],
+   [
+    3.393,
+    6.923
+   ],
+   [
+    3.643,
+    5.888
+   ],
+   [
+    4.173,
+    7.24
+   ],
+   [
+    2.993,
+    7.4
+   ],
+   [
+    3.135,
+    7.799
+   ],
+   [
+    5.108,
+    6.963
+   ],
+   [
+    3.145,
+    5.799
+   ],
+   [
+    3.576,
+    7.03
+   ],
+   [
+    2.927,
+    7.76
+   ],
+   [
+    5.524,
+    8.789
+   ],
+   [
+    2.883,
+    5.656
+   ],
+   [
+    3.197,
+    6.042
+   ],
+   [
+    3.322,
+    6.39
+   ],
+   [
+    3.624,
+    8.786
+   ],
+   [
+    5.627,
+    10.297
+   ],
+   [
+    5.501,
+    8.963
+   ],
+   [
+    3.098,
+    6.581
+   ],
+   [
+    3.041,
+    7.643
+   ],
+   [
+    3.162,
+    6.859
+   ],
+   [
+    2.846,
+    4.815
+   ],
+   [
+    3.149,
+    6.024
+   ],
+   [
+    5.005,
+    10.993
+   ],
+   [
+    3.219,
+    7.372
+   ],
+   [
+    2.674,
+    4.712
+   ],
+   [
+    3.334,
+    7.622
+   ],
+   [
+    2.689,
+    7.208
+   ],
+   [
+    7.05,
+    11.377
+   ],
+   [
+    2.827,
+    8.062
+   ],
+   [
+    3.397,
+    8.466
+   ],
+   [
+    4.767,
+    9.515
+   ],
+   [
+    2.934,
+    6.298
+   ],
+   [
+    3.841,
+    12.094
+   ],
+   [
+    2.547,
+    4.997
+   ],
+   [
+    2.98,
+    7.189
+   ],
+   [
+    3.298,
+    8.562
+   ],
+   [
+    3.626,
+    8.129
+   ],
+   [
+    4.868,
+    10.979
+   ],
+   [
+    6.433,
+    9.123
+   ],
+   [
+    5.549,
+    11.016
+   ],
+   [
+    2.836,
+    4.161
+   ],
+   [
+    3.148,
+    6.173
+   ],
+   [
+    3.119,
+    5.927
+   ],
+   [
+    3.028,
+    6.396
+   ],
+   [
+    3.479,
+    6.904
+   ],
+   [
+    3.184,
+    5.9
+   ],
+   [
+    3.171,
+    6.456
+   ],
+   [
+    3.463,
+    8.11
+   ],
+   [
+    3.75,
+    5.188
+   ],
+   [
+    2.87,
+    6.912
+   ],
+   [
+    3.285,
+    10.472
+   ],
+   [
+    4.925,
+    8.631
+   ],
+   [
+    3.03,
+    5.136
+   ],
+   [
+    3.412,
+    4.544
+   ],
+   [
+    3.895,
+    7.483
+   ],
+   [
+    3.564,
+    7.461
+   ],
+   [
+    3.729,
+    7.608
+   ],
+   [
+    4.039,
+    7.395
+   ],
+   [
+    6.775,
+    8.885
+   ],
+   [
+    3.537,
+    7.989
+   ],
+   [
+    5.851,
+    11.68
+   ],
+   [
+    7.05,
+    12.381
+   ],
+   [
+    4.254,
+    8.628
+   ],
+   [
+    6.364,
+    9.236
+   ],
+   [
+    3.705,
+    7.446
+   ],
+   [
+    2.737,
+    4.638
+   ],
+   [
+    2.663,
+    4.957
+   ],
+   [
+    7.186,
+    12.162
+   ],
+   [
+    3.66,
+    6.615
+   ],
+   [
+    5.913,
+    10.417
+   ],
+   [
+    2.726,
+    5.602
+   ],
+   [
+    2.747,
+    5.502
+   ],
+   [
+    2.838,
+    5.746
+   ],
+   [
+    2.517,
+    5.7
+   ],
+   [
+    4.139,
+    10.408
+   ],
+   [
+    2.841,
+    7.055
+   ],
+   [
+    2.7,
+    5.16
+   ],
+   [
+    3.064,
+    6.524
+   ],
+   [
+    3.019,
+    8.164
+   ],
+   [
+    2.914,
+    6.316
+   ],
+   [
+    3.667,
+    8.892
+   ],
+   [
+    2.932,
+    8.018
+   ],
+   [
+    3.369,
+    6.026
+   ],
+   [
+    3.748,
+    7.827
+   ],
+   [
+    3.578,
+    6.988
+   ],
+   [
+    3.089,
+    8.294
+   ],
+   [
+    3.597,
+    8.525
+   ],
+   [
+    6.369,
+    8.272
+   ],
+   [
+    6.476,
+    8.281
+   ],
+   [
+    2.759,
+    4.614
+   ],
+   [
+    5.476,
+    7.787
+   ],
+   [
+    4.199,
+    8.006
+   ],
+   [
+    4.382,
+    11.574
+   ],
+   [
+    3.902,
+    9.246
+   ],
+   [
+    5.593,
+    11.726
+   ],
+   [
+    6.244,
+    20.219
+   ],
+   [
+    3.307,
+    8.335
+   ],
+   [
+    3.559,
+    6.823
+   ],
+   [
+    3.404,
+    5.329
+   ],
+   [
+    4.636,
+    11.412
+   ],
+   [
+    4.538,
+    8.564
+   ],
+   [
+    3.152,
+    6.765
+   ],
+   [
+    5.423,
+    10.521
+   ],
+   [
+    3.37,
+    6.444
+   ],
+   [
+    3.96,
+    5.776
+   ],
+   [
+    3.544,
+    7.984
+   ],
+   [
+    2.895,
+    5.462
+   ],
+   [
+    3.101,
+    6.589
+   ],
+   [
+    6.768,
+    8.71
+   ],
+   [
+    3.498,
+    6.917
+   ],
+   [
+    4.46,
+    12.325
+   ],
+   [
+    3.327,
+    7.228
+   ],
+   [
+    7.846,
+    10.67
+   ],
+   [
+    6.366,
+    8.634
+   ],
+   [
+    6.448,
+    10.094
+   ],
+   [
+    3.441,
+    3.994
+   ],
+   [
+    8.097,
+    11.184
+   ],
+   [
+    6.918,
+    10.624
+   ],
+   [
+    10.526,
+    11.164
+   ],
+   [
+    7.893,
+    8.429
+   ],
+   [
+    7.206,
+    11.015
+   ],
+   [
+    6.03,
+    10.41
+   ],
+   [
+    5.747,
+    8.95
+   ],
+   [
+    5.835,
+    10.838
+   ],
+   [
+    3.481,
+    7.004
+   ],
+   [
+    3.632,
+    8.069
+   ],
+   [
+    6.872,
+    12.109
+   ],
+   [
+    3.767,
+    6.702
+   ],
+   [
+    5.795,
+    8.144
+   ],
+   [
+    3.465,
+    7.247
+   ],
+   [
+    3.551,
+    7.584
+   ],
+   [
+    4.145,
+    7.096
+   ],
+   [
+    4.475,
+    7.665
+   ],
+   [
+    4.077,
+    6.241
+   ],
+   [
+    4.6,
+    9.561
+   ],
+   [
+    5.615,
+    9.689
+   ],
+   [
+    5.761,
+    10.408
+   ],
+   [
+    7.11,
+    10.201
+   ],
+   [
+    3.502,
+    7.577
+   ],
+   [
+    3.01,
+    5.988
+   ],
+   [
+    3.824,
+    9.601
+   ],
+   [
+    5.811,
+    8.631
+   ],
+   [
+    3.978,
+    6.934
+   ],
+   [
+    3.684,
+    6.15
+   ],
+   [
+    8.983,
+    13.002
+   ],
+   [
+    8.183,
+    9.934
+   ],
+   [
+    4.939,
+    6.492
+   ],
+   [
+    3.915,
+    5.76
+   ],
+   [
+    4.112,
+    4.86
+   ],
+   [
+    6.659,
+    13.552
+   ],
+   [
+    3.846,
+    4.393
+   ],
+   [
+    2.88,
+    3.703
+   ],
+   [
+    2.654,
+    3.37
+   ],
+   [
+    4.231,
+    6.472
+   ],
+   [
+    2.456,
+    3.246
+   ],
+   [
+    4.51,
+    8.268
+   ],
+   [
+    2.611,
+    3.262
+   ],
+   [
+    4.761,
+    6.421
+   ],
+   [
+    3.669,
+    5.908
+   ],
+   [
+    3.558,
+    6.151
+   ],
+   [
+    3.814,
+    5.778
+   ],
+   [
+    2.647,
+    2.999
+   ],
+   [
+    2.514,
+    2.906
+   ],
+   [
+    3.071,
+    3.823
+   ],
+   [
+    4.981,
+    9.78
+   ],
+   [
+    3.284,
+    11.818
+   ],
+   [
+    2.718,
+    3.181
+   ],
+   [
+    4.2,
+    4.561
+   ],
+   [
+    2.923,
+    3.388
+   ],
+   [
+    2.53,
+    2.946
+   ],
+   [
+    6.18,
+    8.302
+   ],
+   [
+    7.06,
+    9.941
+   ],
+   [
+    3.194,
+    3.429
+   ],
+   [
+    3.959,
+    3.964
+   ],
+   [
+    3.368,
+    3.801
+   ],
+   [
+    6.182,
+    7.615
+   ],
+   [
+    3.726,
+    3.729
+   ],
+   [
+    4.238,
+    4.635
+   ],
+   [
+    7.573,
+    16.86
+   ],
+   [
+    6.608,
+    21.873
+   ],
+   [
+    2.818,
+    5.028
+   ],
+   [
+    4.02,
+    8.697
+   ],
+   [
+    3.087,
+    6.038
+   ],
+   [
+    3.295,
+    4.334
+   ],
+   [
+    3.699,
+    10.184
+   ],
+   [
+    2.87,
+    3.176
+   ],
+   [
+    2.756,
+    5.026
+   ],
+   [
+    6.48,
+    20.546
+   ],
+   [
+    5.028,
+    7.42
+   ],
+   [
+    4.635,
+    6.746
+   ],
+   [
+    5.506,
+    12.8
+   ],
+   [
+    2.996,
+    3.513
+   ],
+   [
+    2.921,
+    4.715
+   ],
+   [
+    6.304,
+    17.85
+   ],
+   [
+    3.919,
+    6.051
+   ],
+   [
+    2.963,
+    4.112
+   ],
+   [
+    3.227,
+    4.351
+   ],
+   [
+    6.156,
+    20.258
+   ],
+   [
+    6.071,
+    14.271
+   ],
+   [
+    3.354,
+    6.823
+   ],
+   [
+    2.896,
+    5.262
+   ],
+   [
+    3.007,
+    4.518
+   ],
+   [
+    6.594,
+    19.435
+   ],
+   [
+    3.316,
+    5.83
+   ],
+   [
+    2.722,
+    3.871
+   ],
+   [
+    3.396,
+    6.629
+   ],
+   [
+    4.261,
+    6.483
+   ],
+   [
+    6.103,
+    15.49
+   ],
+   [
+    3.85,
+    13.663
+   ],
+   [
+    4.668,
+    13.09
+   ],
+   [
+    3.774,
+    14.673
+   ],
+   [
+    5.023,
+    7.637
+   ],
+   [
+    3.515,
+    7.219
+   ],
+   [
+    3.551,
+    4.941
+   ],
+   [
+    2.826,
+    6.396
+   ],
+   [
+    3.486,
+    12.02
+   ],
+   [
+    2.621,
+    4.378
+   ],
+   [
+    3.141,
+    5.059
+   ],
+   [
+    3.356,
+    7.551
+   ],
+   [
+    6.688,
+    20.472
+   ],
+   [
+    2.572,
+    5.247
+   ],
+   [
+    5.389,
+    15.193
+   ],
+   [
+    4.341,
+    8.147
+   ],
+   [
+    2.918,
+    3.466
+   ],
+   [
+    4.738,
+    7.844
+   ],
+   [
+    3.902,
+    10.52
+   ],
+   [
+    2.539,
+    6.078
+   ],
+   [
+    5.698,
+    10.045
+   ],
+   [
+    3.747,
+    4.291
+   ],
+   [
+    3.441,
+    3.897
+   ],
+   [
+    3.524,
+    6.331
+   ],
+   [
+    4.508,
+    5.465
+   ],
+   [
+    3.932,
+    9.27
+   ],
+   [
+    6.583,
+    17.767
+   ],
+   [
+    4.835,
+    7.877
+   ],
+   [
+    3.718,
+    5.112
+   ],
+   [
+    3.824,
+    6.456
+   ],
+   [
+    3.739,
+    5.188
+   ],
+   [
+    2.857,
+    4.042
+   ],
+   [
+    3.813,
+    6.529
+   ],
+   [
+    4.67,
+    5.167
+   ],
+   [
+    3.966,
+    6.265
+   ],
+   [
+    4.94,
+    8.161
+   ],
+   [
+    3.727,
+    13.914
+   ],
+   [
+    4.575,
+    14.015
+   ],
+   [
+    4.949,
+    9.987
+   ],
+   [
+    3.892,
+    8.908
+   ],
+   [
+    4.257,
+    14.915
+   ],
+   [
+    4.062,
+    6.019
+   ],
+   [
+    3.714,
+    7.06
+   ],
+   [
+    3.531,
+    8.226
+   ],
+   [
+    5.288,
+    12.417
+   ],
+   [
+    3.214,
+    8.037
+   ],
+   [
+    5.665,
+    13.964
+   ],
+   [
+    3.806,
+    11.269
+   ],
+   [
+    4.767,
+    7.007
+   ],
+   [
+    3.079,
+    4.685
+   ],
+   [
+    5.809,
+    10.142
+   ],
+   [
+    3.305,
+    5.857
+   ],
+   [
+    3.759,
+    4.949
+   ],
+   [
+    4.189,
+    7.423
+   ],
+   [
+    3.32,
+    8.648
+   ],
+   [
+    3.187,
+    3.931
+   ],
+   [
+    3.233,
+    4.026
+   ],
+   [
+    5.562,
+    10.036
+   ],
+   [
+    4.57,
+    5.3
+   ],
+   [
+    4.085,
+    5.539
+   ],
+   [
+    3.893,
+    5.984
+   ],
+   [
+    6.373,
+    10.747
+   ],
+   [
+    2.441,
+    2.569
+   ],
+   [
+    4.453,
+    7.701
+   ],
+   [
+    3.473,
+    4.841
+   ],
+   [
+    2.926,
+    4.303
+   ],
+   [
+    2.532,
+    2.916
+   ],
+   [
+    3.36,
+    4.271
+   ],
+   [
+    3.164,
+    9.093
+   ],
+   [
+    2.18,
+    2.455
+   ],
+   [
+    2.825,
+    3.099
+   ],
+   [
+    2.578,
+    2.95
+   ],
+   [
+    2.552,
+    2.82
+   ],
+   [
+    2.302,
+    2.566
+   ],
+   [
+    2.452,
+    2.563
+   ],
+   [
+    3.992,
+    6.56
+   ],
+   [
+    6.409,
+    16.109
+   ],
+   [
+    2.744,
+    2.863
+   ],
+   [
+    2.849,
+    3.59
+   ],
+   [
+    3.781,
+    5.16
+   ],
+   [
+    8.004,
+    20.346
+   ],
+   [
+    3.78,
+    4.009
+   ],
+   [
+    9.983,
+    19.65
+   ],
+   [
+    3.861,
+    6.588
+   ],
+   [
+    4.007,
+    11.167
+   ],
+   [
+    7.37,
+    23.144
+   ],
+   [
+    3.154,
+    4.232
+   ],
+   [
+    3.781,
+    6.603
+   ],
+   [
+    4.196,
+    10.558
+   ],
+   [
+    5.178,
+    12.556
+   ],
+   [
+    3.678,
+    8.468
+   ],
+   [
+    3.076,
+    4.484
+   ],
+   [
+    3.067,
+    4.362
+   ],
+   [
+    5.7,
+    15.865
+   ],
+   [
+    4.353,
+    13.66
+   ],
+   [
+    3.53,
+    4.544
+   ],
+   [
+    6.457,
+    16.886
+   ],
+   [
+    3.163,
+    5.8
+   ],
+   [
+    3.138,
+    4.755
+   ],
+   [
+    3.117,
+    5.642
+   ],
+   [
+    2.732,
+    5.326
+   ],
+   [
+    7.119,
+    17.669
+   ],
+   [
+    3.785,
+    10.602
+   ],
+   [
+    3.503,
+    4.957
+   ],
+   [
+    2.913,
+    6.06
+   ],
+   [
+    4.082,
+    5.966
+   ],
+   [
+    3.472,
+    5.885
+   ],
+   [
+    2.957,
+    4.097
+   ],
+   [
+    3.363,
+    6.704
+   ],
+   [
+    2.827,
+    3.671
+   ],
+   [
+    4.145,
+    7.018
+   ],
+   [
+    3.029,
+    4.878
+   ],
+   [
+    3.471,
+    7.389
+   ],
+   [
+    3.475,
+    7.105
+   ],
+   [
+    4.838,
+    14.461
+   ],
+   [
+    3.255,
+    4.097
+   ],
+   [
+    6.266,
+    13.441
+   ],
+   [
+    3.406,
+    5.991
+   ],
+   [
+    3.343,
+    5.438
+   ],
+   [
+    6.317,
+    11.774
+   ],
+   [
+    3.225,
+    4.528
+   ],
+   [
+    3.728,
+    5.926
+   ],
+   [
+    3.372,
+    5.663
+   ],
+   [
+    3.432,
+    4.525
+   ],
+   [
+    4.145,
+    10.95
+   ],
+   [
+    3.819,
+    6.426
+   ],
+   [
+    3.003,
+    3.617
+   ],
+   [
+    3.769,
+    9.786
+   ],
+   [
+    4.073,
+    12.352
+   ],
+   [
+    4.35,
+    7.343
+   ],
+   [
+    4.964,
+    10.275
+   ],
+   [
+    3.01,
+    4.954
+   ],
+   [
+    3.379,
+    5.025
+   ],
+   [
+    3.337,
+    4.905
+   ],
+   [
+    2.864,
+    4.451
+   ],
+   [
+    4.992,
+    7.265
+   ],
+   [
+    3.426,
+    4.374
+   ],
+   [
+    4.056,
+    9.415
+   ],
+   [
+    4.002,
+    7.564
+   ],
+   [
+    3.414,
+    6.125
+   ],
+   [
+    3.857,
+    8.953
+   ],
+   [
+    3.182,
+    4.211
+   ],
+   [
+    4.255,
+    7.694
+   ],
+   [
+    5.63,
+    17.081
+   ],
+   [
+    2.703,
+    3.244
+   ],
+   [
+    3.375,
+    5.03
+   ],
+   [
+    3.726,
+    6.071
+   ],
+   [
+    3.73,
+    8.696
+   ],
+   [
+    3.154,
+    4.887
+   ],
+   [
+    3.3,
+    6.358
+   ],
+   [
+    4.443,
+    8.96
+   ],
+   [
+    2.931,
+    5.002
+   ],
+   [
+    3.124,
+    4.025
+   ],
+   [
+    5.371,
+    12.825
+   ],
+   [
+    3.953,
+    6.402
+   ],
+   [
+    3.043,
+    4.701
+   ],
+   [
+    4.144,
+    7.081
+   ],
+   [
+    3.506,
+    4.278
+   ],
+   [
+    3.558,
+    5.05
+   ],
+   [
+    8.149,
+    14.152
+   ],
+   [
+    3.592,
+    4.291
+   ],
+   [
+    5.159,
+    9.069
+   ],
+   [
+    6.203,
+    13.276
+   ],
+   [
+    4.899,
+    11.412
+   ],
+   [
+    3.382,
+    3.784
+   ],
+   [
+    3.7,
+    3.913
+   ],
+   [
+    3.273,
+    5.977
+   ],
+   [
+    9.391,
+    9.823
+   ],
+   [
+    4.019,
+    4.832
+   ],
+   [
+    4.364,
+    5.628
+   ],
+   [
+    5.377,
+    6.567
+   ],
+   [
+    4.803,
+    15.821
+   ],
+   [
+    3.612,
+    27.625
+   ],
+   [
+    4.266,
+    6.442
+   ],
+   [
+    3.961,
+    4.821
+   ],
+   [
+    3.959,
+    26.169
+   ],
+   [
+    5.484,
+    7.099
+   ],
+   [
+    6.527,
+    7.83
+   ],
+   [
+    4.224,
+    4.798
+   ],
+   [
+    6.575,
+    10.226
+   ],
+   [
+    7.473,
+    8.544
+   ],
+   [
+    4.454,
+    5.561
+   ],
+   [
+    7.011,
+    7.46
+   ],
+   [
+    3.033,
+    5.275
+   ],
+   [
+    6.286,
+    8.629
+   ],
+   [
+    5.44,
+    11.221
+   ],
+   [
+    8.92,
+    9.727
+   ],
+   [
+    3.422,
+    5.586
+   ],
+   [
+    4.012,
+    9.671
+   ],
+   [
+    3.125,
+    4.558
+   ],
+   [
+    2.612,
+    4.3
+   ],
+   [
+    6.22,
+    8.803
+   ],
+   [
+    5.41,
+    6.712
+   ],
+   [
+    5.483,
+    7.683
+   ],
+   [
+    5.523,
+    6.33
+   ],
+   [
+    3.335,
+    3.97
+   ],
+   [
+    6.196,
+    7.093
+   ],
+   [
+    10.577,
+    13.124
+   ],
+   [
+    2.754,
+    3.017
+   ],
+   [
+    4.525,
+    6.522
+   ],
+   [
+    6.455,
+    11.349
+   ],
+   [
+    5.441,
+    6.843
+   ],
+   [
+    2.31,
+    2.535
+   ],
+   [
+    6.316,
+    8.465
+   ],
+   [
+    4.572,
+    6.412
+   ],
+   [
+    4.325,
+    5.265
+   ],
+   [
+    4.606,
+    6.641
+   ],
+   [
+    7.855,
+    10.226
+   ],
+   [
+    5.241,
+    6.747
+   ],
+   [
+    7.705,
+    8.318
+   ],
+   [
+    3.309,
+    3.59
+   ],
+   [
+    3.331,
+    4.381
+   ],
+   [
+    11.342,
+    22.444
+   ],
+   [
+    6.066,
+    10.325
+   ],
+   [
+    3.558,
+    6.738
+   ],
+   [
+    3.809,
+    7.538
+   ],
+   [
+    3.824,
+    4.251
+   ],
+   [
+    3.294,
+    4.403
+   ],
+   [
+    5.007,
+    6.156
+   ],
+   [
+    4.035,
+    4.814
+   ],
+   [
+    2.563,
+    3.286
+   ],
+   [
+    2.952,
+    3.844
+   ],
+   [
+    3.877,
+    8.704
+   ],
+   [
+    2.57,
+    3.51
+   ],
+   [
+    2.865,
+    4.555
+   ],
+   [
+    3.207,
+    3.981
+   ],
+   [
+    2.478,
+    3.016
+   ],
+   [
+    5.21,
+    5.562
+   ],
+   [
+    3.049,
+    3.78
+   ],
+   [
+    3.539,
+    3.76
+   ],
+   [
+    2.825,
+    3.911
+   ],
+   [
+    4.359,
+    7.337
+   ],
+   [
+    2.905,
+    3.263
+   ],
+   [
+    3.577,
+    4.111
+   ],
+   [
+    2.752,
+    3.469
+   ],
+   [
+    3.337,
+    4.396
+   ],
+   [
+    5.798,
+    6.291
+   ],
+   [
+    6.845,
+    7.238
+   ],
+   [
+    2.253,
+    2.901
+   ],
+   [
+    3.627,
+    4.684
+   ],
+   [
+    3.836,
+    4.507
+   ],
+   [
+    5.589,
+    10.4
+   ],
+   [
+    8.323,
+    12.466
+   ],
+   [
+    3.642,
+    3.806
+   ],
+   [
+    3.2,
+    3.682
+   ],
+   [
+    7.116,
+    7.725
+   ],
+   [
+    4.964,
+    6.14
+   ],
+   [
+    4.377,
+    7.723
+   ],
+   [
+    4.124,
+    6.216
+   ],
+   [
+    3.776,
+    4.253
+   ],
+   [
+    3.231,
+    3.94
+   ],
+   [
+    9.075,
+    10.398
+   ],
+   [
+    4.726,
+    6.585
+   ],
+   [
+    5.078,
+    8.023
+   ],
+   [
+    7.729,
+    10.404
+   ],
+   [
+    5.982,
+    7.169
+   ],
+   [
+    4.462,
+    5.999
+   ],
+   [
+    4.388,
+    5.852
+   ],
+   [
+    5.769,
+    8.613
+   ],
+   [
+    5.358,
+    6.027
+   ],
+   [
+    4.161,
+    6.341
+   ],
+   [
+    4.345,
+    6.429
+   ],
+   [
+    6.233,
+    6.902
+   ],
+   [
+    4.214,
+    9.04
+   ],
+   [
+    4.819,
+    7.985
+   ],
+   [
+    5.811,
+    7.658
+   ],
+   [
+    4.94,
+    7.617
+   ],
+   [
+    5.262,
+    6.91
+   ],
+   [
+    3.98,
+    4.665
+   ],
+   [
+    9.872,
+    13.197
+   ],
+   [
+    3.865,
+    7.231
+   ],
+   [
+    5.223,
+    7.543
+   ],
+   [
+    6.65,
+    6.653
+   ],
+   [
+    6.024,
+    6.355
+   ],
+   [
+    4.791,
+    5.282
+   ],
+   [
+    9.651,
+    15.933
+   ],
+   [
+    4.81,
+    5.298
+   ],
+   [
+    11.361,
+    19.365
+   ],
+   [
+    2.675,
+    2.968
+   ],
+   [
+    5.801,
+    9.388
+   ],
+   [
+    4.356,
+    7.308
+   ],
+   [
+    2.201,
+    2.502
+   ],
+   [
+    3.139,
+    4.846
+   ],
+   [
+    3.521,
+    6.578
+   ],
+   [
+    2.142,
+    2.807
+   ],
+   [
+    2.914,
+    4.567
+   ],
+   [
+    3.427,
+    5.366
+   ],
+   [
+    2.92,
+    3.913
+   ],
+   [
+    3.113,
+    5.426
+   ],
+   [
+    3.454,
+    6.132
+   ],
+   [
+    2.976,
+    5.808
+   ],
+   [
+    2.479,
+    2.924
+   ],
+   [
+    2.305,
+    2.978
+   ],
+   [
+    6.198,
+    6.855
+   ],
+   [
+    5.129,
+    5.783
+   ],
+   [
+    4.135,
+    7.203
+   ],
+   [
+    2.167,
+    2.653
+   ],
+   [
+    2.829,
+    4.628
+   ],
+   [
+    2.962,
+    3.756
+   ],
+   [
+    3.477,
+    4.989
+   ],
+   [
+    2.679,
+    3.683
+   ],
+   [
+    3.194,
+    3.859
+   ],
+   [
+    3.766,
+    5.055
+   ],
+   [
+    2.551,
+    2.689
+   ],
+   [
+    2.351,
+    2.763
+   ],
+   [
+    3.363,
+    4.094
+   ],
+   [
+    2.459,
+    2.863
+   ],
+   [
+    2.265,
+    2.477
+   ],
+   [
+    2.793,
+    3.016
+   ],
+   [
+    3.22,
+    6.425
+   ],
+   [
+    3.593,
+    4.46
+   ],
+   [
+    3.862,
+    4.739
+   ],
+   [
+    7.772,
+    14.125
+   ],
+   [
+    4.449,
+    6.93
+   ],
+   [
+    6.214,
+    13.148
+   ],
+   [
+    8.347,
+    17.625
+   ],
+   [
+    7.57,
+    20.914
+   ],
+   [
+    5.798,
+    10.001
+   ],
+   [
+    4.877,
+    5.249
+   ],
+   [
+    4.715,
+    5.221
+   ],
+   [
+    3.362,
+    5.377
+   ],
+   [
+    4.718,
+    11.366
+   ],
+   [
+    5.795,
+    6.563
+   ],
+   [
+    6.055,
+    6.657
+   ],
+   [
+    6.002,
+    6.597
+   ],
+   [
+    5.068,
+    5.521
+   ],
+   [
+    6.909,
+    7.366
+   ],
+   [
+    6.037,
+    6.563
+   ],
+   [
+    3.191,
+    5.208
+   ],
+   [
+    7.979,
+    18.888
+   ],
+   [
+    7.042,
+    20.454
+   ],
+   [
+    4.147,
+    9.538
+   ],
+   [
+    5.248,
+    6.324
+   ],
+   [
+    4.635,
+    5.029
+   ],
+   [
+    4.999,
+    5.381
+   ],
+   [
+    5.08,
+    5.609
+   ],
+   [
+    3.412,
+    4.194
+   ],
+   [
+    2.809,
+    4.507
+   ],
+   [
+    7.256,
+    19.274
+   ],
+   [
+    3.589,
+    5.819
+   ],
+   [
+    4.414,
+    7.751
+   ],
+   [
+    7.161,
+    14.178
+   ],
+   [
+    2.974,
+    6.949
+   ],
+   [
+    5.019,
+    10.662
+   ],
+   [
+    2.99,
+    4.694
+   ],
+   [
+    7.454,
+    16.467
+   ],
+   [
+    2.871,
+    3.706
+   ],
+   [
+    3.692,
+    7.209
+   ],
+   [
+    2.172,
+    2.325
+   ],
+   [
+    3.67,
+    5.15
+   ],
+   [
+    4.045,
+    13.749
+   ],
+   [
+    2.835,
+    4.463
+   ],
+   [
+    4.585,
+    6.854
+   ],
+   [
+    5.013,
+    5.531
+   ],
+   [
+    2.408,
+    3.027
+   ],
+   [
+    6.659,
+    17.124
+   ],
+   [
+    3.729,
+    7.121
+   ],
+   [
+    4.399,
+    4.962
+   ],
+   [
+    2.825,
+    3.826
+   ],
+   [
+    5.416,
+    5.824
+   ],
+   [
+    3.066,
+    3.13
+   ],
+   [
+    3.231,
+    4.185
+   ],
+   [
+    3.093,
+    5.708
+   ],
+   [
+    4.45,
+    5.412
+   ],
+   [
+    3.115,
+    5.938
+   ],
+   [
+    3.246,
+    6.856
+   ],
+   [
+    5.145,
+    5.728
+   ],
+   [
+    2.397,
+    2.945
+   ],
+   [
+    4.574,
+    5.086
+   ],
+   [
+    4.605,
+    4.923
+   ],
+   [
+    7.737,
+    19.413
+   ],
+   [
+    2.497,
+    2.68
+   ],
+   [
+    5.407,
+    5.915
+   ],
+   [
+    4.105,
+    5.799
+   ],
+   [
+    4.453,
+    6.86
+   ],
+   [
+    3.132,
+    3.716
+   ],
+   [
+    3.432,
+    5.069
+   ],
+   [
+    4.723,
+    5.24
+   ],
+   [
+    4.526,
+    4.968
+   ],
+   [
+    3.222,
+    6.938
+   ],
+   [
+    3.005,
+    3.945
+   ],
+   [
+    5.424,
+    8.726
+   ],
+   [
+    2.921,
+    4.038
+   ],
+   [
+    3.236,
+    4.824
+   ],
+   [
+    5.851,
+    8.437
+   ],
+   [
+    3.657,
+    4.277
+   ],
+   [
+    3.455,
+    5.638
+   ],
+   [
+    4.032,
+    4.456
+   ],
+   [
+    3.574,
+    4.157
+   ],
+   [
+    4.697,
+    5.377
+   ],
+   [
+    6.568,
+    6.573
+   ],
+   [
+    5.646,
+    5.648
+   ],
+   [
+    2.961,
+    3.645
+   ],
+   [
+    5.703,
+    6.551
+   ],
+   [
+    2.816,
+    3.612
+   ],
+   [
+    4.853,
+    5.759
+   ],
+   [
+    3.606,
+    3.891
+   ],
+   [
+    2.901,
+    4.355
+   ],
+   [
+    4.641,
+    6.721
+   ],
+   [
+    3.185,
+    3.727
+   ],
+   [
+    2.602,
+    3.054
+   ],
+   [
+    2.41,
+    2.544
+   ],
+   [
+    5.808,
+    6.238
+   ],
+   [
+    5.377,
+    5.75
+   ],
+   [
+    2.298,
+    2.426
+   ],
+   [
+    2.637,
+    2.877
+   ],
+   [
+    6.038,
+    6.491
+   ],
+   [
+    4.957,
+    6.981
+   ],
+   [
+    3.603,
+    4.928
+   ],
+   [
+    7.239,
+    7.242
+   ],
+   [
+    2.5,
+    3.06
+   ],
+   [
+    5.488,
+    6.251
+   ],
+   [
+    4.253,
+    4.833
+   ],
+   [
+    2.788,
+    5.076
+   ],
+   [
+    5.08,
+    5.583
+   ],
+   [
+    2.925,
+    4.221
+   ],
+   [
+    5.264,
+    7.477
+   ],
+   [
+    4.998,
+    5.53
+   ],
+   [
+    5.653,
+    5.656
+   ],
+   [
+    2.966,
+    3.461
+   ],
+   [
+    5.711,
+    6.097
+   ],
+   [
+    5.357,
+    5.773
+   ],
+   [
+    3.532,
+    6.222
+   ],
+   [
+    10.367,
+    10.773
+   ],
+   [
+    4.922,
+    5.189
+   ],
+   [
+    5.064,
+    15.951
+   ],
+   [
+    3.875,
+    6.496
+   ],
+   [
+    2.551,
+    3.429
+   ],
+   [
+    2.79,
+    3.567
+   ],
+   [
+    6.092,
+    6.719
+   ],
+   [
+    5.206,
+    5.55
+   ],
+   [
+    4.716,
+    5.199
+   ],
+   [
+    5.005,
+    5.826
+   ],
+   [
+    3.04,
+    4.178
+   ],
+   [
+    4.682,
+    10.487
+   ],
+   [
+    3.461,
+    7.338
+   ],
+   [
+    8.859,
+    9.355
+   ],
+   [
+    4.91,
+    5.309
+   ],
+   [
+    3.449,
+    7.577
+   ],
+   [
+    3.079,
+    3.526
+   ],
+   [
+    3.698,
+    6.23
+   ],
+   [
+    3.652,
+    6.164
+   ],
+   [
+    4.081,
+    6.018
+   ],
+   [
+    5.2,
+    9.679
+   ],
+   [
+    2.498,
+    2.6
+   ],
+   [
+    5.825,
+    19.894
+   ],
+   [
+    5.739,
+    6.186
+   ],
+   [
+    5.299,
+    6.473
+   ],
+   [
+    3.893,
+    5.44
+   ],
+   [
+    4.836,
+    5.922
+   ],
+   [
+    9.674,
+    10.189
+   ],
+   [
+    5.62,
+    8.469
+   ],
+   [
+    4.078,
+    5.619
+   ],
+   [
+    7.982,
+    8.453
+   ],
+   [
+    6.874,
+    7.328
+   ],
+   [
+    6.529,
+    7.165
+   ],
+   [
+    3.887,
+    8.741
+   ],
+   [
+    7.814,
+    8.505
+   ],
+   [
+    4.393,
+    5.761
+   ],
+   [
+    6.264,
+    6.92
+   ],
+   [
+    3.053,
+    6.424
+   ],
+   [
+    3.604,
+    5.8
+   ],
+   [
+    3.803,
+    5.211
+   ],
+   [
+    4.165,
+    6.972
+   ],
+   [
+    4.435,
+    7.814
+   ],
+   [
+    3.244,
+    3.48
+   ],
+   [
+    6.193,
+    6.885
+   ],
+   [
+    6.633,
+    7.052
+   ],
+   [
+    3.143,
+    3.477
+   ],
+   [
+    7.197,
+    7.636
+   ],
+   [
+    4.723,
+    4.923
+   ],
+   [
+    6.342,
+    6.852
+   ],
+   [
+    3.529,
+    7.402
+   ],
+   [
+    10.456,
+    23.825
+   ],
+   [
+    4.582,
+    5.112
+   ],
+   [
+    6.52,
+    10.712
+   ],
+   [
+    3.635,
+    4.762
+   ],
+   [
+    3.939,
+    5.476
+   ],
+   [
+    4.786,
+    5.339
+   ],
+   [
+    7.598,
+    8.61
+   ],
+   [
+    2.392,
+    2.625
+   ],
+   [
+    4.283,
+    8.158
+   ],
+   [
+    3.969,
+    5.825
+   ],
+   [
+    3.117,
+    5.027
+   ],
+   [
+    3.618,
+    5.233
+   ],
+   [
+    4.4,
+    12.383
+   ],
+   [
+    6.761,
+    17.795
+   ],
+   [
+    6.795,
+    20.225
+   ],
+   [
+    4.504,
+    8.047
+   ],
+   [
+    4.46,
+    8.099
+   ],
+   [
+    6.204,
+    14.072
+   ],
+   [
+    6.507,
+    14.4
+   ],
+   [
+    7.863,
+    15.736
+   ],
+   [
+    5.726,
+    12.933
+   ],
+   [
+    3.537,
+    3.902
+   ],
+   [
+    3.755,
+    4.271
+   ],
+   [
+    6.287,
+    17.398
+   ],
+   [
+    7.751,
+    15.707
+   ],
+   [
+    6.926,
+    9.41
+   ],
+   [
+    2.863,
+    5.063
+   ],
+   [
+    4.513,
+    7.189
+   ],
+   [
+    4.382,
+    8.426
+   ],
+   [
+    3.611,
+    4.084
+   ],
+   [
+    4.119,
+    8.062
+   ],
+   [
+    3.448,
+    5.293
+   ],
+   [
+    4.547,
+    7.678
+   ],
+   [
+    4.814,
+    5.479
+   ],
+   [
+    2.879,
+    7.794
+   ],
+   [
+    4.034,
+    15.878
+   ],
+   [
+    9.968,
+    12.664
+   ],
+   [
+    5.465,
+    20.549
+   ],
+   [
+    4.123,
+    8.574
+   ],
+   [
+    9.089,
+    9.469
+   ],
+   [
+    8.282,
+    8.285
+   ],
+   [
+    6.134,
+    6.136
+   ],
+   [
+    10.213,
+    16.484
+   ],
+   [
+    5.715,
+    12.916
+   ],
+   [
+    4.439,
+    7.307
+   ],
+   [
+    7.676,
+    8.205
+   ],
+   [
+    3.927,
+    4.941
+   ],
+   [
+    2.744,
+    5.923
+   ],
+   [
+    2.386,
+    3.113
+   ],
+   [
+    2.563,
+    3.888
+   ],
+   [
+    2.716,
+    3.074
+   ],
+   [
+    6.124,
+    6.508
+   ],
+   [
+    2.838,
+    3.224
+   ],
+   [
+    8.186,
+    8.704
+   ],
+   [
+    2.736,
+    4.209
+   ],
+   [
+    2.786,
+    3.636
+   ],
+   [
+    6.489,
+    7.85
+   ],
+   [
+    5.499,
+    7.16
+   ],
+   [
+    8.384,
+    9.407
+   ],
+   [
+    2.964,
+    3.197
+   ],
+   [
+    6.293,
+    6.646
+   ],
+   [
+    3.579,
+    4.151
+   ],
+   [
+    5.207,
+    6.177
+   ],
+   [
+    2.912,
+    3.691
+   ],
+   [
+    3.072,
+    4.03
+   ],
+   [
+    2.704,
+    2.999
+   ],
+   [
+    3.3,
+    3.912
+   ],
+   [
+    3.363,
+    4.097
+   ],
+   [
+    2.766,
+    3.152
+   ],
+   [
+    3.056,
+    3.469
+   ],
+   [
+    2.878,
+    3.577
+   ],
+   [
+    2.727,
+    3.454
+   ],
+   [
+    2.81,
+    3.245
+   ],
+   [
+    2.478,
+    3.158
+   ],
+   [
+    2.646,
+    3.157
+   ],
+   [
+    2.801,
+    3.479
+   ],
+   [
+    3.111,
+    3.241
+   ],
+   [
+    2.766,
+    3.756
+   ],
+   [
+    7.246,
+    7.696
+   ],
+   [
+    7.119,
+    7.644
+   ],
+   [
+    4.479,
+    8.92
+   ],
+   [
+    8.406,
+    8.408
+   ],
+   [
+    4.567,
+    6.974
+   ],
+   [
+    3.814,
+    5.722
+   ],
+   [
+    9.234,
+    9.236
+   ],
+   [
+    3.827,
+    9.676
+   ],
+   [
+    6.069,
+    6.605
+   ],
+   [
+    6.28,
+    6.916
+   ],
+   [
+    5.827,
+    9.025
+   ],
+   [
+    3.134,
+    3.333
+   ],
+   [
+    4.879,
+    7.181
+   ],
+   [
+    4.289,
+    4.577
+   ],
+   [
+    2.807,
+    3.324
+   ],
+   [
+    3.676,
+    3.921
+   ],
+   [
+    4.754,
+    5.048
+   ],
+   [
+    4.202,
+    4.498
+   ],
+   [
+    2.342,
+    2.659
+   ],
+   [
+    4.003,
+    4.757
+   ],
+   [
+    3.162,
+    5.842
+   ],
+   [
+    4.492,
+    4.888
+   ],
+   [
+    2.011,
+    2.514
+   ],
+   [
+    4.722,
+    5.27
+   ],
+   [
+    3.53,
+    3.972
+   ],
+   [
+    3.185,
+    5.145
+   ],
+   [
+    3.129,
+    3.325
+   ],
+   [
+    2.363,
+    2.726
+   ],
+   [
+    5.856,
+    6.433
+   ],
+   [
+    2.561,
+    3.056
+   ],
+   [
+    5.681,
+    6.277
+   ],
+   [
+    8.108,
+    8.544
+   ],
+   [
+    3.664,
+    4.33
+   ],
+   [
+    5.996,
+    6.607
+   ],
+   [
+    2.849,
+    3.571
+   ],
+   [
+    4.678,
+    5.275
+   ],
+   [
+    5.174,
+    5.972
+   ],
+   [
+    2.632,
+    3.743
+   ],
+   [
+    7.538,
+    8.083
+   ],
+   [
+    2.986,
+    3.375
+   ],
+   [
+    6.793,
+    7.247
+   ],
+   [
+    2.447,
+    2.62
+   ],
+   [
+    4.387,
+    4.897
+   ],
+   [
+    2.67,
+    3.751
+   ],
+   [
+    5.622,
+    6.166
+   ],
+   [
+    2.893,
+    3.387
+   ],
+   [
+    3.209,
+    4.134
+   ],
+   [
+    5.737,
+    6.145
+   ],
+   [
+    6.483,
+    7.125
+   ],
+   [
+    6.717,
+    7.388
+   ],
+   [
+    3.081,
+    5.093
+   ],
+   [
+    1.932,
+    2.109
+   ],
+   [
+    5.552,
+    6.169
+   ],
+   [
+    6.567,
+    7.265
+   ],
+   [
+    2.75,
+    2.94
+   ],
+   [
+    7.174,
+    7.732
+   ],
+   [
+    4.682,
+    5.029
+   ],
+   [
+    7.594,
+    8.173
+   ],
+   [
+    7.287,
+    7.852
+   ],
+   [
+    3.9,
+    6.104
+   ],
+   [
+    3.921,
+    4.864
+   ],
+   [
+    4.243,
+    6.288
+   ],
+   [
+    3.49,
+    5.997
+   ],
+   [
+    7.04,
+    8.722
+   ],
+   [
+    4.157,
+    5.244
+   ],
+   [
+    5.273,
+    5.725
+   ],
+   [
+    5.164,
+    5.676
+   ],
+   [
+    5.426,
+    5.929
+   ],
+   [
+    2.635,
+    2.905
+   ],
+   [
+    5.659,
+    6.337
+   ],
+   [
+    4.647,
+    6.357
+   ],
+   [
+    3.898,
+    4.452
+   ],
+   [
+    4.607,
+    5.699
+   ],
+   [
+    2.809,
+    2.993
+   ],
+   [
+    4.187,
+    5.5
+   ],
+   [
+    3.604,
+    3.927
+   ],
+   [
+    8.142,
+    8.587
+   ],
+   [
+    2.185,
+    2.488
+   ],
+   [
+    3.06,
+    3.42
+   ],
+   [
+    2.769,
+    3.079
+   ],
+   [
+    5.155,
+    5.495
+   ],
+   [
+    2.67,
+    3.179
+   ],
+   [
+    2.549,
+    2.751
+   ],
+   [
+    3.113,
+    3.669
+   ],
+   [
+    2.431,
+    3.179
+   ],
+   [
+    4.834,
+    5.389
+   ],
+   [
+    2.299,
+    2.808
+   ],
+   [
+    6.617,
+    7.189
+   ],
+   [
+    2.968,
+    3.303
+   ],
+   [
+    3.805,
+    6.891
+   ],
+   [
+    6.209,
+    6.744
+   ],
+   [
+    2.312,
+    2.513
+   ],
+   [
+    4.843,
+    5.303
+   ],
+   [
+    2.641,
+    2.987
+   ],
+   [
+    7.602,
+    7.951
+   ],
+   [
+    3.122,
+    3.484
+   ],
+   [
+    2.3,
+    3.3
+   ],
+   [
+    5.123,
+    5.511
+   ],
+   [
+    1.915,
+    2.208
+   ],
+   [
+    2.517,
+    3.182
+   ],
+   [
+    5.039,
+    5.265
+   ],
+   [
+    3.229,
+    4.273
+   ],
+   [
+    2.787,
+    3.165
+   ],
+   [
+    3.192,
+    3.751
+   ],
+   [
+    3.315,
+    3.535
+   ],
+   [
+    2.178,
+    2.557
+   ],
+   [
+    2.195,
+    2.748
+   ],
+   [
+    2.633,
+    3.258
+   ],
+   [
+    3.957,
+    4.55
+   ],
+   [
+    2.221,
+    2.784
+   ],
+   [
+    4.499,
+    4.835
+   ],
+   [
+    3.355,
+    4.396
+   ],
+   [
+    4.461,
+    5.033
+   ],
+   [
+    3.516,
+    4.4
+   ],
+   [
+    5.129,
+    6.993
+   ],
+   [
+    4.228,
+    6.012
+   ],
+   [
+    3.571,
+    5.139
+   ],
+   [
+    3.119,
+    3.982
+   ],
+   [
+    3.156,
+    4.162
+   ],
+   [
+    2.771,
+    3.393
+   ],
+   [
+    3.886,
+    4.117
+   ],
+   [
+    2.894,
+    3.715
+   ],
+   [
+    3.299,
+    4.023
+   ],
+   [
+    3.19,
+    4.347
+   ],
+   [
+    2.937,
+    3.714
+   ],
+   [
+    6.827,
+    8.157
+   ],
+   [
+    6.336,
+    6.753
+   ],
+   [
+    3.119,
+    3.504
+   ],
+   [
+    3.431,
+    5.172
+   ],
+   [
+    3.538,
+    4.578
+   ],
+   [
+    5.093,
+    5.669
+   ],
+   [
+    6.577,
+    7.121
+   ],
+   [
+    4.001,
+    5.958
+   ],
+   [
+    4.159,
+    5.761
+   ],
+   [
+    6.004,
+    6.492
+   ],
+   [
+    2.813,
+    3.38
+   ],
+   [
+    2.222,
+    2.729
+   ],
+   [
+    7.111,
+    7.703
+   ],
+   [
+    2.797,
+    3.31
+   ],
+   [
+    2.674,
+    3.306
+   ],
+   [
+    2.491,
+    2.857
+   ],
+   [
+    4.55,
+    4.918
+   ],
+   [
+    2.274,
+    2.444
+   ],
+   [
+    5.526,
+    5.98
+   ],
+   [
+    2.714,
+    3.542
+   ],
+   [
+    4.891,
+    5.375
+   ],
+   [
+    2.032,
+    2.743
+   ],
+   [
+    4.6,
+    5.007
+   ],
+   [
+    4.973,
+    5.304
+   ],
+   [
+    2.893,
+    3.229
+   ],
+   [
+    2.873,
+    3.422
+   ],
+   [
+    2.025,
+    2.226
+   ],
+   [
+    2.273,
+    3.332
+   ],
+   [
+    3.261,
+    3.575
+   ],
+   [
+    2.634,
+    3.547
+   ],
+   [
+    2.876,
+    4.057
+   ],
+   [
+    2.714,
+    3.584
+   ],
+   [
+    3.576,
+    4.327
+   ],
+   [
+    2.465,
+    3.11
+   ],
+   [
+    2.268,
+    2.534
+   ],
+   [
+    2.291,
+    2.471
+   ],
+   [
+    2.309,
+    3.54
+   ],
+   [
+    2.182,
+    2.758
+   ],
+   [
+    5.012,
+    5.445
+   ],
+   [
+    5.186,
+    6.032
+   ],
+   [
+    5.716,
+    6.169
+   ],
+   [
+    2.371,
+    2.542
+   ],
+   [
+    2.252,
+    2.44
+   ],
+   [
+    5.421,
+    6.084
+   ],
+   [
+    4.49,
+    4.964
+   ],
+   [
+    4.486,
+    4.957
+   ],
+   [
+    5.459,
+    5.955
+   ],
+   [
+    3.793,
+    5.219
+   ],
+   [
+    2.025,
+    2.736
+   ],
+   [
+    2.536,
+    3.32
+   ],
+   [
+    7.15,
+    8.991
+   ],
+   [
+    5.485,
+    5.788
+   ],
+   [
+    2.348,
+    3.097
+   ],
+   [
+    2.023,
+    2.516
+   ],
+   [
+    2.222,
+    2.586
+   ],
+   [
+    2.814,
+    21.719
+   ],
+   [
+    2.326,
+    2.822
+   ],
+   [
+    2.303,
+    2.704
+   ],
+   [
+    4.321,
+    4.694
+   ],
+   [
+    4.612,
+    5.876
+   ],
+   [
+    2.252,
+    2.537
+   ],
+   [
+    5.574,
+    6.132
+   ],
+   [
+    3.547,
+    4.161
+   ],
+   [
+    2.45,
+    3.555
+   ],
+   [
+    3.403,
+    5.065
+   ],
+   [
+    2.272,
+    2.598
+   ],
+   [
+    2.861,
+    7.642
+   ],
+   [
+    2.593,
+    3.161
+   ],
+   [
+    2.964,
+    7.171
+   ],
+   [
+    4.634,
+    5.088
+   ],
+   [
+    3.441,
+    5.008
+   ],
+   [
+    5.817,
+    6.457
+   ],
+   [
+    2.492,
+    3.572
+   ],
+   [
+    4.613,
+    5.07
+   ],
+   [
+    3.685,
+    4.692
+   ],
+   [
+    2.319,
+    2.544
+   ],
+   [
+    1.951,
+    2.136
+   ],
+   [
+    8.265,
+    8.268
+   ],
+   [
+    5.415,
+    10.324
+   ],
+   [
+    2.535,
+    2.959
+   ],
+   [
+    4.834,
+    5.405
+   ],
+   [
+    2.908,
+    3.626
+   ],
+   [
+    3.403,
+    4.475
+   ],
+   [
+    5.806,
+    10.728
+   ],
+   [
+    5.118,
+    14.591
+   ],
+   [
+    5.203,
+    8.869
+   ],
+   [
+    6.69,
+    10.856
+   ],
+   [
+    6.652,
+    11.465
+   ],
+   [
+    5.638,
+    6.809
+   ],
+   [
+    4.403,
+    7.854
+   ],
+   [
+    4.758,
+    6.317
+   ],
+   [
+    3.936,
+    11.156
+   ],
+   [
+    4.425,
+    9.365
+   ],
+   [
+    3.471,
+    4.33
+   ],
+   [
+    3.371,
+    4.455
+   ],
+   [
+    4.868,
+    12.824
+   ],
+   [
+    8.618,
+    9.317
+   ],
+   [
+    4.929,
+    6.912
+   ],
+   [
+    5.333,
+    7.559
+   ],
+   [
+    9.603,
+    16.766
+   ],
+   [
+    7.202,
+    23.813
+   ],
+   [
+    8.577,
+    11.34
+   ],
+   [
+    4.912,
+    6.899
+   ],
+   [
+    6.977,
+    30.603
+   ],
+   [
+    4.508,
+    7.509
+   ],
+   [
+    3.03,
+    31.306
+   ],
+   [
+    4.943,
+    26.098
+   ],
+   [
+    5.154,
+    7.873
+   ],
+   [
+    7.581,
+    8.206
+   ],
+   [
+    2.685,
+    2.957
+   ],
+   [
+    3.388,
+    4.043
+   ],
+   [
+    5.887,
+    6.627
+   ],
+   [
+    7.858,
+    11.1
+   ],
+   [
+    6.16,
+    6.876
+   ],
+   [
+    5.165,
+    6.272
+   ],
+   [
+    7.242,
+    8.747
+   ],
+   [
+    6.113,
+    7.915
+   ],
+   [
+    2.574,
+    3.198
+   ],
+   [
+    2.732,
+    3.221
+   ],
+   [
+    9.994,
+    10.409
+   ],
+   [
+    4.657,
+    5.936
+   ],
+   [
+    5.187,
+    9.353
+   ],
+   [
+    3.552,
+    5.308
+   ]
+  ],
+  "daily": [
+   {
+    "date": "2026-09-23",
+    "requests": 376,
+    "median": 6.9079999999999995,
+    "p95": 11.5835,
+    "ttft_median": 3.397
+   },
+   {
+    "date": "2026-09-24",
+    "requests": 118,
+    "median": 6.968999999999999,
+    "p95": 13.117950000000004,
+    "ttft_median": 4.159
+   },
+   {
+    "date": "2026-09-25",
+    "requests": 425,
+    "median": 6.365,
+    "p95": 18.168400000000005,
+    "ttft_median": 3.7439999999999998
+   },
+   {
+    "date": "2026-09-26",
+    "requests": 28,
+    "median": 6.6355,
+    "p95": 10.5681,
+    "ttft_median": 5.41
+   },
+   {
+    "date": "2026-09-27",
+    "requests": 31,
+    "median": 6.641,
+    "p95": 10.787500000000001,
+    "ttft_median": 4.606
+   },
+   {
+    "date": "2026-09-28",
+    "requests": 110,
+    "median": 5.1035,
+    "p95": 10.4084,
+    "ttft_median": 3.912
+   },
+   {
+    "date": "2026-09-29",
+    "requests": 604,
+    "median": 5.922499999999999,
+    "p95": 15.1621,
+    "ttft_median": 4.165
+   },
+   {
+    "date": "2026-09-30",
+    "requests": 478,
+    "median": 5.079000000000001,
+    "p95": 11.159749999999999,
+    "ttft_median": 3.897
+   }
+  ],
+  "slots": [
+   {
+    "slot": "00:00-08:00",
+    "requests": 138,
+    "latency_mean": 5.600782608695649,
+    "latency_p50": 5.227,
+    "latency_p95": 9.76135,
+    "ttft_mean": 4.559080291970803,
+    "ttft_p95": 7.616199999999999
+   },
+   {
+    "slot": "08:00-13:00",
+    "requests": 1040,
+    "latency_mean": 6.675401923076923,
+    "latency_p50": 5.8215,
+    "latency_p95": 14.12505,
+    "ttft_mean": 4.0220977734753145,
+    "ttft_p95": 6.845
+   },
+   {
+    "slot": "13:00-18:00",
+    "requests": 713,
+    "latency_mean": 7.440915848527339,
+    "latency_p50": 6.548,
+    "latency_p95": 14.512999999999996,
+    "ttft_mean": 4.413401974612128,
+    "ttft_p95": 7.331800000000002
+   },
+   {
+    "slot": "18:00-24:00",
+    "requests": 279,
+    "latency_mean": 7.110623655913973,
+    "latency_p50": 6.472,
+    "latency_p95": 13.552299999999999,
+    "ttft_mean": 4.90481090909091,
+    "ttft_p95": 8.4234
+   }
+  ],
+  "thresholds": [
+   {
+    "seconds": 5,
+    "count": 689,
+    "total": 2170,
+    "rate": 31.75115207373272,
+    "previous_rate": 13.366336633663366
+   },
+   {
+    "seconds": 10,
+    "count": 1858,
+    "total": 2170,
+    "rate": 85.6221198156682,
+    "previous_rate": 85.84158415841584
+   },
+   {
+    "seconds": 20,
+    "count": 2135,
+    "total": 2170,
+    "rate": 98.38709677419355,
+    "previous_rate": 99.8019801980198
+   }
+  ],
+  "ttft_share_median": 69.99330619629126
+ },
+ "cost": {
+  "input_tokens": 3512992,
+  "output_tokens": 326849,
+  "total_tokens": 3839841,
+  "cost": 0.5666858999389996,
+  "cost_per_request": 0.0002611455760087556,
+  "estimated_share": 68.78450655679964,
+  "unpriced": [],
+  "daily": [
+   {
+    "date": "2026-09-23",
+    "input_tokens": 702561,
+    "output_tokens": 55498,
+    "cost": 0.13868294995000002
+   },
+   {
+    "date": "2026-09-24",
+    "input_tokens": 203333,
+    "output_tokens": 16027,
+    "cost": 0.039631149989
+   },
+   {
+    "date": "2026-09-25",
+    "input_tokens": 782867,
+    "output_tokens": 73471,
+    "cost": 0.11502219999999992
+   },
+   {
+    "date": "2026-09-26",
+    "input_tokens": 29701,
+    "output_tokens": 3077,
+    "cost": 0.0045086
+   },
+   {
+    "date": "2026-09-27",
+    "input_tokens": 59296,
+    "output_tokens": 5414,
+    "cost": 0.0086366
+   },
+   {
+    "date": "2026-09-28",
+    "input_tokens": 147929,
+    "output_tokens": 15488,
+    "cost": 0.022536900000000002
+   },
+   {
+    "date": "2026-09-29",
+    "input_tokens": 972041,
+    "output_tokens": 97703,
+    "cost": 0.1460556
+   },
+   {
+    "date": "2026-09-30",
+    "input_tokens": 615264,
+    "output_tokens": 60171,
+    "cost": 0.09161190000000002
+   }
+  ],
+  "forecast": {
+   "requests_per_day": 271.25,
+   "avg_input_tokens": 1618.8903225806453,
+   "avg_output_tokens": 150.6216589861751,
+   "cost_per_request": 0.0002611455760087556,
+   "current_model": "gpt-6-luna",
+   "prices": {
+    "gpt-4o-mini": {
+     "input": 0.15,
+     "output": 0.6
+    },
+    "gpt-6-luna": {
+     "input": 0.1,
+     "output": 0.5
+    }
+   },
+   "semester_end": null,
+   "days_to_semester_end": null
+  }
+ },
+ "users": {
+  "available": true,
+  "unique": 489,
+  "no_user_id": 0,
+  "requests_per_user": {
+   "mean": 4.437627811860941,
+   "median": 3.0,
+   "max": 41
+  },
+  "top10pct_share": 34.10138248847926,
+  "active_2plus_days": 45,
+  "distribution": [
+   {
+    "bucket": "1",
+    "users": 118
+   },
+   {
+    "bucket": "2–5",
+    "users": 255
+   },
+   {
+    "bucket": "6–10",
+    "users": 80
+   },
+   {
+    "bucket": "11–20",
+    "users": 30
+   },
+   {
+    "bucket": ">20",
+    "users": 6
+   }
+  ],
+  "sessions": {
+   "count": 730,
+   "turns_per_session": {
+    "mean": 2.9506849315068493,
+    "median": 2.0,
+    "p95": 8.0,
+    "max": 38
+   },
+   "sessions_per_user": {
+    "mean": 1.5020576131687242,
+    "median": 1.0,
+    "p95": 3.0,
+    "max": 10
+   }
+  },
+  "groups": [
+   {
+    "group": "returning",
+    "users": 58,
+    "user_share": 11.860940695296524,
+    "requests": 193,
+    "request_share": 8.894009216589861,
+    "sessions": 81,
+    "req_per_user": 3.3275862068965516,
+    "median_req_per_user": 3.0,
+    "active_2plus_days": 3
+   },
+   {
+    "group": "new",
+    "users": 431,
+    "user_share": 88.13905930470348,
+    "requests": 1977,
+    "request_share": 91.10599078341014,
+    "sessions": 649,
+    "req_per_user": 4.587006960556844,
+    "median_req_per_user": 3.0,
+    "active_2plus_days": 42
+   },
+   {
+    "group": "total",
+    "users": 489,
+    "user_share": 100.0,
+    "requests": 2170,
+    "request_share": 100.0,
+    "sessions": 730,
+    "req_per_user": 4.437627811860941,
+    "median_req_per_user": 3.0,
+    "active_2plus_days": 45
+   }
+  ],
+  "daily_groups": [
+   {
+    "date": "2026-09-23",
+    "new": 95,
+    "returning": 8,
+    "returning_in_period": 0,
+    "requests": 376
+   },
+   {
+    "date": "2026-09-24",
+    "new": 37,
+    "returning": 4,
+    "returning_in_period": 4,
+    "requests": 118
+   },
+   {
+    "date": "2026-09-25",
+    "new": 99,
+    "returning": 5,
+    "returning_in_period": 4,
+    "requests": 425
+   },
+   {
+    "date": "2026-09-26",
+    "new": 5,
+    "returning": 5,
+    "returning_in_period": 5,
+    "requests": 28
+   },
+   {
+    "date": "2026-09-27",
+    "new": 6,
+    "returning": 1,
+    "returning_in_period": 1,
+    "requests": 31
+   },
+   {
+    "date": "2026-09-28",
+    "new": 18,
+    "returning": 9,
+    "returning_in_period": 4,
+    "requests": 110
+   },
+   {
+    "date": "2026-09-29",
+    "new": 91,
+    "returning": 28,
+    "returning_in_period": 7,
+    "requests": 604
+   },
+   {
+    "date": "2026-09-30",
+    "new": 72,
+    "returning": 5,
+    "returning_in_period": 33,
+    "requests": 478
+   }
+  ],
+  "retention": {
+   "previous_users": 230,
+   "returned": 46,
+   "rate": 20.0
+  },
+  "top": [
+   {
+    "user": "demo001",
+    "user_masked": "u_e1632de6",
+    "requests": 41,
+    "active_days": 2,
+    "latency_mean": 4.068365853658538,
+    "first": "2026-09-29T22:35:56+07:00",
+    "last": "2026-09-30T09:34:08+07:00",
+    "cohort": "B23·MR",
+    "top_course": "MAR1408",
+    "top_course_name": "Phân tích web"
+   },
+   {
+    "user": "demo002",
+    "user_masked": "u_0970d5df",
+    "requests": 38,
+    "active_days": 1,
+    "latency_mean": 10.234236842105261,
+    "first": "2026-09-29T16:57:16+07:00",
+    "last": "2026-09-29T17:37:13+07:00",
+    "cohort": "B24·ME",
+    "top_course": "MAR1425_CLC",
+    "top_course_name": "Marketing dịch vụ (service marketing)"
+   },
+   {
+    "user": "demo003",
+    "user_masked": "u_c2533efc",
+    "requests": 33,
+    "active_days": 1,
+    "latency_mean": 5.826848484848484,
+    "first": "2026-09-29T10:56:39+07:00",
+    "last": "2026-09-29T11:52:09+07:00",
+    "cohort": "B23·MR",
+    "top_course": "MAR1408",
+    "top_course_name": "Phân tích web"
+   },
+   {
+    "user": "demo004",
+    "user_masked": "u_6262016f",
+    "requests": 25,
+    "active_days": 1,
+    "latency_mean": 6.462320000000001,
+    "first": "2026-09-29T10:48:49+07:00",
+    "last": "2026-09-29T11:20:52+07:00",
+    "cohort": "B26·LQ",
+    "top_course": "BSA1310",
+    "top_course_name": "Kinh tế vi mô 1"
+   },
+   {
+    "user": "demo005",
+    "user_masked": "u_9c1a3d82",
+    "requests": 25,
+    "active_days": 2,
+    "latency_mean": 5.653999999999999,
+    "first": "2026-09-29T11:41:46+07:00",
+    "last": "2026-09-30T13:21:38+07:00",
+    "cohort": "B23·MR",
+    "top_course": "MAR1408",
+    "top_course_name": "Phân tích web"
+   },
+   {
+    "user": "demo006",
+    "user_masked": "u_771eec62",
+    "requests": 23,
+    "active_days": 3,
+    "latency_mean": 7.010956521739129,
+    "first": "2026-09-28T23:44:17+07:00",
+    "last": "2026-09-30T08:45:48+07:00",
+    "cohort": "B26·MR",
+    "top_course": "BSA1310",
+    "top_course_name": "Kinh tế vi mô 1"
+   },
+   {
+    "user": "demo007",
+    "user_masked": "u_5e41e3df",
+    "requests": 20,
+    "active_days": 2,
+    "latency_mean": 4.9389,
+    "first": "2026-09-29T14:55:59+07:00",
+    "last": "2026-09-30T09:33:47+07:00",
+    "cohort": "B23·MR",
+    "top_course": "MAR1408",
+    "top_course_name": "Phân tích web"
+   },
+   {
+    "user": "demo008",
+    "user_masked": "u_16da1cfe",
+    "requests": 19,
+    "active_days": 2,
+    "latency_mean": 6.339684210526317,
+    "first": "2026-09-23T10:42:19+07:00",
+    "last": "2026-09-30T09:45:02+07:00",
+    "cohort": "B26·TT",
+    "top_course": "BSA12117",
+    "top_course_name": "Pháp luật và sở hữu trí tuệ"
+   },
+   {
+    "user": "demo009",
+    "user_masked": "u_2033beb4",
+    "requests": 19,
+    "active_days": 3,
+    "latency_mean": 5.720473684210526,
+    "first": "2026-09-23T10:45:18+07:00",
+    "last": "2026-09-30T09:55:56+07:00",
+    "cohort": "B26·TT",
+    "top_course": "BSA12117",
+    "top_course_name": "Pháp luật và sở hữu trí tuệ"
+   },
+   {
+    "user": "demo010",
+    "user_masked": "u_382d2e8c",
+    "requests": 18,
+    "active_days": 2,
+    "latency_mean": 5.919388888888889,
+    "first": "2026-09-23T10:42:39+07:00",
+    "last": "2026-09-30T09:53:36+07:00",
+    "cohort": "B26·TT",
+    "top_course": "BSA12117",
+    "top_course_name": "Pháp luật và sở hữu trí tuệ"
+   }
+  ]
+ },
+ "reliability": {
+  "errors": 0,
+  "error_rate": 0.0,
+  "error_rows": [],
+  "slowest": [
+   {
+    "time": "2026-09-25T14:47:53+07:00",
+    "name": "handle-chat-stream",
+    "model": "gpt-6-luna",
+    "user": "demo011",
+    "user_masked": "u_aece0a17",
+    "course": "BSA12117",
+    "course_name": "Pháp luật và sở hữu trí tuệ",
+    "trace_id": "c7cb1e69eb8f0d10563fd142569770f7",
+    "latency": 40.282,
+    "ttft": 38.707,
+    "output_tokens": 82
+   },
+   {
+    "time": "2026-09-25T21:47:05+07:00",
+    "name": "handle-chat-stream",
+    "model": "gpt-6-luna",
+    "user": "demo012",
+    "user_masked": "u_1c4dab3d",
+    "course": "BSA12117",
+    "course_name": "Pháp luật và sở hữu trí tuệ",
+    "trace_id": "ad7090f11f93f84de070695cecfda8b2",
+    "latency": 35.676,
+    "ttft": 5.416,
+    "output_tokens": 183
+   },
+   {
+    "time": "2026-09-30T17:56:52+07:00",
+    "name": "handle-chat-stream",
+    "model": "gpt-6-luna",
+    "user": "demo013",
+    "user_masked": "u_001d3712",
+    "course": "MAR1329_CLC",
+    "course_name": "Quản trị bán hàng (sales management)",
+    "trace_id": "b5ccd895c30a1fed149ceb792b5e6353",
+    "latency": 31.306,
+    "ttft": 3.03,
+    "output_tokens": 148
+   },
+   {
+    "time": "2026-09-30T17:20:35+07:00",
+    "name": "handle-chat-stream",
+    "model": "gpt-6-luna",
+    "user": "demo014",
+    "user_masked": "u_40d5485d",
+    "course": "MAR1410",
+    "course_name": "Quản trị quảng cáo",
+    "trace_id": "83a3c4ea909f02153f93e829ee85be1a",
+    "latency": 30.603,
+    "ttft": 6.977,
+    "output_tokens": 335
+   },
+   {
+    "time": "2026-09-30T13:20:04+07:00",
+    "name": "handle-chat-stream",
+    "model": "gpt-6-luna",
+    "user": "demo015",
+    "user_masked": "u_906181aa",
+    "course": "MAR1406",
+    "course_name": "Marketing qua phương tiện truyền thông xã hội",
+    "trace_id": "98f7d7a416e97b9c5ee9b79c244119af",
+    "latency": 30.142,
+    "ttft": 2.352,
+    "output_tokens": 119
+   },
+   {
+    "time": "2026-09-25T21:44:25+07:00",
+    "name": "handle-chat-stream",
+    "model": "gpt-6-luna",
+    "user": "demo012",
+    "user_masked": "u_1c4dab3d",
+    "course": "BSA12117",
+    "course_name": "Pháp luật và sở hữu trí tuệ",
+    "trace_id": "0b813808cd4299fb1c6bac63932048dc",
+    "latency": 27.625,
+    "ttft": 3.612,
+    "output_tokens": 102
+   },
+   {
+    "time": "2026-09-30T17:52:46+07:00",
+    "name": "handle-chat-stream",
+    "model": "gpt-6-luna",
+    "user": "demo013",
+    "user_masked": "u_001d3712",
+    "course": "MAR1329_CLC",
+    "course_name": "Quản trị bán hàng (sales management)",
+    "trace_id": "2b4a144a5b226d34316a30721c825244",
+    "latency": 27.114,
+    "ttft": 9.666,
+    "output_tokens": 303
+   },
+   {
+    "time": "2026-09-25T21:57:08+07:00",
+    "name": "handle-chat-stream",
+    "model": "gpt-6-luna",
+    "user": "demo012",
+    "user_masked": "u_1c4dab3d",
+    "course": "BSA12117",
+    "course_name": "Pháp luật và sở hữu trí tuệ",
+    "trace_id": "1fa009049f581afdd60e0d715c447aeb",
+    "latency": 26.806,
+    "ttft": 4.844,
+    "output_tokens": 147
+   },
+   {
+    "time": "2026-09-25T21:56:36+07:00",
+    "name": "handle-chat-stream",
+    "model": "gpt-6-luna",
+    "user": "demo012",
+    "user_masked": "u_1c4dab3d",
+    "course": "BSA12117",
+    "course_name": "Pháp luật và sở hữu trí tuệ",
+    "trace_id": "991de51f4a9ac0c097fae7c2f8f54b70",
+    "latency": 26.169,
+    "ttft": 3.959,
+    "output_tokens": 209
+   },
+   {
+    "time": "2026-09-30T18:02:55+07:00",
+    "name": "handle-chat-stream",
+    "model": "gpt-6-luna",
+    "user": "demo013",
+    "user_masked": "u_001d3712",
+    "course": "MAR1361_CLC",
+    "course_name": "Quản trị dự án marketing (Marketing project management)",
+    "trace_id": "5d3164571c43e746278f3cce147309cc",
+    "latency": 26.098,
+    "ttft": 4.943,
+    "output_tokens": 199
+   }
+  ]
+ },
+ "data_quality": {
+  "rows_read": 2188,
+  "rows_analyzed": 2170,
+  "excluded": [
+   {
+    "rule": "ptit:*",
+    "count": 18
+   }
+  ],
+  "missing": [
+   {
+    "field": "user_id",
+    "count": 0
+   },
+   {
+    "field": "model",
+    "count": 0
+   },
+   {
+    "field": "latency",
+    "count": 0
+   },
+   {
+    "field": "ttft",
+    "count": 16
+   },
+   {
+    "field": "output_tokens",
+    "count": 0
+   },
+   {
+    "field": "cost",
+    "count": 0
+   },
+   {
+    "field": "session_id",
+    "count": 16
+   }
+  ],
+  "notes": [
+   "Chỉ tính các request người dùng (trace handle-chat-stream / handle-chat-turn). Thời gian quy đổi về GMT+7. Tokens/giây = output tokens / latency.",
+   "User mới = lần đầu dùng chatbot nằm trong kỳ; user quay lại = đã dùng trước kỳ. Giữ chân = tỉ lệ user của kỳ trước quay lại trong kỳ này.",
+   "Tỉ lệ lỗi dựa trên level = ERROR của trace; mba_api hiện chưa ghi nhận lỗi vào trace.",
+   "Lịch sử user bắt đầu từ 03/09/2026 (ngày bắt đầu tracing); user dùng trước đó được tính là user mới.",
+   "1.683 request không có chi phí trong Langfuse; chi phí được ước tính từ bảng giá trong Cài đặt."
+  ]
+ },
+ "highlights": [
+  {
+   "kind": "traffic",
+   "text": "Lưu lượng tăng 114,9% so với kỳ trước: 2.170 requests (kỳ trước 1.010) và 489 unique users (+112,6%)."
+  },
+  {
+   "kind": "peak",
+   "text": "Ngày cao điểm là T3 29/09 với 604 requests và 126 users; 3 ngày bận nhất (T6 25/09, T3 29/09, T4 30/09) chiếm 69,4% requests."
+  },
+  {
+   "kind": "slot",
+   "text": "Khung 08:00-13:00 chiếm 1.040 requests (47,9%); giờ đông nhất là 10:00-11:00 (414 requests)."
+  },
+  {
+   "kind": "course",
+   "text": "Môn Pháp luật và sở hữu trí tuệ (BSA12117) dẫn đầu với 1.056 requests (48,7%), tiếp theo là Phân tích web (17,8%)."
+  },
+  {
+   "kind": "users",
+   "text": "User mới chiếm 88,1% (431/489 users) và tạo 91,1% requests; 58 user quay lại. Giữ chân 20,0% user của kỳ trước (46/230)."
+  },
+  {
+   "kind": "latency",
+   "text": "Latency trung bình 6,91 giây (kỳ trước 7,63), p95 12,11 → 14,05 giây, TTFT trung bình 4,23 → 4,30 giây."
+  },
+  {
+   "kind": "sla",
+   "text": "Tỉ lệ request xong trong 5 giây 13,4% → 31,8%; trong 10 giây 85,8% → 85,6%."
+  },
+  {
+   "kind": "errors",
+   "text": "Không ghi nhận lỗi nào (0/2.170 request ở mức ERROR)."
+  },
+  {
+   "kind": "cost",
+   "text": "Chi phí 0,567 USD cho 3,84 triệu tokens (~0,00026 USD/request), tăng so với 0,381 USD kỳ trước."
+  },
+  {
+   "kind": "model",
+   "text": "Model: gpt-6-luna 77,6%, gpt-4o-mini 22,4%."
+  }
+ ]
+}
