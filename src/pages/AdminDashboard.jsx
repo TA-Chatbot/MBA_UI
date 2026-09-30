@@ -415,7 +415,7 @@ const AdminDashboard = () => {
         {/* Link: API performance dashboard (usage, latency, tokens, cost from Langfuse) */}
         <a
           href="/mini/admin/performance"
-          className="group bg-white rounded-lg shadow-lg p-5 mb-4 flex flex-wrap sm:flex-nowrap items-center gap-4 border-l-4 border-red-600 hover:shadow-xl transition-shadow"
+          className="group bg-white rounded-lg shadow-lg p-5 mb-4 flex flex-wrap sm:flex-nowrap items-center gap-4 hover:shadow-xl transition-shadow"
         >
           <div className="w-12 h-12 bg-red-600 rounded-lg flex items-center justify-center flex-none">
             <FaTachometerAlt className="text-white text-xl" />

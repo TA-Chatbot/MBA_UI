@@ -72,19 +72,19 @@ describe('format numbers (vi-VN)', () => {
 
 describe('format change percent', () => {
   it('marks a rise in a lower-is-better metric as bad (red)', () => {
-    expect(fmtChange(12.34, 'lower-better')).toEqual({ text: '▲ +12,3%', direction: 'up', tone: 'bad' });
-    expect(fmtChange(-5.9, 'lower-better')).toEqual({ text: '▼ −5,9%', direction: 'down', tone: 'good' });
+    expect(fmtChange(12.34, 'lower-better')).toEqual({ text: '▲ +12,3%', label: '+12,3%', direction: 'up', tone: 'bad' });
+    expect(fmtChange(-5.9, 'lower-better')).toEqual({ text: '▼ −5,9%', label: '−5,9%', direction: 'down', tone: 'good' });
   });
 
   it('marks a rise in a volume metric as good (green) and a fall as neutral', () => {
     expect(fmtChange(16.8, 'higher-better').tone).toBe('good');
-    expect(fmtChange(-3, 'higher-better')).toEqual({ text: '▼ −3%', direction: 'down', tone: 'neutral' });
+    expect(fmtChange(-3, 'higher-better')).toEqual({ text: '▼ −3%', label: '−3%', direction: 'down', tone: 'neutral' });
   });
 
   it('handles zero and null', () => {
     expect(fmtChange(0).text).toBe('0%');
     expect(fmtChange(0.01).direction).toBe('flat');
-    expect(fmtChange(null)).toEqual({ text: DASH, direction: 'none', tone: 'none' });
+    expect(fmtChange(null)).toEqual({ text: DASH, label: DASH, direction: 'none', tone: 'none' });
   });
 });
 

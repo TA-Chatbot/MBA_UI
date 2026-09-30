@@ -1,4 +1,5 @@
 import React from 'react';
+import { FaDatabase } from 'react-icons/fa';
 import { fmtInt, fmtDate, MISSING_FIELD_LABELS, DASH } from './format';
 import { Section, Block, EmptyNote, Stat, list } from './common';
 
@@ -10,7 +11,7 @@ export default function DataQualitySection({ dataQuality, meta }) {
   const patterns = list(meta?.excluded_users);
 
   return (
-    <Section id="perf-data-quality" title="Chất lượng dữ liệu">
+    <Section id="perf-data-quality" icon={FaDatabase} title="Chất lượng dữ liệu">
       <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
         <Stat label="Dòng đọc từ Langfuse" value={fmtInt(dataQuality?.rows_read)} />
         <Stat label="Dòng được phân tích" value={fmtInt(dataQuality?.rows_analyzed)} />
@@ -18,7 +19,7 @@ export default function DataQualitySection({ dataQuality, meta }) {
         <Stat label="Lịch sử từ" value={meta?.history_start ? fmtDate(meta.history_start) : DASH} hint="dùng cho user mới/quay lại" />
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2 mt-4">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 mt-4">
         <Block flush title="Loại trừ">
           {excluded.length === 0 ? <EmptyNote>Không có dòng nào bị loại.</EmptyNote> : (
             <div className="perf-table-wrap">

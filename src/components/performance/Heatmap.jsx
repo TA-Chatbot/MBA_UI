@@ -1,15 +1,16 @@
-// CSS-grid heatmap: colour intensity by value (one-hue blue ramp), value in the cell.
+// CSS-grid heatmap: colour intensity by value (one-hue red ramp, the site's brand
+// hue), value in the cell.
 import React, { useContext } from 'react';
 import { fmtInt, isNum } from './format';
 import { PrintContext } from './common';
 
-// Sequential blue, light -> dark (dataviz reference ramp, steps 100..700).
-const RAMP = [
-  '#cde2fb', '#b7d3f6', '#9ec5f4', '#86b6ef', '#6da7ec', '#5598e7',
-  '#3987e5', '#2a78d6', '#256abf', '#1c5cab', '#184f95', '#104281', '#0d366b',
-];
-const EMPTY_BG = '#f5f5f4';
-const EMPTY_FG = '#b8b6b0';
+// Sequential red, light -> dark (Tailwind red-100..red-900). White numbers only
+// from red-600 down, where they keep 4.5:1; lighter steps use dark red ink.
+const RAMP = ['#fee2e2', '#fecaca', '#fca5a5', '#f87171', '#ef4444', '#dc2626', '#b91c1c', '#991b1b', '#7f1d1d'];
+const LIGHT_INK_FROM = 5;
+const DARK_INK = '#450a0a';
+const EMPTY_BG = '#f9fafb';
+const EMPTY_FG = '#d1d5db';
 
 export function heatColor(value, max) {
   if (!isNum(value) || value <= 0 || !isNum(max) || max <= 0) {
@@ -17,7 +18,7 @@ export function heatColor(value, max) {
   }
   const t = Math.min(1, value / max);
   const idx = Math.max(0, Math.ceil(t * RAMP.length) - 1);
-  return { background: RAMP[idx], color: idx >= 6 ? '#ffffff' : '#0d2745' };
+  return { background: RAMP[idx], color: idx >= LIGHT_INK_FROM ? '#ffffff' : DARK_INK };
 }
 
 /**
@@ -61,7 +62,7 @@ export default function Heatmap({
           const total = row.filter(isNum).reduce((s, v) => s + v, 0);
           return (
             <React.Fragment key={`r${i}`}>
-              <div role="rowheader" className="pr-2 text-gray-700 font-medium flex items-center truncate" title={rowLabels[i]}>
+              <div role="rowheader" className="pr-3 text-gray-700 font-medium flex items-center truncate" title={rowLabels[i]}>
                 {rowLabels[i] ?? i}
               </div>
               {Array.from({ length: nCols }, (_, j) => {
@@ -71,7 +72,7 @@ export default function Heatmap({
                   <div
                     key={`c${j}`}
                     role="cell"
-                    className="perf-heat-cell h-7 rounded-[3px] flex items-center justify-center tabular-nums"
+                    className="perf-heat-cell h-7 rounded flex items-center justify-center tabular-nums"
                     style={style}
                     title={cellTitle ? cellTitle(i, j, v) : undefined}
                   >
@@ -91,7 +92,7 @@ export default function Heatmap({
       <div className="flex items-center gap-2 mt-2 text-[11px] text-gray-500" aria-hidden="true">
         <span>Ít</span>
         <div className="flex">
-          {RAMP.filter((_, k) => k % 2 === 0).map((c) => (
+          {RAMP.map((c) => (
             <span key={c} className="perf-heat-swatch inline-block w-4 h-2.5" style={{ background: c }} />
           ))}
         </div>

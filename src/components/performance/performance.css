@@ -1,11 +1,88 @@
-/* Performance dashboard: tables, anchors and the print layout.
-   :where() keeps these selectors at element specificity so Tailwind
-   utility classes on the same elements still win. */
+/* Performance dashboard. Uses the site's vocabulary: Tailwind reds/grays and the
+   daisyUI components the site already ships, re-themed for this page only so
+   daisyUI's "primary" is the site's brand red (the global winter theme is blue).
+   :where() keeps table selectors at element specificity so utility classes win. */
 
+.perf-page {
+  /* daisyUI v2 theme variables (HSL triplets), scoped to this page. */
+  --p: 0 72.2% 50.6%;       /* red-600 #dc2626 */
+  --pf: 0 73.7% 41.8%;      /* red-700 #b91c1c */
+  --pc: 0 0% 100%;
+  --b2: 210 20% 98%;        /* gray-50 */
+  --b3: 220 13% 91%;        /* gray-200 */
+  --bc: 215 27.9% 16.9%;    /* gray-800 */
+  --rounded-btn: 0.5rem;
+  --btn-text-case: none;
+  --btn-focus-scale: 1;
+  --animation-btn: 0.15s;
+}
+
+.perf-page ::selection {
+  background: #fecaca; /* red-200 */
+  color: #7f1d1d;
+}
+
+.perf-page :focus-visible {
+  outline-color: #ef4444;
+}
+
+/* Sections land below the fixed navbar and the sticky tab strip. */
 :where(.perf-page) .perf-section {
   scroll-margin-top: var(--perf-scroll-offset, 170px);
 }
 
+/* Form controls: daisyUI input/select, sized and coloured like the site's inputs. */
+.perf-input {
+  @apply input input-bordered input-sm rounded-lg text-sm text-gray-800 border-gray-300 focus:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-500/40;
+}
+
+select.perf-input {
+  @apply select select-bordered select-sm font-normal;
+}
+
+.perf-btn-primary {
+  @apply btn btn-sm btn-primary gap-2 font-semibold;
+}
+
+.perf-btn-secondary {
+  @apply btn btn-sm btn-outline gap-2 font-medium border-gray-300 text-gray-700 hover:bg-red-50 hover:text-red-700 hover:border-red-200;
+}
+
+.perf-btn-ghost {
+  @apply btn btn-sm btn-ghost gap-2 font-medium text-gray-700 hover:bg-red-50 hover:text-red-700;
+}
+
+/* Toggle state for a secondary button (Ẩn ID). */
+.perf-btn-secondary[aria-pressed='true'] {
+  @apply bg-red-50 text-red-700 border-red-200;
+}
+
+/* Tab strip items mirror the site navbar items. */
+.perf-tab {
+  @apply inline-flex items-center gap-2 whitespace-nowrap px-3 py-2 rounded-lg text-sm font-medium text-gray-700 transition-colors duration-200;
+}
+
+.perf-tab:hover {
+  @apply text-red-600 bg-red-50;
+}
+
+.perf-tab[aria-selected='true'] {
+  @apply text-red-600 bg-red-50 font-semibold;
+}
+
+.perf-tab:focus-visible {
+  @apply outline-none ring-2 ring-red-500;
+}
+
+.perf-tabs-scroll {
+  scrollbar-width: none;
+}
+
+.perf-tabs-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* Tables: the site's table vocabulary (gray-50 head, small uppercase labels). */
 :where(.perf-table-wrap) {
   overflow-x: auto;
 }
@@ -13,24 +90,28 @@
 :where(.perf-table) {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.8125rem;
-  line-height: 1.35;
+  font-size: 0.875rem;
+  line-height: 1.4;
 }
 
 :where(.perf-table) th {
   background: #f9fafb;
-  color: #4b5563;
-  font-weight: 600;
-  font-size: 0.75rem;
+  color: #6b7280;
+  font-weight: 500;
+  font-size: 0.6875rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
   text-align: left;
-  padding: 6px 10px;
-  border-bottom: 1px solid #e5e7eb;
+  padding: 10px 12px;
   white-space: nowrap;
   vertical-align: bottom;
 }
 
+:where(.perf-table) thead tr:first-child th:first-child { border-top-left-radius: 0.5rem; }
+:where(.perf-table) thead tr:first-child th:last-child { border-top-right-radius: 0.5rem; }
+
 :where(.perf-table) td {
-  padding: 6px 10px;
+  padding: 9px 12px;
   border-bottom: 1px solid #f3f4f6;
   color: #1f2937;
   vertical-align: middle;
@@ -42,14 +123,18 @@
   white-space: nowrap;
 }
 
+:where(.perf-table) tbody tr {
+  transition: background-color 0.15s;
+}
+
 :where(.perf-table) tbody tr:hover {
-  background: #fafaf9;
+  background: #fef2f2; /* red-50, the site's hover tint */
 }
 
 :where(.perf-table) tfoot td {
   font-weight: 600;
   background: #f9fafb;
-  border-top: 1px solid #e5e7eb;
+  border-bottom: 0;
 }
 
 .perf-print-header,
@@ -61,7 +146,7 @@
   background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 37%, #f3f4f6 63%);
   background-size: 400% 100%;
   animation: perf-shimmer 1.4s ease infinite;
-  border-radius: 0.75rem;
+  border-radius: 0.5rem;
 }
 
 @keyframes perf-shimmer {
@@ -69,8 +154,19 @@
   100% { background-position: 0 50%; }
 }
 
+/* A panel fades in when its tab opens (state change, not decoration). */
+.perf-panel-enter {
+  animation: perf-panel-in 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes perf-panel-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: none; }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .perf-skeleton { animation: none; }
+  .perf-skeleton,
+  .perf-panel-enter { animation: none; }
 }
 
 @media print {
@@ -83,8 +179,8 @@
   .perf-page > header,
   .perf-page header.fixed,
   .perf-page footer,
-  .perf-topbar,
-  .perf-sidenav,
+  .perf-controls,
+  .perf-tabbar,
   .perf-drawer,
   .perf-no-print,
   .perf-page button:not(.perf-keep-print),
@@ -98,8 +194,7 @@
     min-height: 0 !important;
   }
 
-  .perf-layout {
-    display: block !important;
+  .perf-container {
     max-width: none !important;
     padding: 0 !important;
   }
@@ -108,11 +203,23 @@
     display: block;
     margin-bottom: 12px;
     padding-bottom: 8px;
-    border-bottom: 2px solid #111827;
+    border-bottom: 2px solid #dc2626;
   }
 
   .perf-print-only {
     display: block !important;
+  }
+
+  .perf-panel {
+    display: block !important;
+  }
+
+  .perf-panel + .perf-panel {
+    break-before: page;
+  }
+
+  .perf-panel-enter {
+    animation: none !important;
   }
 
   .perf-card,
@@ -124,13 +231,17 @@
   }
 
   .perf-section {
-    border: 1px solid #d1d5db !important;
+    border: 1px solid #e5e7eb !important;
     margin-bottom: 10px !important;
     padding: 10px 12px !important;
   }
 
-  .perf-kpi-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  .perf-grid-2 {
+    display: block !important;
+  }
+
+  .perf-grid-2 > * + * {
+    margin-top: 10px;
   }
 
   /* Charts render at a fixed width while printing (see ChartBox). */

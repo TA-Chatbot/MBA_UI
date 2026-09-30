@@ -2,6 +2,7 @@ import React from 'react';
 import {
   fmtInt, fmtFixed, fmtPercent, fmtSeconds, fmtUsd, fmtNum, COST_SOURCE_LABELS, STAT_LABELS, DASH,
 } from './format';
+import { FaMicrochip } from 'react-icons/fa';
 import { Section, Block, EmptyNote, ShareBar, SERIES, list } from './common';
 
 const STAT_ORDER = ['latency', 'ttft', 'tps', 'input_tokens', 'output_tokens'];
@@ -39,7 +40,7 @@ export default function ModelSection({ models }) {
   ];
 
   return (
-    <Section id="perf-models" title="Model và hiệu năng">
+    <Section id="perf-models" icon={FaMicrochip} title="Model và hiệu năng">
       <Block title="Tỉ lệ sử dụng model">
         {rows.length === 0 ? <EmptyNote /> : (
           <div className="perf-table-wrap">

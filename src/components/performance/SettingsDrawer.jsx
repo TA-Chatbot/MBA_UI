@@ -138,7 +138,7 @@ export default function SettingsDrawer({ open, onClose, onSaved }) {
       >
         <div className="flex items-center justify-between px-5 py-4 border-b border-gray-200">
           <div>
-            <h2 id="perf-settings-title" className="text-lg font-bold text-gray-900">Cài đặt báo cáo hiệu năng</h2>
+            <h2 id="perf-settings-title" className="text-lg font-bold text-gray-800">Cài đặt báo cáo hiệu năng</h2>
             {info?.updated_at && (
               <p className="text-xs text-gray-500">
                 Cập nhật lần cuối {fmtDateTime(info.updated_at, { withYear: true })}
@@ -146,7 +146,7 @@ export default function SettingsDrawer({ open, onClose, onSaved }) {
               </p>
             )}
           </div>
-          <button type="button" onClick={onClose} className="p-2 text-gray-500 hover:text-gray-900" aria-label="Đóng cài đặt">
+          <button type="button" onClick={onClose} className="perf-btn-ghost btn-square" aria-label="Đóng cài đặt">
             <FaTimes />
           </button>
         </div>
@@ -156,7 +156,7 @@ export default function SettingsDrawer({ open, onClose, onSaved }) {
             <p className="text-sm text-gray-600 flex items-center gap-2"><FaSpinner className="animate-spin" /> Đang tải cài đặt...</p>
           )}
           {loadError && (
-            <div className="rounded-lg border border-red-300 bg-red-50 p-3 text-sm text-red-800" role="alert">
+            <div className="rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-800" role="alert">
               {loadError}{' '}
               <button type="button" onClick={load} className="underline font-semibold">Thử lại</button>
             </div>
@@ -176,7 +176,7 @@ export default function SettingsDrawer({ open, onClose, onSaved }) {
                   value={excludedText}
                   onChange={(e) => setExcludedText(e.target.value)}
                   rows={5}
-                  className="w-full border border-gray-300 rounded-md px-3 py-2 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-red-400"
+                  className="textarea textarea-bordered w-full rounded-lg border-gray-300 font-mono text-sm focus:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-500/40"
                   spellCheck={false}
                 />
               </section>
@@ -190,7 +190,7 @@ export default function SettingsDrawer({ open, onClose, onSaved }) {
                   <button
                     type="button"
                     onClick={() => addRow()}
-                    className="inline-flex items-center gap-1 px-2.5 py-1.5 text-xs rounded-md border border-gray-300 hover:bg-gray-50"
+                    className="perf-btn-secondary"
                   >
                     <FaPlus aria-hidden="true" /> Thêm dòng
                   </button>
@@ -220,7 +220,7 @@ export default function SettingsDrawer({ open, onClose, onSaved }) {
                                 onChange={(e) => updateRow(r.id, 'model', e.target.value)}
                                 placeholder="tên model"
                                 aria-label="Tên model"
-                                className="w-full min-w-[9rem] border border-gray-300 rounded px-2 py-1 font-mono text-xs"
+                                className="perf-input w-full min-w-[9rem] font-mono text-xs"
                               />
                               {highlight && <span className="block mt-0.5 text-[11px] text-amber-800 font-semibold">Chưa có giá{seen ? ` · ${fmtInt(seen.requests)} requests / 30 ngày` : ''}</span>}
                             </td>
@@ -230,7 +230,7 @@ export default function SettingsDrawer({ open, onClose, onSaved }) {
                                 onChange={(e) => updateRow(r.id, 'input', e.target.value)}
                                 inputMode="decimal"
                                 aria-label={`Giá input ${r.model}`}
-                                className="w-20 border border-gray-300 rounded px-2 py-1 text-right text-xs"
+                                className="perf-input w-24 text-right text-xs"
                               />
                             </td>
                             <td className="num">
@@ -239,11 +239,11 @@ export default function SettingsDrawer({ open, onClose, onSaved }) {
                                 onChange={(e) => updateRow(r.id, 'output', e.target.value)}
                                 inputMode="decimal"
                                 aria-label={`Giá output ${r.model}`}
-                                className="w-20 border border-gray-300 rounded px-2 py-1 text-right text-xs"
+                                className="perf-input w-24 text-right text-xs"
                               />
                             </td>
                             <td>
-                              <button type="button" onClick={() => removeRow(r.id)} className="p-1 text-gray-400 hover:text-red-600" aria-label={`Xóa giá ${r.model}`}>
+                              <button type="button" onClick={() => removeRow(r.id)} className="perf-btn-ghost btn-square text-gray-400" aria-label={`Xóa giá ${r.model}`}>
                                 <FaTrash />
                               </button>
                             </td>
@@ -266,10 +266,10 @@ export default function SettingsDrawer({ open, onClose, onSaved }) {
                             <span className="font-mono">{m.model || DASH}</span>
                             <span className="text-gray-500">{fmtInt(m.requests)} requests</span>
                             {m.has_langfuse_cost && <span className="px-1.5 rounded bg-green-100 text-green-800">Langfuse có chi phí</span>}
-                            {m.has_price && <span className="px-1.5 rounded bg-blue-100 text-blue-800">Có giá</span>}
+                            {m.has_price && <span className="px-1.5 rounded bg-red-50 text-red-700">Có giá</span>}
                             {missing && <span className="px-1.5 rounded bg-amber-100 text-amber-800 font-semibold">Chưa có giá</span>}
                             {missing && !inTable && (
-                              <button type="button" onClick={() => addRow(m.model)} className="text-blue-700 underline">Thêm giá</button>
+                              <button type="button" onClick={() => addRow(m.model)} className="font-medium text-red-600 hover:text-red-700 hover:underline">Thêm giá</button>
                             )}
                           </li>
                         );
@@ -288,10 +288,10 @@ export default function SettingsDrawer({ open, onClose, onSaved }) {
                     type="date"
                     value={semesterEnd}
                     onChange={(e) => setSemesterEnd(e.target.value)}
-                    className="border border-gray-300 rounded-md px-2 py-1 text-sm"
+                    className="perf-input"
                   />
                   {semesterEnd && (
-                    <button type="button" onClick={() => setSemesterEnd('')} className="text-xs text-gray-600 underline">Xóa</button>
+                    <button type="button" onClick={() => setSemesterEnd('')} className="perf-btn-ghost">Xóa</button>
                   )}
                 </div>
               </section>
@@ -301,16 +301,16 @@ export default function SettingsDrawer({ open, onClose, onSaved }) {
 
         <div className="border-t border-gray-200 px-5 py-3">
           {saveError && (
-            <p className="mb-2 text-sm text-red-700 bg-red-50 border border-red-200 rounded-md p-2" role="alert">{saveError}</p>
+            <p className="mb-3 text-sm text-red-700 bg-red-50 border border-red-200 rounded-lg p-3" role="alert">{saveError}</p>
           )}
           <div className="flex justify-end gap-2">
-            <button type="button" onClick={onClose} className="px-4 py-2 text-sm rounded-md border border-gray-300 text-gray-700 hover:bg-gray-50">
+            <button type="button" onClick={onClose} className="perf-btn-secondary">
               Hủy
             </button>
             <button
               type="submit"
               disabled={saving || loading || Boolean(loadError)}
-              className="px-4 py-2 text-sm rounded-md bg-red-600 hover:bg-red-700 text-white font-semibold disabled:bg-red-300 inline-flex items-center gap-2"
+              className="perf-btn-primary"
             >
               {saving && <FaSpinner className="animate-spin" aria-hidden="true" />}
               Lưu và tải lại báo cáo

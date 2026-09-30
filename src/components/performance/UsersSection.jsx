@@ -1,12 +1,13 @@
 import React from 'react';
 import {
-  BarChart, Bar, ComposedChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, LabelList,
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, LabelList,
 } from 'recharts';
+import { FaUsers } from 'react-icons/fa';
 import {
   fmtInt, fmtNum, fmtPercent, fmtSeconds, fmtDayLabel, fmtDateTime, GROUP_LABELS, isNum, DASH,
 } from './format';
 import {
-  Section, Block, ChartBox, EmptyNote, Stat, UserId, SERIES, AXIS_TICK, GRID_STROKE, TOOLTIP_STYLE, LEGEND_PROPS, list,
+  Section, Block, ChartBox, EmptyNote, Stat, UserId, SERIES, AXIS_TICK, GRID_STROKE, TOOLTIP_STYLE, LEGEND_PROPS, BAR_RADIUS, list,
 } from './common';
 
 const UNAVAILABLE = 'Không có dữ liệu user mới/quay lại';
@@ -104,22 +105,20 @@ function NewReturning({ users }) {
 
       <Block
         title="User mới và user quay lại theo ngày"
-        note="Cột chồng: số user mỗi ngày (trục trái). Đường: requests (trục phải). “Quay lại trong kỳ” = user mới của kỳ này dùng lại vào ngày sau."
+        note="Số user mỗi ngày theo nhóm. “Quay lại trong kỳ” = user mới của kỳ này dùng lại vào một ngày sau."
       >
         {daily.length === 0 ? <EmptyNote /> : (
           <ChartBox height={280} label="User mới và user quay lại theo ngày">
-            <ComposedChart data={daily} margin={{ top: 8, right: 8, left: -8, bottom: 0 }}>
+            <BarChart data={daily} margin={{ top: 8, right: 8, left: -8, bottom: 0 }}>
               <CartesianGrid vertical={false} stroke={GRID_STROKE} />
-              <XAxis dataKey="label" tick={AXIS_TICK} tickLine={false} />
-              <YAxis yAxisId="users" tick={AXIS_TICK} allowDecimals={false} tickLine={false} axisLine={false} />
-              <YAxis yAxisId="requests" orientation="right" tick={AXIS_TICK} allowDecimals={false} tickLine={false} axisLine={false} />
+              <XAxis dataKey="label" tick={AXIS_TICK} tickLine={false} axisLine={{ stroke: '#e5e7eb' }} />
+              <YAxis tick={AXIS_TICK} allowDecimals={false} tickLine={false} axisLine={false} />
               <Tooltip {...TOOLTIP_STYLE} formatter={(v, name) => [fmtInt(v), name]} />
               <Legend {...LEGEND_PROPS} />
-              <Bar isAnimationActive={false} yAxisId="users" dataKey="returning" name="Quay lại (trước kỳ)" stackId="u" fill={SERIES[0]} stroke="#ffffff" strokeWidth={1} />
-              <Bar isAnimationActive={false} yAxisId="users" dataKey="returning_in_period" name="Quay lại trong kỳ" stackId="u" fill={SERIES[2]} stroke="#ffffff" strokeWidth={1} />
-              <Bar isAnimationActive={false} yAxisId="users" dataKey="new" name="User mới" stackId="u" fill={SERIES[3]} stroke="#ffffff" strokeWidth={1} radius={[3, 3, 0, 0]} />
-              <Line isAnimationActive={false} yAxisId="requests" type="monotone" dataKey="requests" name="Requests" stroke={SERIES[1]} strokeWidth={2} dot={{ r: 3 }} connectNulls />
-            </ComposedChart>
+              <Bar isAnimationActive={false} dataKey="new" name="User mới" stackId="u" fill={SERIES[0]} stroke="#ffffff" strokeWidth={2} maxBarSize={56} />
+              <Bar isAnimationActive={false} dataKey="returning" name="Quay lại (dùng trước kỳ)" stackId="u" fill={SERIES[1]} stroke="#ffffff" strokeWidth={2} maxBarSize={56} />
+              <Bar isAnimationActive={false} dataKey="returning_in_period" name="Quay lại trong kỳ" stackId="u" fill={SERIES[2]} stroke="#ffffff" strokeWidth={2} radius={BAR_RADIUS} maxBarSize={56} />
+            </BarChart>
           </ChartBox>
         )}
       </Block>
@@ -134,7 +133,7 @@ export default function UsersSection({ users, hideIds }) {
   const available = users?.available !== false;
 
   return (
-    <Section id="perf-users" title="Hành vi người dùng">
+    <Section id="perf-users" title="Hành vi người dùng" icon={FaUsers}>
       <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-2">
         <Stat label="User duy nhất" value={fmtInt(users?.unique)} />
         <Stat label="Requests/user" value={fmtNum(rpu?.mean, 2)} hint={`median ${fmtNum(rpu?.median, 1)} · max ${fmtInt(rpu?.max)}`} />
@@ -144,16 +143,16 @@ export default function UsersSection({ users, hideIds }) {
         <Stat label="Không có user_id" value={fmtInt(users?.no_user_id)} hint="request" />
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-2 mt-6">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 mt-6">
         <Block flush title="Số request mỗi user" note="Số user theo nhóm số request trong kỳ.">
           {distribution.length === 0 ? <EmptyNote /> : (
             <ChartBox height={240} label="Phân bố số request mỗi user">
               <BarChart data={distribution} margin={{ top: 20, right: 8, left: -8, bottom: 0 }}>
                 <CartesianGrid vertical={false} stroke={GRID_STROKE} />
-                <XAxis dataKey="bucket" tick={AXIS_TICK} tickLine={false} />
+                <XAxis dataKey="bucket" tick={AXIS_TICK} tickLine={false} axisLine={{ stroke: '#e5e7eb' }} />
                 <YAxis tick={AXIS_TICK} allowDecimals={false} tickLine={false} axisLine={false} />
                 <Tooltip {...TOOLTIP_STYLE} labelFormatter={(l) => `${l} requests`} formatter={(v) => [fmtInt(v), 'Users']} />
-                <Bar isAnimationActive={false} dataKey="users" name="Users" fill={SERIES[0]} radius={[3, 3, 0, 0]}>
+                <Bar isAnimationActive={false} dataKey="users" name="Users" fill={SERIES[0]} radius={BAR_RADIUS} maxBarSize={56}>
                   <LabelList dataKey="users" position="top" formatter={(v) => fmtInt(v)} style={{ fontSize: 11, fill: '#374151' }} />
                 </Bar>
               </BarChart>
@@ -167,7 +166,7 @@ export default function UsersSection({ users, hideIds }) {
 
       {available ? <NewReturning users={users} /> : (
         <Block title="User mới và user quay lại">
-          <div className="rounded-lg border border-gray-200 bg-gray-50 p-3 text-sm text-gray-600" role="status">
+          <div className="rounded-lg bg-gray-50 p-4 text-sm text-gray-600" role="status">
             {UNAVAILABLE}. Đồng bộ lần đầu dùng (first-seen) thất bại; các phần khác vẫn chính xác.
           </div>
         </Block>

@@ -9,6 +9,7 @@ import {
 import {
   Section, Block, ChartBox, EmptyNote, SERIES, AXIS_TICK, GRID_STROKE, TOOLTIP_STYLE, LEGEND_PROPS, list,
 } from './common';
+import { FaStopwatch, FaArrowUp, FaArrowDown } from 'react-icons/fa';
 
 function histogramData(histogram) {
   const lat = list(histogram?.latency);
@@ -33,9 +34,16 @@ function PointDiff({ rate, previous }) {
   const diff = Math.round((rate - previous) * 10) / 10;
   if (diff === 0) return <span className="text-gray-500">0 điểm %</span>;
   const up = diff > 0;
+  const Icon = up ? FaArrowUp : FaArrowDown;
   return (
-    <span className={up ? 'text-green-700' : 'text-red-600'}>
-      {up ? '▲ +' : '▼ −'}{fmtNum(Math.abs(diff), 1)} điểm %
+    <span
+      className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-semibold ${
+        up ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'
+      }`}
+      title={`${up ? 'tăng' : 'giảm'} ${fmtNum(Math.abs(diff), 1)} điểm phần trăm so với kỳ trước`}
+    >
+      <Icon className="text-[10px]" aria-hidden="true" />
+      {up ? '+' : '−'}{fmtNum(Math.abs(diff), 1)} điểm %
     </span>
   );
 }
@@ -56,15 +64,14 @@ export default function LatencySection({ latency, stats }) {
   const statBy = new Map(list(stats).map((s) => [s.metric, s]));
 
   return (
-    <Section id="perf-latency" title="Phân phối độ trễ" subtitle="Latency = tổng thời gian trả lời; TTFT = thời gian tới token đầu tiên (giây).">
-      <div className="grid gap-6 xl:grid-cols-2">
-        <Block flush title="Histogram latency và TTFT" note={isNum(latency?.histogram?.bin_width) ? `Độ rộng bin ${fmtNum(latency.histogram.bin_width, 2)} giây; hai phân phối chồng lên nhau.` : undefined}>
+    <Section id="perf-latency" icon={FaStopwatch} title="Phân phối độ trễ" subtitle="Latency = tổng thời gian trả lời; TTFT = thời gian tới token đầu tiên (giây).">
+      <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
+        <Block flush title="Histogram latency và TTFT" note={isNum(latency?.histogram?.bin_width) ? `Số request theo khoảng ${fmtNum(latency.histogram.bin_width, 2)} giây; hai cột mỗi khoảng: latency và TTFT.` : undefined}>
           {hist.length === 0 ? <EmptyNote /> : (
             <ChartBox height={260} label="Histogram latency và TTFT">
-              <BarChart data={hist} margin={{ top: 8, right: 8, left: -8, bottom: 0 }} barCategoryGap="6%">
+              <BarChart data={hist} margin={{ top: 8, right: 8, left: -8, bottom: 0 }} barCategoryGap="12%" barGap={1}>
                 <CartesianGrid vertical={false} stroke={GRID_STROKE} />
-                <XAxis xAxisId="lat" dataKey="label" tick={AXIS_TICK} tickLine={false} interval="preserveStartEnd" minTickGap={16} />
-                <XAxis xAxisId="ttft" dataKey="label" hide />
+                <XAxis dataKey="label" tick={AXIS_TICK} tickLine={false} axisLine={{ stroke: '#e5e7eb' }} interval="preserveStartEnd" minTickGap={16} />
                 <YAxis tick={AXIS_TICK} allowDecimals={false} tickLine={false} axisLine={false} />
                 <Tooltip
                   {...TOOLTIP_STYLE}
@@ -72,8 +79,8 @@ export default function LatencySection({ latency, stats }) {
                   formatter={(v, name) => [fmtInt(v), name]}
                 />
                 <Legend {...LEGEND_PROPS} />
-                <Bar isAnimationActive={false} xAxisId="ttft" dataKey="ttft" name="TTFT" fill={SERIES[1]} fillOpacity={0.6} radius={[2, 2, 0, 0]} />
-                <Bar isAnimationActive={false} xAxisId="lat" dataKey="latency" name="Latency" fill={SERIES[0]} fillOpacity={0.6} radius={[2, 2, 0, 0]} />
+                <Bar isAnimationActive={false} dataKey="latency" name="Latency" fill={SERIES[0]} radius={[2, 2, 0, 0]} />
+                <Bar isAnimationActive={false} dataKey="ttft" name="TTFT" fill={SERIES[1]} radius={[2, 2, 0, 0]} />
               </BarChart>
             </ChartBox>
           )}
@@ -110,9 +117,9 @@ export default function LatencySection({ latency, stats }) {
               <YAxis tick={AXIS_TICK} tickLine={false} axisLine={false} unit=" s" />
               <Tooltip {...TOOLTIP_STYLE} formatter={(v, name) => [fmtSeconds(v), name]} />
               <Legend {...LEGEND_PROPS} />
-              <Line isAnimationActive={false} type="monotone" dataKey="median" name="Latency median" stroke={SERIES[0]} strokeWidth={2} dot={{ r: 3 }} connectNulls />
-              <Line isAnimationActive={false} type="monotone" dataKey="p95" name="Latency p95" stroke={SERIES[1]} strokeWidth={2} dot={{ r: 3 }} connectNulls />
-              <Line isAnimationActive={false} type="monotone" dataKey="ttft_median" name="TTFT median" stroke={SERIES[2]} strokeWidth={2} dot={{ r: 3 }} connectNulls />
+              <Line isAnimationActive={false} type="linear" dataKey="median" name="Latency median" stroke={SERIES[0]} strokeWidth={2} dot={{ r: 3 }} connectNulls />
+              <Line isAnimationActive={false} type="linear" dataKey="p95" name="Latency p95" stroke={SERIES[1]} strokeWidth={2} dot={{ r: 3 }} connectNulls />
+              <Line isAnimationActive={false} type="linear" dataKey="ttft_median" name="TTFT median" stroke={SERIES[2]} strokeWidth={2} dot={{ r: 3 }} connectNulls />
             </LineChart>
           </ChartBox>
         )}

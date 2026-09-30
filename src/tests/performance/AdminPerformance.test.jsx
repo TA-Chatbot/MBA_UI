@@ -2,7 +2,7 @@ import React from 'react';
 import { describe, it, expect, vi, beforeAll, beforeEach } from 'vitest';
 import { render, screen, waitFor, within, fireEvent } from '@testing-library/react';
 import fixture from '../../components/performance/__fixtures__/report.sample.json';
-import AdminPerformance, { NAV_ITEMS } from '../../pages/AdminPerformance';
+import AdminPerformance, { TABS } from '../../pages/AdminPerformance';
 import {
   fmtInt, presetRange, todayInTz, HIDE_IDS_KEY,
 } from '../../components/performance/format';
@@ -25,7 +25,18 @@ const jsonResponse = (status, body) => ({
   json: async () => body,
 });
 
-const SECTION_TITLES = NAV_ITEMS.map((n) => n.label);
+const openTab = (label) => fireEvent.click(screen.getByRole('tab', { name: label }));
+
+/** Every tab's section headings are reachable by opening that tab. */
+function expectEveryTabRenders() {
+  TABS.forEach((tab) => {
+    openTab(tab.label);
+    expect(screen.getByRole('tab', { name: tab.label })).toHaveAttribute('aria-selected', 'true');
+    tab.sections.forEach((title) => {
+      expect(screen.getByRole('heading', { level: 2, name: title })).toBeInTheDocument();
+    });
+  });
+}
 
 const isReportCall = (call) => String(call[0]).includes('/admin/performance/report');
 const reportCalls = () => global.fetch.mock.calls.filter(isReportCall);
@@ -61,6 +72,8 @@ beforeAll(() => {
 
 beforeEach(() => {
   localStorage.setItem('access_token', 'test-token');
+  // setup.js stubs window.location; give it the parts the page reads its tab and range from.
+  window.location = { href: '', pathname: '/mini/admin/performance', search: '', hash: '', reload: vi.fn() };
 });
 
 describe('AdminPerformance page', () => {
@@ -74,16 +87,45 @@ describe('AdminPerformance page', () => {
     expect(init.headers.Authorization).toBe('Bearer test-token');
   });
 
-  it('renders every section heading from the fixture', async () => {
+  it('opens on the overview and renders every tab from the fixture', async () => {
     await renderWithReport();
-    SECTION_TITLES.forEach((title) => {
-      expect(screen.getByRole('heading', { level: 2, name: title })).toBeInTheDocument();
-    });
+    expect(screen.getAllByRole('tab')).toHaveLength(TABS.length);
+    expect(screen.getByRole('tab', { name: 'Tổng quan' })).toHaveAttribute('aria-selected', 'true');
     expect(within(screen.getByTestId('kpi-requests')).getByText(fmtInt(fixture.kpis.requests.value))).toBeInTheDocument();
-    // side nav links to each section
-    SECTION_TITLES.forEach((title) => {
-      expect(screen.getAllByRole('link', { name: title }).length).toBeGreaterThan(0);
-    });
+    expectEveryTabRenders();
+  });
+
+  it('keeps the tab and range in the URL', async () => {
+    const replaceState = vi.spyOn(window.history, 'replaceState');
+    await renderWithReport();
+    openTab('Chi phí');
+    const url = String(replaceState.mock.calls.at(-1)[2]);
+    replaceState.mockRestore();
+    expect(url.startsWith('/mini/admin/performance?')).toBe(true);
+    const params = new URLSearchParams(url.split('?')[1]);
+    expect(params.get('tab')).toBe('chi-phi');
+    const { from, to } = presetRange('last7', todayInTz());
+    expect(params.get('from')).toBe(from);
+    expect(params.get('to')).toBe(to);
+  });
+
+  it('opens the tab and custom range named in the URL', async () => {
+    const { from } = presetRange('last30', todayInTz());
+    window.location.search = `?tab=nguoi-dung&from=${from}&to=${from}`;
+    mockApi({ reports: [jsonResponse(200, fixture)] });
+    render(<AdminPerformance />);
+    await screen.findByRole('heading', { level: 2, name: 'Hành vi người dùng' });
+    expect(screen.getByRole('tab', { name: 'Người dùng' })).toHaveAttribute('aria-selected', 'true');
+    expect(reportCalls()[0][0]).toContain(`from=${from}&to=${from}`);
+  });
+
+  it('moves between tabs with the arrow keys', async () => {
+    await renderWithReport();
+    const first = screen.getByRole('tab', { name: 'Tổng quan' });
+    fireEvent.keyDown(first, { key: 'ArrowRight' });
+    expect(screen.getByRole('tab', { name: 'Sử dụng' })).toHaveAttribute('aria-selected', 'true');
+    fireEvent.keyDown(screen.getByRole('tab', { name: 'Sử dụng' }), { key: 'End' });
+    expect(screen.getByRole('tab', { name: 'Dữ liệu' })).toHaveAttribute('aria-selected', 'true');
   });
 
   it('shows the error banner on 502 and keeps the previous report after a failed retry', async () => {
@@ -103,14 +145,14 @@ describe('AdminPerformance page', () => {
     expect(banner).toHaveTextContent('lỗi 502');
     expect(reportCalls()[1][0]).toContain('refresh=1');
     // previous data still on screen
-    expect(screen.getByRole('heading', { level: 2, name: 'Phân bố sử dụng' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 2, name: 'Nhận xét chính' })).toBeInTheDocument();
     expect(within(screen.getByTestId('kpi-requests')).getByText(fmtInt(fixture.kpis.requests.value))).toBeInTheDocument();
 
     fireEvent.click(within(banner).getByRole('button', { name: /Thử lại/ }));
     await waitFor(() => expect(screen.getByTestId('perf-error')).toHaveTextContent('Langfuse vẫn không phản hồi'));
     expect(reportCalls()).toHaveLength(3);
     expect(reportCalls()[2][0]).toContain('refresh=1'); // retry repeats the failed request
-    expect(screen.getByRole('heading', { level: 2, name: 'Chất lượng dữ liệu' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 2, name: 'Lưu lượng theo ngày' })).toBeInTheDocument();
     expect(within(screen.getByTestId('kpi-requests')).getByText(fmtInt(fixture.kpis.requests.value))).toBeInTheDocument();
   });
 
@@ -149,18 +191,24 @@ describe('AdminPerformance page', () => {
     report.reliability.error_rows = [];
     await renderWithReport(report);
 
-    expect(screen.getAllByText('b99dctest001')).toHaveLength(2);
+    // top users (Người dùng) and slowest requests (Hiệu năng) both show the id
+    openTab('Người dùng');
+    expect(screen.getByText('b99dctest001')).toBeInTheDocument();
+    openTab('Hiệu năng');
+    expect(screen.getByText('b99dctest001')).toBeInTheDocument();
     expect(screen.queryByText('u_deadbeef')).not.toBeInTheDocument();
 
     const toggle = screen.getByRole('button', { name: /Ẩn ID/ });
     fireEvent.click(toggle);
     expect(toggle).toHaveAttribute('aria-pressed', 'true');
-    expect(screen.getAllByText('u_deadbeef')).toHaveLength(2);
+    expect(screen.getByText('u_deadbeef')).toBeInTheDocument();
     expect(screen.queryByText('b99dctest001')).not.toBeInTheDocument();
+    openTab('Người dùng');
+    expect(screen.getByText('u_deadbeef')).toBeInTheDocument();
     expect(localStorage.getItem(HIDE_IDS_KEY)).toBe('1');
 
     fireEvent.click(toggle);
-    expect(screen.getAllByText('b99dctest001')).toHaveLength(2);
+    expect(screen.getByText('b99dctest001')).toBeInTheDocument();
     expect(localStorage.getItem(HIDE_IDS_KEY)).toBe('0');
   });
 
@@ -169,6 +217,7 @@ describe('AdminPerformance page', () => {
     const report = clone(fixture);
     report.users.top = [{ ...(fixture.users.top[0] || {}), user: 'b99dctest001', user_masked: 'u_deadbeef' }];
     await renderWithReport(report);
+    openTab('Người dùng');
     expect(screen.getByText('u_deadbeef')).toBeInTheDocument();
     expect(screen.queryByText('b99dctest001')).not.toBeInTheDocument();
   });
@@ -179,6 +228,7 @@ describe('AdminPerformance page', () => {
     report.reliability.slowest = [{ ...(fixture.reliability.slowest[0] || {}), trace_id: 'abc123' }];
     report.reliability.error_rows = [];
     await renderWithReport(report);
+    openTab('Hiệu năng');
     const section = screen.getByRole('region', { name: 'Độ tin cậy và lỗi' });
     const link = within(section).getByRole('link', { name: /Trace/ });
     expect(link).toHaveAttribute('href', 'https://lang.example/project/p/traces/abc123');
@@ -214,6 +264,7 @@ describe('AdminPerformance page', () => {
     const report = clone(fixture);
     report.users.available = false;
     await renderWithReport(report);
+    openTab('Người dùng');
     expect(screen.getByText(/Không có dữ liệu user mới\/quay lại/)).toBeInTheDocument();
     expect(screen.getByRole('heading', { level: 3, name: 'Top 10 user' })).toBeInTheDocument();
   });
@@ -222,6 +273,7 @@ describe('AdminPerformance page', () => {
     await renderWithReport();
     const days = fixture.usage.days;
     if (days.length === 0) return;
+    openTab('Sử dụng');
     const section = screen.getByRole('region', { name: 'Phân bố sử dụng' });
     const dayButton = within(section).getAllByRole('button', { expanded: false })[0];
     fireEvent.click(dayButton);
@@ -267,9 +319,7 @@ describe('AdminPerformance page', () => {
       data_quality: { rows_read: 0, rows_analyzed: 0, excluded: [], missing: [], notes: [] },
     };
     await renderWithReport(sparse);
-    SECTION_TITLES.forEach((title) => {
-      expect(screen.getByRole('heading', { level: 2, name: title })).toBeInTheDocument();
-    });
+    expectEveryTabRenders();
   });
 
   it('renders when whole sections are null', async () => {
@@ -280,9 +330,7 @@ describe('AdminPerformance page', () => {
       cost: null, users: null, reliability: null, data_quality: null,
     };
     await renderWithReport(nulls);
-    SECTION_TITLES.forEach((title) => {
-      expect(screen.getByRole('heading', { level: 2, name: title })).toBeInTheDocument();
-    });
+    expectEveryTabRenders();
   });
 });
 

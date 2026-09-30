@@ -1,4 +1,5 @@
 import React from 'react';
+import { FaShieldAlt } from 'react-icons/fa';
 import {
   fmtInt, fmtPercent, fmtSeconds, fmtDateTime, DASH,
 } from './format';
@@ -11,7 +12,7 @@ export default function ReliabilitySection({ reliability, traceUrlBase, hideIds 
   const slowest = list(reliability?.slowest);
 
   return (
-    <Section id="perf-reliability" title="Độ tin cậy và lỗi" subtitle="Lỗi = observation có level ERROR trên Langfuse.">
+    <Section id="perf-reliability" icon={FaShieldAlt} title="Độ tin cậy và lỗi" subtitle="Lỗi = observation có level ERROR trên Langfuse.">
       <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
         <Stat label="Request lỗi" value={fmtInt(reliability?.errors)} />
         <Stat label="Tỉ lệ lỗi" value={fmtPercent(reliability?.error_rate, 2)} />

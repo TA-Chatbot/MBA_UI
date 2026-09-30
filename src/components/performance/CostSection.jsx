@@ -1,13 +1,13 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ComposedChart, Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
-import { FaExclamationTriangle, FaCog } from 'react-icons/fa';
+import { FaExclamationTriangle, FaCog, FaCoins } from 'react-icons/fa';
 import {
   fmtInt, fmtNum, fmtPercent, fmtUsd, fmtCompact, fmtDayLabel, fmtDate, isNum, DASH,
 } from './format';
 import {
-  Section, Block, ChartBox, EmptyNote, Stat, SERIES, AXIS_TICK, GRID_STROKE, TOOLTIP_STYLE, LEGEND_PROPS, list,
+  Section, Block, ChartBox, EmptyNote, Stat, SERIES, AXIS_TICK, GRID_STROKE, TOOLTIP_STYLE, LEGEND_PROPS, BAR_RADIUS, list,
 } from './common';
 import { computeForecast, forecastModels, hasPrice } from './forecast';
 
@@ -15,7 +15,7 @@ export function UnpricedWarning({ unpriced, onOpenSettings }) {
   const items = list(unpriced).filter((u) => u && u.model);
   if (items.length === 0) return null;
   return (
-    <div className="perf-block flex flex-wrap items-start gap-3 rounded-lg border border-amber-300 bg-amber-50 p-3 text-sm text-amber-900" role="status">
+    <div className="perf-block flex flex-wrap items-start gap-3 rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900" role="status">
       <FaExclamationTriangle className="flex-none mt-0.5 text-amber-600" aria-hidden="true" />
       <div className="flex-1 min-w-[12rem]">
         <p className="font-semibold">Chưa có giá cho model: {items.map((u) => u.model).join(', ')}</p>
@@ -28,7 +28,7 @@ export function UnpricedWarning({ unpriced, onOpenSettings }) {
         <button
           type="button"
           onClick={onOpenSettings}
-          className="perf-no-print inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-amber-600 hover:bg-amber-700 text-white text-xs font-semibold"
+          className="perf-no-print inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-amber-600 hover:bg-amber-700 text-white text-xs font-semibold focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2"
         >
           <FaCog aria-hidden="true" /> Mở Cài đặt
         </button>
@@ -75,38 +75,38 @@ function Forecast({ forecast, onOpenSettings }) {
       </p>
 
       <div className="perf-no-print flex flex-wrap items-end gap-3 mb-4">
-        <label className="text-xs text-gray-600">
+        <label className="flex flex-col gap-1 text-xs text-gray-600">
           Số request ×
           <input
             type="number" min="0" max="100" step="0.1" inputMode="decimal"
             value={reqText}
             onChange={(e) => setReqText(e.target.value)}
-            className="mt-1 block w-24 border border-gray-300 rounded-md px-2 py-1 text-sm text-gray-900"
+            className="perf-input w-24"
             aria-label="Hệ số số request"
           />
         </label>
-        <label className="text-xs text-gray-600">
+        <label className="flex flex-col gap-1 text-xs text-gray-600">
           Input tokens ×
           <input
             type="number" min="0" max="100" step="0.1" inputMode="decimal"
             value={inText}
             onChange={(e) => setInText(e.target.value)}
-            className="mt-1 block w-24 border border-gray-300 rounded-md px-2 py-1 text-sm text-gray-900"
+            className="perf-input w-24"
             aria-label="Hệ số input tokens"
           />
         </label>
-        <label className="text-xs text-gray-600">
+        <label className="flex flex-col gap-1 text-xs text-gray-600">
           Model
           <select
             value={model}
             onChange={(e) => setModel(e.target.value)}
-            className="mt-1 block max-w-[22rem] border border-gray-300 rounded-md px-2 py-1 text-sm text-gray-900 bg-white"
+            className="perf-input max-w-[22rem]"
             aria-label="Model để dự báo"
           >
             {models.map((m) => <option key={m} value={m}>{priceLabel(m)}</option>)}
           </select>
         </label>
-        <button type="button" onClick={reset} className="px-3 py-1.5 text-xs rounded-md border border-gray-300 text-gray-700 hover:bg-gray-50">
+        <button type="button" onClick={reset} className="perf-btn-secondary">
           Đặt lại
         </button>
       </div>
@@ -116,7 +116,7 @@ function Forecast({ forecast, onOpenSettings }) {
 
       {invalid && <p className="text-sm text-red-600" role="alert">Hệ số phải là số từ 0 đến 100.</p>}
       {!invalid && result === null && (
-        <div className="flex flex-wrap items-center gap-3 rounded-lg border border-amber-300 bg-amber-50 p-3 text-sm text-amber-900" role="status">
+        <div className="flex flex-wrap items-center gap-3 rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900" role="status">
           <span>Chưa có giá cho model này{model === forecast.current_model && inputMultiplier !== 1 ? ' (cần giá để tính khi đổi input tokens)' : ''}.</span>
           {onOpenSettings && (
             <button type="button" onClick={onOpenSettings} className="perf-no-print underline font-semibold">Thêm giá trong Cài đặt</button>
@@ -139,7 +139,7 @@ function Forecast({ forecast, onOpenSettings }) {
             />
           </div>
           {result.daysToSemesterEnd === null && onOpenSettings && (
-            <button type="button" onClick={onOpenSettings} className="perf-no-print mt-2 text-xs text-blue-700 underline">
+            <button type="button" onClick={onOpenSettings} className="perf-no-print mt-3 text-xs font-medium text-red-600 hover:text-red-700 hover:underline">
               Đặt ngày kết thúc học kỳ trong Cài đặt
             </button>
           )}
@@ -152,7 +152,7 @@ function Forecast({ forecast, onOpenSettings }) {
 export default function CostSection({ cost, onOpenSettings }) {
   const daily = list(cost?.daily).map((d) => ({ ...d, label: fmtDayLabel(d.date) }));
   return (
-    <Section id="perf-cost" title="Token và chi phí" subtitle="Chi phí lấy từ Langfuse; thiếu thì ước tính theo bảng giá (USD / 1M tokens).">
+    <Section id="perf-cost" title="Token và chi phí" icon={FaCoins} subtitle="Chi phí lấy từ Langfuse; thiếu thì ước tính theo bảng giá (USD / 1M tokens).">
       <UnpricedWarning unpriced={cost?.unpriced} onOpenSettings={onOpenSettings} />
 
       <Block flush title="Tổng hợp" className="mt-4">
@@ -182,26 +182,38 @@ export default function CostSection({ cost, onOpenSettings }) {
         </div>
       </Block>
 
-      <Block title="Tokens và chi phí theo ngày" note="Cột: input + output tokens (trục trái). Đường: chi phí USD (trục phải).">
+      <Block title="Theo ngày" note="Tokens và chi phí vẽ riêng hai biểu đồ vì khác đơn vị.">
         {daily.length === 0 ? <EmptyNote /> : (
           <>
-            <ChartBox height={280} label="Tokens và chi phí theo ngày">
-              <ComposedChart data={daily} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
-                <CartesianGrid vertical={false} stroke={GRID_STROKE} />
-                <XAxis dataKey="label" tick={AXIS_TICK} tickLine={false} />
-                <YAxis yAxisId="tokens" tick={AXIS_TICK} tickLine={false} axisLine={false} tickFormatter={fmtCompact} />
-                <YAxis yAxisId="cost" orientation="right" tick={AXIS_TICK} tickLine={false} axisLine={false} tickFormatter={(v) => fmtUsd(v)} width={70} />
-                <Tooltip
-                  {...TOOLTIP_STYLE}
-                  formatter={(v, name, item) => [item?.dataKey === 'cost' ? fmtUsd(v) : fmtInt(v), name]}
-                />
-                <Legend {...LEGEND_PROPS} />
-                <Bar isAnimationActive={false} yAxisId="tokens" dataKey="input_tokens" name="Input tokens" stackId="tokens" fill={SERIES[0]} stroke="#ffffff" strokeWidth={1} />
-                <Bar isAnimationActive={false} yAxisId="tokens" dataKey="output_tokens" name="Output tokens" stackId="tokens" fill={SERIES[2]} stroke="#ffffff" strokeWidth={1} radius={[3, 3, 0, 0]} />
-                <Line isAnimationActive={false} yAxisId="cost" type="monotone" dataKey="cost" name="Chi phí (USD)" stroke={SERIES[1]} strokeWidth={2} dot={{ r: 3 }} connectNulls />
-              </ComposedChart>
-            </ChartBox>
-            <div className="perf-table-wrap mt-3">
+            <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+              <div>
+                <h4 className="text-xs font-semibold text-gray-600 mb-2">Tokens mỗi ngày</h4>
+                <ChartBox height={240} label="Input và output tokens theo ngày">
+                  <BarChart data={daily} margin={{ top: 8, right: 4, left: -4, bottom: 0 }}>
+                    <CartesianGrid vertical={false} stroke={GRID_STROKE} />
+                    <XAxis dataKey="label" tick={AXIS_TICK} tickLine={false} axisLine={{ stroke: '#e5e7eb' }} interval="preserveStartEnd" />
+                    <YAxis tick={AXIS_TICK} tickLine={false} axisLine={false} tickFormatter={fmtCompact} />
+                    <Tooltip {...TOOLTIP_STYLE} formatter={(v, name) => [fmtInt(v), name]} />
+                    <Legend {...LEGEND_PROPS} />
+                    <Bar isAnimationActive={false} dataKey="input_tokens" name="Input tokens" stackId="tokens" fill={SERIES[0]} stroke="#ffffff" strokeWidth={2} maxBarSize={48} />
+                    <Bar isAnimationActive={false} dataKey="output_tokens" name="Output tokens" stackId="tokens" fill={SERIES[1]} stroke="#ffffff" strokeWidth={2} radius={BAR_RADIUS} maxBarSize={48} />
+                  </BarChart>
+                </ChartBox>
+              </div>
+              <div>
+                <h4 className="text-xs font-semibold text-gray-600 mb-2">Chi phí mỗi ngày (USD)</h4>
+                <ChartBox height={240} label="Chi phí theo ngày">
+                  <BarChart data={daily} margin={{ top: 8, right: 4, left: 4, bottom: 0 }}>
+                    <CartesianGrid vertical={false} stroke={GRID_STROKE} />
+                    <XAxis dataKey="label" tick={AXIS_TICK} tickLine={false} axisLine={{ stroke: '#e5e7eb' }} interval="preserveStartEnd" />
+                    <YAxis tick={AXIS_TICK} tickLine={false} axisLine={false} tickFormatter={(v) => fmtUsd(v)} width={64} />
+                    <Tooltip {...TOOLTIP_STYLE} formatter={(v) => [fmtUsd(v), 'Chi phí']} />
+                    <Bar isAnimationActive={false} dataKey="cost" name="Chi phí" fill={SERIES[2]} radius={BAR_RADIUS} maxBarSize={48} />
+                  </BarChart>
+                </ChartBox>
+              </div>
+            </div>
+            <div className="perf-table-wrap mt-6">
               <table className="perf-table">
                 <thead>
                   <tr>

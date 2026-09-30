@@ -2,12 +2,12 @@ import React, { useMemo, useState } from 'react';
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
-import { FaTimes } from 'react-icons/fa';
+import { FaTimes, FaCalendarAlt } from 'react-icons/fa';
 import {
   fmtInt, fmtNum, fmtDayLabel, WEEKDAYS, WEEKDAY_NAMES, isNum,
 } from './format';
 import {
-  Section, Block, ChartBox, EmptyNote, Segmented, SERIES, AXIS_TICK, GRID_STROKE, TOOLTIP_STYLE, LEGEND_PROPS, list,
+  Section, Block, ChartBox, EmptyNote, Segmented, SERIES, AXIS_TICK, GRID_STROKE, TOOLTIP_STYLE, LEGEND_PROPS, BAR_RADIUS, list,
 } from './common';
 import Heatmap from './Heatmap';
 
@@ -35,7 +35,7 @@ function HourlyDrilldown({ day, onClose }) {
   data.forEach((d, i) => { if (!peak || d.requests > peak.requests) peak = { ...d, i }; });
 
   return (
-    <div className="perf-block mt-4 rounded-lg border border-blue-200 bg-blue-50/40 p-3" data-testid="perf-hourly">
+    <div className="perf-block mt-4 rounded-lg bg-red-50/60 p-4" data-testid="perf-hourly">
       <div className="flex items-start justify-between gap-2 mb-2">
         <div>
           <h4 className="text-sm font-semibold text-gray-900">
@@ -52,7 +52,7 @@ function HourlyDrilldown({ day, onClose }) {
         <button
           type="button"
           onClick={onClose}
-          className="perf-no-print text-gray-500 hover:text-gray-800 p-1"
+          className="perf-no-print text-gray-500 hover:text-red-600 p-2 rounded-lg hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500"
           aria-label="Đóng chi tiết theo giờ"
         >
           <FaTimes />
@@ -66,8 +66,8 @@ function HourlyDrilldown({ day, onClose }) {
             <YAxis tick={AXIS_TICK} allowDecimals={false} tickLine={false} axisLine={false} />
             <Tooltip {...TOOLTIP_STYLE} formatter={(v, name) => [fmtInt(v), name]} />
             <Legend {...LEGEND_PROPS} />
-            <Bar isAnimationActive={false} dataKey="requests" name="Requests" fill={SERIES[0]} radius={[3, 3, 0, 0]} />
-            <Bar isAnimationActive={false} dataKey="users" name="Users" fill={SERIES[1]} radius={[3, 3, 0, 0]} />
+            <Bar isAnimationActive={false} dataKey="requests" name="Requests" fill={SERIES[0]} radius={BAR_RADIUS} />
+            <Bar isAnimationActive={false} dataKey="users" name="Users" fill={SERIES[1]} radius={BAR_RADIUS} />
           </BarChart>
         </ChartBox>
       ) : (
@@ -107,6 +107,7 @@ export default function UsageSection({ usage }) {
   return (
     <Section
       id="perf-usage"
+      icon={FaCalendarAlt}
       title="Phân bố sử dụng"
       subtitle="Requests và user duy nhất theo ngày × 4 khung giờ (GMT+7). Bấm vào một ngày để xem theo giờ."
     >
@@ -131,13 +132,13 @@ export default function UsageSection({ usage }) {
               </thead>
               <tbody>
                 {days.map((d) => (
-                  <tr key={d.date} className={selectedDate === d.date ? 'bg-blue-50' : undefined}>
+                  <tr key={d.date} className={selectedDate === d.date ? 'bg-red-50' : undefined}>
                     <td className="whitespace-nowrap">
                       <button
                         type="button"
                         onClick={() => toggleDay(d.date)}
                         aria-expanded={selectedDate === d.date}
-                        className="perf-keep-print font-medium text-blue-700 hover:underline"
+                        className="perf-keep-print font-medium text-red-600 hover:text-red-700 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 rounded"
                         title="Xem theo giờ"
                       >
                         {fmtDayLabel(d.date)}
@@ -195,7 +196,7 @@ export default function UsageSection({ usage }) {
               <Tooltip {...TOOLTIP_STYLE} formatter={(v, name) => [fmtInt(v), name]} cursor={{ fill: 'rgba(0,0,0,0.04)' }} />
               <Legend {...LEGEND_PROPS} />
               {slots.map((s, k) => (
-                <Bar isAnimationActive={false} key={s} dataKey={`s${k}`} name={s} fill={SERIES[k % SERIES.length]} radius={[3, 3, 0, 0]} cursor="pointer" />
+                <Bar isAnimationActive={false} key={s} dataKey={`s${k}`} name={s} fill={SERIES[k % SERIES.length]} radius={BAR_RADIUS} cursor="pointer" />
               ))}
             </BarChart>
           </ChartBox>

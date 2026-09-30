@@ -5,7 +5,7 @@ import React from 'react';
 import { describe, it, expect, vi, beforeAll, beforeEach } from 'vitest';
 import { render, screen, within, fireEvent } from '@testing-library/react';
 import live from '../../components/performance/__fixtures__/report.live-sample.json';
-import AdminPerformance, { NAV_ITEMS } from '../../pages/AdminPerformance';
+import AdminPerformance, { TABS } from '../../pages/AdminPerformance';
 import { fmtInt } from '../../components/performance/format';
 
 vi.mock('../../pages/Navbar', () => ({ default: () => <header data-testid="navbar" /> }));
@@ -16,20 +16,27 @@ beforeAll(() => {
   vi.stubGlobal('ResizeObserver', class { observe() {} unobserve() {} disconnect() {} });
 });
 
+const openTab = (label) => fireEvent.click(screen.getByRole('tab', { name: label }));
+
 beforeEach(() => {
   localStorage.setItem('access_token', 'test-token');
+  window.location = { href: '', pathname: '/mini/admin/performance', search: '', hash: '', reload: vi.fn() };
   global.fetch = vi.fn(async () => ({ ok: true, status: 200, json: async () => live }));
 });
 
 describe('AdminPerformance with a real backend report', () => {
-  it('renders every section, the KPIs and the highlights', async () => {
+  it('renders every tab, the KPIs and the highlights', async () => {
     render(<AdminPerformance />);
     await screen.findByRole('heading', { level: 2, name: 'Chỉ số chính' });
-    NAV_ITEMS.forEach((n) => {
-      expect(screen.getByRole('heading', { level: 2, name: n.label })).toBeInTheDocument();
-    });
     expect(within(screen.getByTestId('kpi-requests')).getByText(fmtInt(live.kpis.requests.value))).toBeInTheDocument();
     expect(screen.getByText(live.highlights[0].text)).toBeInTheDocument();
+    TABS.forEach((tab) => {
+      openTab(tab.label);
+      tab.sections.forEach((title) => {
+        expect(screen.getByRole('heading', { level: 2, name: title })).toBeInTheDocument();
+      });
+    });
+    openTab('Môn học');
     expect(screen.getAllByText(live.courses.rows[0].name).length).toBeGreaterThan(0);
   });
 });
@@ -37,7 +44,8 @@ describe('AdminPerformance with a real backend report', () => {
 describe('long course and cohort lists', () => {
   it('show the top rows plus an "others" total, and expand on request', async () => {
     render(<AdminPerformance />);
-    await screen.findByRole('heading', { level: 2, name: 'Môn học và khóa' });
+    await screen.findByRole('heading', { level: 2, name: 'Chỉ số chính' });
+    openTab('Môn học');
     const others = screen.getByTestId('course-others');
     const rest = live.courses.rows.slice(15);
     expect(within(others).getByText(`${rest.length} môn khác`)).toBeInTheDocument();

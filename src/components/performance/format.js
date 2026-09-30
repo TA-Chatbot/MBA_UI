@@ -83,18 +83,21 @@ export const LOWER_IS_BETTER = new Set([
  * Signed change with an arrow.
  * @param {number|null} changePct  change in percent (0–100 scale), null when unknown
  * @param {'lower-better'|'higher-better'} polarity
- * @returns {{text: string, direction: 'up'|'down'|'flat'|'none', tone: 'good'|'bad'|'neutral'|'none'}}
+ * @returns {{text: string, label: string, direction: 'up'|'down'|'flat'|'none', tone: 'good'|'bad'|'neutral'|'none'}}
+ *   `text` carries an arrow glyph for plain-text use; `label` is the signed
+ *   percentage alone, for places that draw the arrow as an icon.
  */
 export function fmtChange(changePct, polarity = 'higher-better') {
-  if (!isNum(changePct)) return { text: DASH, direction: 'none', tone: 'none' };
+  if (!isNum(changePct)) return { text: DASH, label: DASH, direction: 'none', tone: 'none' };
   const rounded = Math.round(changePct * 10) / 10;
-  if (rounded === 0) return { text: '0%', direction: 'flat', tone: 'neutral' };
+  if (rounded === 0) return { text: '0%', label: '0%', direction: 'flat', tone: 'neutral' };
   const up = rounded > 0;
-  const text = `${up ? '▲ +' : '▼ −'}${nf(0, 1).format(Math.abs(rounded))}%`;
+  const label = `${up ? '+' : '−'}${nf(0, 1).format(Math.abs(rounded))}%`;
+  const text = `${up ? '▲' : '▼'} ${label}`;
   let tone;
   if (polarity === 'lower-better') tone = up ? 'bad' : 'good';
   else tone = up ? 'good' : 'neutral';
-  return { text, direction: up ? 'up' : 'down', tone };
+  return { text, label, direction: up ? 'up' : 'down', tone };
 }
 
 export const TONE_CLASS = {

@@ -27,57 +27,63 @@ export default function DateRangeBar({ range, today, onChange, disabled = false 
   };
 
   return (
-    <div className="flex flex-col gap-2">
-      <div className="flex flex-wrap items-center gap-1.5" role="group" aria-label="Khoảng thời gian có sẵn">
-        {PRESETS.map((p) => (
-          <button
-            key={p.key}
-            type="button"
-            disabled={disabled}
-            aria-pressed={range.preset === p.key}
-            onClick={() => pickPreset(p.key)}
-            className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-colors disabled:opacity-60 ${
-              range.preset === p.key
-                ? 'bg-red-600 border-red-600 text-white'
-                : 'bg-white border-gray-300 text-gray-700 hover:border-red-400 hover:text-red-700'
-            }`}
-          >
-            {p.label}
-          </button>
-        ))}
+    <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
+      <div
+        className="inline-flex flex-wrap gap-1 rounded-lg bg-gray-100 p-1 self-start"
+        role="group"
+        aria-label="Khoảng thời gian có sẵn"
+      >
+        {PRESETS.map((p) => {
+          const active = range.preset === p.key;
+          return (
+            <button
+              key={p.key}
+              type="button"
+              disabled={disabled}
+              aria-pressed={active}
+              onClick={() => pickPreset(p.key)}
+              className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors disabled:opacity-60 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 ${
+                active ? 'bg-white text-red-600 shadow-sm font-semibold' : 'text-gray-600 hover:text-red-600'
+              }`}
+            >
+              {p.label}
+            </button>
+          );
+        })}
       </div>
-      <form className="flex flex-wrap items-center gap-2 text-xs" onSubmit={applyCustom} aria-label="Khoảng thời gian tùy chọn">
-        <label className="flex items-center gap-1 text-gray-600">
+
+      <form className="flex flex-wrap items-center gap-2" onSubmit={applyCustom} aria-label="Khoảng thời gian tùy chọn">
+        <label className="flex items-center gap-2 text-sm text-gray-600">
           Từ
           <input
             type="date"
             value={draftFrom}
             max={today}
             onChange={(e) => setDraftFrom(e.target.value)}
-            className="border border-gray-300 rounded-md px-2 py-1 text-gray-900 focus:outline-none focus:ring-2 focus:ring-red-400"
+            className="perf-input"
             aria-label="Từ ngày"
           />
         </label>
-        <label className="flex items-center gap-1 text-gray-600">
+        <label className="flex items-center gap-2 text-sm text-gray-600">
           đến
           <input
             type="date"
             value={draftTo}
             max={today}
             onChange={(e) => setDraftTo(e.target.value)}
-            className="border border-gray-300 rounded-md px-2 py-1 text-gray-900 focus:outline-none focus:ring-2 focus:ring-red-400"
+            className="perf-input"
             aria-label="Đến ngày"
           />
         </label>
         <button
           type="submit"
           disabled={disabled || Boolean(draftError) || !draftChanged}
-          className="px-3 py-1 rounded-md bg-gray-800 text-white font-medium disabled:bg-gray-300 disabled:text-gray-500"
+          className="perf-btn-secondary"
         >
           Áp dụng
         </button>
         {draftError && draftChanged && (
-          <span className="text-red-600" role="alert">{draftError}</span>
+          <span className="basis-full text-sm text-red-600" role="alert">{draftError}</span>
         )}
       </form>
     </div>

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import {
-  fmtInt, fmtPercent, fmtSeconds, fmtUsd, fmtChange, TONE_CLASS, WEEKDAYS, WEEKDAY_NAMES, DASH,
+  fmtInt, fmtPercent, fmtSeconds, fmtUsd, fmtChange, WEEKDAYS, WEEKDAY_NAMES, DASH,
 } from './format';
-import { Section, Block, EmptyNote, ShareBar, list } from './common';
+import { Section, Block, EmptyNote, ShareBar, ChangePill, list } from './common';
+import { FaBook } from 'react-icons/fa';
 import Heatmap from './Heatmap';
 
 // Long tails (60+ courses, 30+ cohorts) bury the rows the meeting cares about:
@@ -61,6 +62,7 @@ export default function CourseSection({ courses }) {
   return (
     <Section
       id="perf-courses"
+      icon={FaBook}
       title="Môn học và khóa"
       subtitle="Môn học lấy từ metadata.source; khóa (cohort) suy ra từ mã user."
     >
@@ -97,7 +99,7 @@ export default function CourseSection({ courses }) {
                       </td>
                       <td className="num">{fmtInt(c.users)}</td>
                       <td className="num text-gray-500">{fmtInt(c.previous_requests)}</td>
-                      <td className={`num ${TONE_CLASS[change.tone]}`}>{change.text}</td>
+                      <td className="num"><ChangePill change={change} /></td>
                       <td className="num">{fmtSeconds(c.latency_mean)}</td>
                       <td className="num">{fmtSeconds(c.latency_p95)}</td>
                       <td className="num">{fmtSeconds(c.ttft_mean)}</td>
