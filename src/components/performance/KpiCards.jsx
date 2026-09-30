@@ -5,6 +5,7 @@ import {
   fmtInt, fmtSeconds, fmtPercent, fmtCompact, fmtUsd, fmtChange, fmtRange,
   LOWER_IS_BETTER, rangeDays,
 } from './format';
+import { FaListAlt } from 'react-icons/fa';
 import { Section, ChangePill } from './common';
 
 export const KPI_GROUPS = [
@@ -31,7 +32,8 @@ export const KPI_GROUPS = [
     key: 'cost',
     label: 'Token và chi phí',
     items: [
-      { key: 'total_tokens', label: 'Tổng tokens', fmt: fmtCompact, full: fmtInt },
+      // Tokens drive cost: a rise is not good news, so it is shown neutral.
+      { key: 'total_tokens', label: 'Tổng tokens', fmt: fmtCompact, full: fmtInt, neutral: true },
       { key: 'cost', label: 'Chi phí', fmt: fmtUsd },
     ],
   },
@@ -63,11 +65,11 @@ function KpiRow({ def, kpi, onOpenSettings }) {
   const value = kpi?.value ?? null;
   const previous = kpi?.previous ?? null;
   const incomplete = def.key === 'cost' && kpi?.incomplete === true;
-  const polarity = LOWER_IS_BETTER.has(def.key) ? 'lower-better' : 'higher-better';
+  const polarity = def.neutral ? 'neutral' : (LOWER_IS_BETTER.has(def.key) ? 'lower-better' : 'higher-better');
   const change = fmtChange(incomplete ? null : (kpi?.change_pct ?? null), polarity);
   return (
     <tr className="perf-kpi border-t border-gray-100 first:border-t-0" data-testid={`kpi-${def.key}`}>
-      <th scope="row" className="py-2.5 pr-2 sm:pr-3 text-left text-sm font-normal text-gray-700">{def.label}</th>
+      <th scope="row" className="py-2.5 pl-3 pr-2 sm:pr-3 text-left text-sm font-normal text-gray-700">{def.label}</th>
       <td className="py-2.5 px-2 sm:px-3 text-right whitespace-nowrap">
         <span
           className="text-lg font-semibold text-gray-800 tabular-nums"
@@ -79,8 +81,8 @@ function KpiRow({ def, kpi, onOpenSettings }) {
         <div className="sm:hidden text-xs text-gray-500 tabular-nums" aria-hidden="true">trước {def.fmt(previous)}</div>
       </td>
       <td className="hidden sm:table-cell py-2.5 px-3 text-right text-sm text-gray-500 tabular-nums whitespace-nowrap">{def.fmt(previous)}</td>
-      <td className="py-2.5 pl-2 sm:pl-3 text-right whitespace-nowrap">
-        {incomplete ? <span className="text-xs text-gray-400">không so sánh</span> : <ChangePill change={change} />}
+      <td className="py-2.5 pl-2 pr-3 sm:pl-3 text-right whitespace-nowrap">
+        {incomplete ? <span className="text-xs text-gray-500">không so sánh</span> : <ChangePill change={change} />}
       </td>
     </tr>
   );
@@ -90,7 +92,7 @@ export default function KpiCards({ kpis, meta, onOpenSettings }) {
   const previous = meta?.previous;
   const days = meta?.days ?? (meta?.from && meta?.to ? rangeDays(meta.from, meta.to) : null);
   return (
-    <Section id="perf-kpis" title="Chỉ số chính">
+    <Section id="perf-kpis" title="Chỉ số chính" icon={FaListAlt}>
       {meta?.from && meta?.to && (
         <div className="-mt-2 mb-5">
           <p className="text-2xl sm:text-3xl font-bold tracking-tight text-gray-800 tabular-nums" data-testid="perf-period">
@@ -105,17 +107,17 @@ export default function KpiCards({ kpis, meta, onOpenSettings }) {
       <div className="perf-table-wrap">
         <table className="w-full">
           <thead>
-            <tr className="text-xs font-medium text-gray-500 uppercase tracking-wider">
-              <th scope="col" className="pb-2 pr-2 sm:pr-3 text-left font-medium">Chỉ số</th>
-              <th scope="col" className="pb-2 px-2 sm:px-3 text-right font-medium">Kỳ này</th>
-              <th scope="col" className="hidden sm:table-cell pb-2 px-3 text-right font-medium">Kỳ trước</th>
-              <th scope="col" className="pb-2 pl-2 sm:pl-3 text-right font-medium">Thay đổi</th>
+            <tr className="text-[11px] font-medium text-gray-500 uppercase tracking-wider bg-gray-50">
+              <th scope="col" className="py-2.5 pl-3 pr-2 sm:pr-3 text-left font-medium rounded-tl-lg">Chỉ số</th>
+              <th scope="col" className="py-2.5 px-2 sm:px-3 text-right font-medium">Kỳ này</th>
+              <th scope="col" className="hidden sm:table-cell py-2.5 px-3 text-right font-medium">Kỳ trước</th>
+              <th scope="col" className="py-2.5 pl-2 pr-3 sm:pl-3 text-right font-medium rounded-tr-lg">Thay đổi</th>
             </tr>
           </thead>
           {KPI_GROUPS.map((group) => (
             <tbody key={group.key}>
               <tr>
-                <th scope="rowgroup" colSpan={4} className="pt-5 pb-1 text-left text-xs font-semibold text-red-600">
+                <th scope="rowgroup" colSpan={4} className="pt-5 pb-1 pl-3 text-left text-xs font-semibold text-red-600">
                   {group.label}
                 </th>
               </tr>

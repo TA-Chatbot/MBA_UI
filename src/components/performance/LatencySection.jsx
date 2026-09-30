@@ -30,7 +30,7 @@ function histogramData(histogram) {
 }
 
 function PointDiff({ rate, previous }) {
-  if (!isNum(rate) || !isNum(previous)) return <span className="text-gray-400">{DASH}</span>;
+  if (!isNum(rate) || !isNum(previous)) return <span className="text-gray-500">{DASH}</span>;
   const diff = Math.round((rate - previous) * 10) / 10;
   if (diff === 0) return <span className="text-gray-500">0 điểm %</span>;
   const up = diff > 0;
@@ -86,13 +86,19 @@ export default function LatencySection({ latency, stats }) {
           )}
         </Block>
 
-        <Block flush title="TTFT so với latency" note="Mỗi điểm là một request (tối đa 1.500 điểm, lấy mẫu đều). Đường nét đứt: y = x.">
+        <Block flush title="Latency theo TTFT" note="Mỗi điểm là một request (tối đa 1.500 điểm, lấy mẫu đều). Trục ngang: TTFT, trục dọc: latency; điểm luôn nằm trên đường nét đứt (latency ≥ TTFT).">
           {scatter.length === 0 ? <EmptyNote /> : (
             <ChartBox height={260} label="Biểu đồ phân tán TTFT và latency">
-              <ScatterChart margin={{ top: 8, right: 16, left: -8, bottom: 8 }}>
+              <ScatterChart margin={{ top: 8, right: 16, left: 8, bottom: 20 }}>
                 <CartesianGrid stroke={GRID_STROKE} />
-                <XAxis type="number" dataKey="ttft" name="TTFT" unit=" s" domain={[0, axisMax]} tick={AXIS_TICK} tickLine={false} />
-                <YAxis type="number" dataKey="latency" name="Latency" unit=" s" domain={[0, axisMax]} tick={AXIS_TICK} tickLine={false} axisLine={false} />
+                <XAxis
+                  type="number" dataKey="ttft" name="TTFT" unit=" s" domain={[0, axisMax]} tick={AXIS_TICK} tickLine={false}
+                  label={{ value: 'TTFT (giây)', position: 'insideBottom', offset: -12, fill: '#4b5563', fontSize: 12 }}
+                />
+                <YAxis
+                  type="number" dataKey="latency" name="Latency" unit=" s" domain={[0, axisMax]} tick={AXIS_TICK} tickLine={false} axisLine={false}
+                  label={{ value: 'Latency (giây)', angle: -90, position: 'insideLeft', offset: 4, fill: '#4b5563', fontSize: 12 }}
+                />
                 <ZAxis range={[16, 16]} />
                 <Tooltip {...TOOLTIP_STYLE} cursor={{ strokeDasharray: '3 3' }} formatter={(v, name) => [fmtSeconds(v), name]} />
                 <ReferenceLine
@@ -117,9 +123,9 @@ export default function LatencySection({ latency, stats }) {
               <YAxis tick={AXIS_TICK} tickLine={false} axisLine={false} unit=" s" />
               <Tooltip {...TOOLTIP_STYLE} formatter={(v, name) => [fmtSeconds(v), name]} />
               <Legend {...LEGEND_PROPS} />
-              <Line isAnimationActive={false} type="linear" dataKey="median" name="Latency median" stroke={SERIES[0]} strokeWidth={2} dot={{ r: 3 }} connectNulls />
-              <Line isAnimationActive={false} type="linear" dataKey="p95" name="Latency p95" stroke={SERIES[1]} strokeWidth={2} dot={{ r: 3 }} connectNulls />
-              <Line isAnimationActive={false} type="linear" dataKey="ttft_median" name="TTFT median" stroke={SERIES[2]} strokeWidth={2} dot={{ r: 3 }} connectNulls />
+              <Line isAnimationActive={false} type="linear" dataKey="median" name="Latency median" stroke={SERIES[0]} strokeWidth={2} dot={{ r: 3, fill: SERIES[0] }} connectNulls />
+              <Line isAnimationActive={false} type="linear" dataKey="p95" name="Latency p95 (nét đứt)" stroke={SERIES[1]} strokeWidth={2} strokeDasharray="6 4" dot={{ r: 3, fill: SERIES[1] }} connectNulls />
+              <Line isAnimationActive={false} type="linear" dataKey="ttft_median" name="TTFT median (điểm rỗng)" stroke={SERIES[2]} strokeWidth={2} dot={{ r: 4, fill: '#ffffff', strokeWidth: 2 }} connectNulls />
             </LineChart>
           </ChartBox>
         )}

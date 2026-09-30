@@ -89,7 +89,7 @@ export default function CourseSection({ courses }) {
                   const change = fmtChange(c.change_pct, 'higher-better');
                   return (
                     <tr key={c.source || i}>
-                      <td><CourseName source={c.source} name={c.name} /></td>
+                      <td className="min-w-[12rem] whitespace-normal"><CourseName source={c.source} name={c.name} /></td>
                       <td className="num font-semibold">{fmtInt(c.requests)}</td>
                       <td className="num">
                         <span className="inline-flex items-center gap-2">

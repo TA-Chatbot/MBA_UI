@@ -62,7 +62,7 @@ export default function DataQualitySection({ dataQuality, meta }) {
                   {missing.map((m, i) => (
                     <tr key={m.field || i}>
                       <td>{MISSING_FIELD_LABELS[m.field] || m.field || DASH}</td>
-                      <td className={`num ${m.count > 0 ? 'font-semibold' : 'text-gray-400'}`}>{fmtInt(m.count)}</td>
+                      <td className={`num ${m.count > 0 ? 'font-semibold' : 'text-gray-500'}`}>{fmtInt(m.count)}</td>
                     </tr>
                   ))}
                 </tbody>

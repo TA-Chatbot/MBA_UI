@@ -200,7 +200,7 @@ export default function UsersSection({ users, hideIds }) {
                     <td className="whitespace-nowrap">{fmtDateTime(u.first)}</td>
                     <td className="whitespace-nowrap">{fmtDateTime(u.last)}</td>
                     <td>{u.cohort || DASH}</td>
-                    <td className="font-mono text-xs">{u.top_course || DASH}</td>
+                    <td className="text-xs text-gray-700 whitespace-nowrap">{u.top_course || DASH}</td>
                   </tr>
                 ))}
               </tbody>

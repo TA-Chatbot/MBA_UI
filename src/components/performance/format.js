@@ -82,7 +82,7 @@ export const LOWER_IS_BETTER = new Set([
 /**
  * Signed change with an arrow.
  * @param {number|null} changePct  change in percent (0–100 scale), null when unknown
- * @param {'lower-better'|'higher-better'} polarity
+ * @param {'lower-better'|'higher-better'|'neutral'} polarity
  * @returns {{text: string, label: string, direction: 'up'|'down'|'flat'|'none', tone: 'good'|'bad'|'neutral'|'none'}}
  *   `text` carries an arrow glyph for plain-text use; `label` is the signed
  *   percentage alone, for places that draw the arrow as an icon.
@@ -96,6 +96,7 @@ export function fmtChange(changePct, polarity = 'higher-better') {
   const text = `${up ? '▲' : '▼'} ${label}`;
   let tone;
   if (polarity === 'lower-better') tone = up ? 'bad' : 'good';
+  else if (polarity === 'neutral') tone = 'neutral';
   else tone = up ? 'good' : 'neutral';
   return { text, label, direction: up ? 'up' : 'down', tone };
 }

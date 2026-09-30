@@ -82,6 +82,21 @@ select.perf-input {
   display: none;
 }
 
+.perf-tabs-scroll.perf-fade-right {
+  -webkit-mask-image: linear-gradient(to right, #000 82%, transparent);
+  mask-image: linear-gradient(to right, #000 82%, transparent);
+}
+
+.perf-tabs-scroll.perf-fade-left {
+  -webkit-mask-image: linear-gradient(to left, #000 82%, transparent);
+  mask-image: linear-gradient(to left, #000 82%, transparent);
+}
+
+.perf-tabs-scroll.perf-fade-left.perf-fade-right {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 14%, #000 86%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 14%, #000 86%, transparent);
+}
+
 /* Tables: the site's table vocabulary (gray-50 head, small uppercase labels). */
 :where(.perf-table-wrap) {
   overflow-x: auto;
@@ -115,6 +130,7 @@ select.perf-input {
   border-bottom: 1px solid #f3f4f6;
   color: #1f2937;
   vertical-align: middle;
+  white-space: nowrap;
 }
 
 :where(.perf-table) :is(th, td):where(.num) {

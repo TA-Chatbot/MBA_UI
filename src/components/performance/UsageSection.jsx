@@ -162,11 +162,11 @@ export default function UsageSection({ usage }) {
                   {slots.map((s, k) => (
                     <React.Fragment key={s}>
                       <td className="num border-l border-gray-100">{fmtInt(at(slotTotals, k))}</td>
-                      <td className="num text-gray-400">—</td>
+                      <td className="num text-gray-500">—</td>
                     </React.Fragment>
                   ))}
                   <td className="num border-l border-gray-100">{fmtInt(totalRequests)}</td>
-                  <td className="num text-gray-400">—</td>
+                  <td className="num text-gray-500">—</td>
                 </tr>
               </tfoot>
             </table>

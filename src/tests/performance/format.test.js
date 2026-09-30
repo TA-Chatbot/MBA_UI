@@ -85,6 +85,8 @@ describe('format change percent', () => {
     expect(fmtChange(0).text).toBe('0%');
     expect(fmtChange(0.01).direction).toBe('flat');
     expect(fmtChange(null)).toEqual({ text: DASH, label: DASH, direction: 'none', tone: 'none' });
+    // volume that drives cost (tokens): shown without a good/bad judgement
+    expect(fmtChange(81.3, 'neutral')).toEqual({ text: '▲ +81,3%', label: '+81,3%', direction: 'up', tone: 'neutral' });
   });
 });
 

@@ -136,7 +136,7 @@ export function traceUrl(base, traceId) {
 
 export function TraceLink({ base, traceId }) {
   const href = traceUrl(base, traceId);
-  if (!href) return <span className="text-gray-400">—</span>;
+  if (!href) return <span className="text-gray-500">—</span>;
   return (
     <a
       href={href}
@@ -154,7 +154,7 @@ export function UserId({ row, hideIds }) {
   const text = displayUser(row, hideIds);
   const missing = text === NO_USER_LABEL;
   return (
-    <span className={missing ? 'text-gray-400 italic' : 'font-mono text-xs text-gray-800'} data-testid="perf-user-id">
+    <span className={missing ? 'text-gray-500 italic' : 'font-mono text-xs text-gray-800 whitespace-nowrap'} data-testid="perf-user-id">
       {text}
     </span>
   );
@@ -174,12 +174,12 @@ const CHANGE_STYLE = {
   good: 'bg-green-50 text-green-700',
   bad: 'bg-red-50 text-red-700',
   neutral: 'bg-gray-100 text-gray-600',
-  none: 'text-gray-400',
+  none: 'text-gray-500',
 };
 
 /** A change vs the previous period (the object fmtChange returns) as an arrow pill. */
 export function ChangePill({ change }) {
-  if (!change || change.direction === 'none') return <span className="text-gray-400">—</span>;
+  if (!change || change.direction === 'none') return <span className="text-gray-500">—</span>;
   const Icon = change.direction === 'up' ? FaArrowUp : change.direction === 'down' ? FaArrowDown : FaMinus;
   const word = change.direction === 'up' ? 'tăng' : change.direction === 'down' ? 'giảm' : 'không đổi';
   return (

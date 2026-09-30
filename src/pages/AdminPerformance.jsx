@@ -150,6 +150,32 @@ function ErrorBanner({ error, report, meta, loading, onRetry }) {
 
 function TabStrip({ active, onSelect, top }) {
   const refs = useRef({});
+  const scrollerRef = useRef(null);
+  const [fade, setFade] = useState({ left: false, right: false });
+
+  // On narrow screens some tabs sit off-screen: fade the edge that has more.
+  useEffect(() => {
+    const el = scrollerRef.current;
+    if (!el) return undefined;
+    const update = () => {
+      const left = el.scrollLeft > 4;
+      const right = el.scrollLeft + el.clientWidth < el.scrollWidth - 4;
+      setFade((f) => (f.left === left && f.right === right ? f : { left, right }));
+    };
+    update();
+    el.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    return () => {
+      el.removeEventListener('scroll', update);
+      window.removeEventListener('resize', update);
+    };
+  }, []);
+
+  // Keep the selected tab visible inside the strip.
+  useEffect(() => {
+    refs.current[active]?.scrollIntoView?.({ block: 'nearest', inline: 'nearest' });
+  }, [active]);
+
   const onKeyDown = (e) => {
     const i = TABS.findIndex((t) => t.id === active);
     let next = null;
@@ -163,9 +189,11 @@ function TabStrip({ active, onSelect, top }) {
     refs.current[next.id]?.focus();
   };
   return (
-    <div className="perf-tabbar sticky z-30 -mx-1 px-1 py-2" style={{ top }}>
+    <div className="perf-tabbar sticky z-30 mt-4" style={{ top }}>
       <div
-        className="perf-tabs-scroll bg-white rounded-lg shadow-lg px-2 py-2 flex gap-1 overflow-x-auto"
+        ref={scrollerRef}
+        className={`perf-tabs-scroll bg-white rounded-lg shadow-lg px-2 py-2 flex gap-1 overflow-x-auto${
+          fade.left ? ' perf-fade-left' : ''}${fade.right ? ' perf-fade-right' : ''}`}
         role="tablist"
         aria-label="Nội dung báo cáo"
         onKeyDown={onKeyDown}
@@ -464,7 +492,7 @@ const AdminPerformance = () => {
 
           {hasData && <TabStrip active={tab} onSelect={selectTab} top={navHeight} />}
 
-          <div className={hasData ? 'mt-4' : 'mt-6'}>
+          <div className={hasData ? 'mt-6' : 'mt-6'}>
             {error && (
               <div className="mb-6">
                 <ErrorBanner error={error} report={report} meta={meta} loading={loading} onRetry={retry} />
@@ -485,8 +513,9 @@ const AdminPerformance = () => {
                 key={id}
                 id={`perf-panel-${id}`}
                 role="tabpanel"
+                tabIndex={0}
                 aria-labelledby={`perf-tab-${id}`}
-                className={`perf-panel perf-panel-enter ${loading ? 'opacity-60 transition-opacity' : ''} ${printing ? 'mb-6' : ''}`}
+                className={`perf-panel perf-panel-enter rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-4 focus-visible:ring-offset-red-100 ${loading ? 'opacity-60 transition-opacity' : ''} ${printing ? 'mb-6' : ''}`}
               >
                 <TabPanel tab={id} report={report} hideIds={hideIds} onOpenSettings={openSettings} />
               </div>

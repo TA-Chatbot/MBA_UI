@@ -100,7 +100,7 @@ function Forecast({ forecast, onOpenSettings }) {
           <select
             value={model}
             onChange={(e) => setModel(e.target.value)}
-            className="perf-input max-w-[22rem]"
+            className="perf-input w-full sm:w-auto max-w-full sm:max-w-[22rem]"
             aria-label="Model để dự báo"
           >
             {models.map((m) => <option key={m} value={m}>{priceLabel(m)}</option>)}
