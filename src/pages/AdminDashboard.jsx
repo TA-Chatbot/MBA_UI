@@ -12,7 +12,8 @@ import {
   FaTimes,
   FaExclamationTriangle,
   FaSpinner,
-  FaSearch
+  FaSearch,
+  FaTachometerAlt
 } from 'react-icons/fa';
 
 const AdminDashboard = () => {
@@ -410,6 +411,25 @@ const AdminDashboard = () => {
             </div>
           </div>
         )}
+
+        {/* Link: API performance dashboard (usage, latency, tokens, cost from Langfuse) */}
+        <a
+          href="/mini/admin/performance"
+          className="group bg-white rounded-lg shadow-lg p-5 mb-4 flex flex-wrap sm:flex-nowrap items-center gap-4 border-l-4 border-red-600 hover:shadow-xl transition-shadow"
+        >
+          <div className="w-12 h-12 bg-red-600 rounded-lg flex items-center justify-center flex-none">
+            <FaTachometerAlt className="text-white text-xl" />
+          </div>
+          <div className="flex-1 min-w-0">
+            <h2 className="text-lg font-bold text-gray-800">Hiệu năng API</h2>
+            <p className="text-sm text-gray-600">
+              Lượng dùng, độ trễ, token và chi phí của chatbot (Langfuse) theo khoảng thời gian bất kỳ, so với kỳ trước.
+            </p>
+          </div>
+          <span className="text-sm font-semibold text-red-600 whitespace-nowrap group-hover:underline">
+            Mở dashboard →
+          </span>
+        </a>
 
         {/* ===== Section: Quản lý Chatbot (tách riêng) ===== */}
         <div className="bg-white rounded-lg shadow-lg p-6 mb-4">

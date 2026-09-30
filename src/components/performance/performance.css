@@ -1,0 +1,180 @@
+/* Performance dashboard: tables, anchors and the print layout.
+   :where() keeps these selectors at element specificity so Tailwind
+   utility classes on the same elements still win. */
+
+:where(.perf-page) .perf-section {
+  scroll-margin-top: var(--perf-scroll-offset, 170px);
+}
+
+:where(.perf-table-wrap) {
+  overflow-x: auto;
+}
+
+:where(.perf-table) {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8125rem;
+  line-height: 1.35;
+}
+
+:where(.perf-table) th {
+  background: #f9fafb;
+  color: #4b5563;
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-align: left;
+  padding: 6px 10px;
+  border-bottom: 1px solid #e5e7eb;
+  white-space: nowrap;
+  vertical-align: bottom;
+}
+
+:where(.perf-table) td {
+  padding: 6px 10px;
+  border-bottom: 1px solid #f3f4f6;
+  color: #1f2937;
+  vertical-align: middle;
+}
+
+:where(.perf-table) :is(th, td):where(.num) {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+:where(.perf-table) tbody tr:hover {
+  background: #fafaf9;
+}
+
+:where(.perf-table) tfoot td {
+  font-weight: 600;
+  background: #f9fafb;
+  border-top: 1px solid #e5e7eb;
+}
+
+.perf-print-header,
+.perf-print-only {
+  display: none;
+}
+
+.perf-skeleton {
+  background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 37%, #f3f4f6 63%);
+  background-size: 400% 100%;
+  animation: perf-shimmer 1.4s ease infinite;
+  border-radius: 0.75rem;
+}
+
+@keyframes perf-shimmer {
+  0% { background-position: 100% 50%; }
+  100% { background-position: 0 50%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .perf-skeleton { animation: none; }
+}
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 12mm;
+  }
+
+  /* Site chrome and every control. */
+  .perf-page > header,
+  .perf-page header.fixed,
+  .perf-page footer,
+  .perf-topbar,
+  .perf-sidenav,
+  .perf-drawer,
+  .perf-no-print,
+  .perf-page button:not(.perf-keep-print),
+  .Toastify {
+    display: none !important;
+  }
+
+  .perf-page {
+    padding-top: 0 !important;
+    background: #ffffff !important;
+    min-height: 0 !important;
+  }
+
+  .perf-layout {
+    display: block !important;
+    max-width: none !important;
+    padding: 0 !important;
+  }
+
+  .perf-print-header {
+    display: block;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #111827;
+  }
+
+  .perf-print-only {
+    display: block !important;
+  }
+
+  .perf-card,
+  .perf-block,
+  .perf-kpi {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    box-shadow: none !important;
+  }
+
+  .perf-section {
+    border: 1px solid #d1d5db !important;
+    margin-bottom: 10px !important;
+    padding: 10px 12px !important;
+  }
+
+  .perf-kpi-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+
+  /* Charts render at a fixed width while printing (see ChartBox). */
+  .perf-chart {
+    width: 680px !important;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .perf-table-wrap,
+  .perf-heatmap {
+    overflow: visible !important;
+  }
+
+  .perf-heatmap > div {
+    min-width: 0 !important;
+  }
+
+  .perf-heat-cell {
+    font-size: 8px;
+    height: 1.25rem !important;
+  }
+
+  button.perf-keep-print {
+    color: inherit !important;
+    text-decoration: none !important;
+  }
+
+  :where(.perf-table) {
+    font-size: 9pt;
+  }
+
+  :where(.perf-table) th,
+  :where(.perf-table) td {
+    padding: 3px 6px;
+  }
+
+  .perf-heat-cell,
+  .perf-page * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  a[href]::after {
+    content: none !important;
+  }
+}

@@ -23,7 +23,8 @@ import {
   FaClipboardList,
   FaChartBar,
   FaTicketAlt,
-  FaStar
+  FaStar,
+  FaTachometerAlt
 } from "react-icons/fa";
 import { isTokenValid, clearAuthData } from "../utils/auth";
 import { API_ENDPOINTS } from "../config/api";
@@ -309,6 +310,13 @@ const Navbar = () => {
                             onClick={() => setIsAdminDropdownOpen(false)}
                           >
                             <FaClipboardList className="mr-2 text-sm inline" /> Quản lý Logs
+                          </a>
+                          <a
+                            href="/mini/admin/performance"
+                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 transition-all duration-200"
+                            onClick={() => setIsAdminDropdownOpen(false)}
+                          >
+                            <FaTachometerAlt className="mr-2 text-sm inline" /> Hiệu năng API
                           </a>
                           <a
                             href="/mini/admin/tickets"
@@ -612,6 +620,14 @@ const Navbar = () => {
                           >
                             <FaClipboardList className="mr-3 text-sm" />
                             Quản lý Logs
+                          </a>
+                          <a
+                            href="/mini/admin/performance"
+                            className="flex items-center px-4 py-3 text-gray-700 hover:bg-red-50 hover:text-red-600 rounded-lg transition-all duration-200"
+                            onClick={() => setIsMenuOpen(false)}
+                          >
+                            <FaTachometerAlt className="mr-3 text-sm" />
+                            Hiệu năng API
                           </a>
                           <a
                             href="/mini/admin/tickets"

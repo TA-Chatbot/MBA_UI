@@ -133,6 +133,10 @@ export const API_ENDPOINTS = {
   // Admin - Logs
   ADMIN_LOGS: `${AUTH_MINI_BASE}/admin/logs`,
 
+  // Admin - API performance dashboard (Langfuse report)
+  ADMIN_PERFORMANCE_REPORT: `${AUTH_MINI_BASE}/admin/performance/report`,
+  ADMIN_PERFORMANCE_SETTINGS: `${AUTH_MINI_BASE}/admin/performance/settings`,
+
   // Teacher
   TEACHER_MY_TOPICS: `${AUTH_MINI_BASE}/teacher/my-topics`,
   TEACHER_QUIZ_HISTORY: `${AUTH_MINI_BASE}/teacher/quiz-history`,

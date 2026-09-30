@@ -34,6 +34,7 @@ const StudyWithAmi = lazy(() => import('./pages/StudyWithAmi'));
 const MyTickets = lazy(() => import("./pages/MyTickets"));
 const AdminTickets = lazy(() => import("./pages/AdminTickets"));
 const AdminRatings = lazy(() => import("./pages/AdminRatings"));
+const AdminPerformance = lazy(() => import("./pages/AdminPerformance"));
 
 const LoadingFallback = () => (
   <div className="min-h-screen bg-gradient-to-br from-red-100 to-pink-100 flex items-center justify-center">
@@ -94,6 +95,7 @@ function App() {
             <Route path="/ratings" element={<PrivateRoute><AdminRatings /></PrivateRoute>} />
             <Route path="/tickets" element={<PrivateRoute><MyTickets /></PrivateRoute>} />
             <Route path="/admin/tickets" element={<AdminRoute><AdminTickets /></AdminRoute>} />
+            <Route path="/admin/performance" element={<AdminRoute><AdminPerformance /></AdminRoute>} />
             <Route path="/access-auth" element={<AuthSuccess />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
