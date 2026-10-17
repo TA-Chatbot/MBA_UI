@@ -97,12 +97,25 @@ export const API_ENDPOINTS = {
   DELETE_CHAT_HISTORY: (userId, source) => `${AUTH_MINI_BASE}/mba/chat_history/${userId}?source=${source}`,
 
   // Quiz
-  RANDOM_QUESTIONS: (topic, chapters = []) => {
+  RANDOM_QUESTIONS: (topic, chapters = [], mode = 'random', count = 10, rangeStart = null, rangeEnd = null) => {
     const params = new URLSearchParams();
     if (topic) params.set('topic', topic);
     if (chapters.length > 0) params.set('chapters', chapters.join(','));
+    params.set('mode', mode);
+    params.set('count', String(count));
+    if (rangeStart != null) params.set('range_start', String(rangeStart));
+    if (rangeEnd != null) params.set('range_end', String(rangeEnd));
     return `${AUTH_MINI_BASE}/random-questions?${params.toString()}`;
   },
+  ORDERED_PRACTICE_BATCH: (topic, chapters = [], batchSize = 20, rangeStart = null, rangeEnd = null) => {
+    const params = new URLSearchParams({ batch_size: String(batchSize) });
+    if (topic) params.set('topic', topic);
+    if (chapters.length > 0) params.set('chapters', chapters.join(','));
+    if (rangeStart != null) params.set('range_start', String(rangeStart));
+    if (rangeEnd != null) params.set('range_end', String(rangeEnd));
+    return `${AUTH_MINI_BASE}/ordered-practice-batch?${params.toString()}`;
+  },
+  ORDERED_PRACTICE_RESTART: `${AUTH_MINI_BASE}/ordered-practice-restart`,
   QUIZ_CHAPTERS: (topic) => `${AUTH_MINI_BASE}/quiz-chapters?topic=${encodeURIComponent(topic)}`,
   SUBMIT_QUIZ: `${AUTH_MINI_BASE}/submit_quiz`,
   QUIZ_HISTORY: `${AUTH_MINI_BASE}/quiz_history`,

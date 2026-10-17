@@ -155,11 +155,12 @@ const ExplanationPanel = ({ visible, onClose, currentIndex, wrongIndexes, questi
 
 
 
-const QuizPopup = ({ isOpen, onClose, apiUrl, onRequestExplanation }) => {
+const QuizPopup = ({ isOpen, onClose, apiUrl, orderedPracticeScope, answerDisplayMode = 'all', onRequestExplanation }) => {
   if (!isOpen) return null;
 
   const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState({});
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [fetchError, setFetchError] = useState("");
@@ -168,6 +169,10 @@ const QuizPopup = ({ isOpen, onClose, apiUrl, onRequestExplanation }) => {
   const [showVideoPanel, setShowVideoPanel] = useState(false);
   const [showVideo, setShowVideo] = useState(false);
   const [isVideoLoading, setIsVideoLoading] = useState(false);
+  const [batchRefresh, setBatchRefresh] = useState(0);
+  const [batchInfo, setBatchInfo] = useState(null);
+  const [canContinueBatch, setCanContinueBatch] = useState(false);
+  const [bankComplete, setBankComplete] = useState(false);
   const quizRefs = useRef([]);
   const bottomRef = useRef(null);
 
@@ -176,6 +181,7 @@ const QuizPopup = ({ isOpen, onClose, apiUrl, onRequestExplanation }) => {
   useEffect(() => {
     setQuestions([]);
     setAnswers({});
+    setCurrentQuestionIndex(0);
     setIsSubmitted(false);
     setWrongIndexes([]);
     setCurrentWrongIndex(0);
@@ -183,8 +189,12 @@ const QuizPopup = ({ isOpen, onClose, apiUrl, onRequestExplanation }) => {
     setShowVideo(false);
     setIsVideoLoading(false);
     setFetchError("");
+    setBatchInfo(null);
+    setCanContinueBatch(false);
+    setBankComplete(false);
     setIsLoading(true);
-    fetch(apiUrl)
+    const token = localStorage.getItem('access_token');
+    fetch(apiUrl, { headers: token ? { Authorization: `Bearer ${token}` } : {} })
       .then(async (res) => {
         const data = await res.json();
 
@@ -195,6 +205,14 @@ const QuizPopup = ({ isOpen, onClose, apiUrl, onRequestExplanation }) => {
         return data;
       })
       .then(data => {
+        if (data?.progress?.enabled) {
+          setBatchInfo(data.progress);
+          if (data.progress.completed) {
+            setBankComplete(true);
+            setQuestions([]);
+            return;
+          }
+        }
         if (!Array.isArray(data?.questions) || data.questions.length === 0) {
           throw new Error('Không có câu hỏi phù hợp với lựa chọn hiện tại.');
         }
@@ -218,7 +236,7 @@ const QuizPopup = ({ isOpen, onClose, apiUrl, onRequestExplanation }) => {
         setFetchError(err.message || 'Không thể tải câu hỏi.');
       })
       .finally(() => setIsLoading(false));
-  }, [apiUrl]);
+  }, [apiUrl, batchRefresh]);
 
   useEffect(() => {
     if (showVideoPanel && wrongIndexes.length > 0) {
@@ -254,7 +272,7 @@ const QuizPopup = ({ isOpen, onClose, apiUrl, onRequestExplanation }) => {
   }, [showVideo]);
 
   const handleOptionChange = (index, option) => {
-    setAnswers({ ...answers, [index]: option });
+    setAnswers((previous) => ({ ...previous, [index]: option }));
   };
 
   const getScore = () => {
@@ -271,9 +289,13 @@ const QuizPopup = ({ isOpen, onClose, apiUrl, onRequestExplanation }) => {
     });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (questions.length === 0) {
       toast.error('Không có câu hỏi để nộp bài.');
+      return;
+    }
+    if (batchInfo?.enabled && Object.keys(answers).length < questions.length) {
+      toast.error('Hãy trả lời đủ câu hỏi trong lượt này để mở lượt tiếp theo.');
       return;
     }
 
@@ -310,29 +332,77 @@ const QuizPopup = ({ isOpen, onClose, apiUrl, onRequestExplanation }) => {
       }),
       is_intake_test: false
     };
+    if (batchInfo?.batch_id) historyData.practice_batch_id = batchInfo.batch_id;
 
     // Get token for authentication
     const token = localStorage.getItem('access_token');
 
-    fetch(API_ENDPOINTS.SUBMIT_QUIZ, {
+    try {
+      const response = await fetch(API_ENDPOINTS.SUBMIT_QUIZ, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
       },
       body: JSON.stringify(historyData)
-    })
-      .then(res => res.json())
-      .then(data => {
-        console.log('Quiz history saved:', data);
-      })
-      .catch(err => {
-        console.error('Error saving quiz history:', err);
       });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data?.detail || 'Không thể lưu kết quả bài luyện tập.');
+      if (batchInfo?.enabled) {
+        if (!data.practice_progress) throw new Error('Không ghi nhận được tiến độ lượt luyện tập.');
+        setCanContinueBatch(!data.practice_progress.completed);
+        setBankComplete(data.practice_progress.completed);
+        setBatchInfo((previous) => ({
+          ...previous,
+          completed_questions: data.practice_progress.next_offset,
+          remaining_questions: Math.max(0, data.practice_progress.total_questions - data.practice_progress.next_offset),
+          total_questions: data.practice_progress.total_questions,
+        }));
+      }
+    } catch (err) {
+      console.error('Error saving quiz history:', err);
+      if (batchInfo?.enabled) {
+        setIsSubmitted(false);
+        toast.error(err.message || 'Không thể lưu kết quả. Hãy thử nộp lại.');
+        return;
+      }
+    }
 
     setTimeout(() => {
       bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
     }, 300);
+  };
+
+  const handleNextBatch = () => {
+    setAnswers({});
+    setIsSubmitted(false);
+    setWrongIndexes([]);
+    setCurrentWrongIndex(0);
+    setCanContinueBatch(false);
+    setIsLoading(true);
+    setBatchRefresh((value) => value + 1);
+  };
+
+  const handleRestartPractice = async () => {
+    const token = localStorage.getItem('access_token');
+    try {
+      const response = await fetch(API_ENDPOINTS.ORDERED_PRACTICE_RESTART, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(orderedPracticeScope),
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data?.detail || 'Không thể bắt đầu lại.');
+      setBankComplete(false);
+      setBatchInfo(null);
+      setIsLoading(true);
+      setBatchRefresh((value) => value + 1);
+    } catch (err) {
+      toast.error(err.message || 'Không thể bắt đầu lại.');
+    }
   };
 
   const handleRetry = () => {
@@ -403,8 +473,21 @@ const QuizPopup = ({ isOpen, onClose, apiUrl, onRequestExplanation }) => {
             <p className="font-medium mb-2">Không thể bắt đầu bài luyện tập</p>
             <p className="text-sm">{fetchError}</p>
           </div>
+        ) : bankComplete ? (
+          <div className="py-8 text-center">
+            <h3 className="text-xl font-semibold text-green-700">Đã hoàn thành ngân hàng câu hỏi</h3>
+            <p className="mt-2 text-gray-600">Bạn đã luyện hết {batchInfo?.total_questions || 0} câu trong phạm vi này.</p>
+            <button onClick={handleRestartPractice} className="mt-5 bg-blue-600 text-white px-5 py-2 rounded hover:bg-blue-700">
+              Bắt đầu lại từ đầu
+            </button>
+          </div>
         ) : (
-          questions.map((q, idx) => {
+          <>
+          {batchInfo?.enabled && <p className="mb-4 text-center text-sm font-medium text-gray-600">
+            Lượt {batchInfo.batch_number} · Câu {batchInfo.start_question}–{batchInfo.end_question} / {batchInfo.total_questions}
+          </p>}
+          {(answerDisplayMode === 'sequential' ? [currentQuestionIndex] : questions.map((_, index) => index)).map((idx) => {
+            const q = questions[idx];
             // Safety check: ensure answers exists and is an array
             if (!q.answers || !Array.isArray(q.answers)) {
               return null;
@@ -463,10 +546,28 @@ const QuizPopup = ({ isOpen, onClose, apiUrl, onRequestExplanation }) => {
                 )}
               </div>
             );
-          })
+          })}
+          {answerDisplayMode === 'sequential' && questions.length > 1 && !isSubmitted && (
+            <div className="mb-4 flex items-center justify-between gap-3">
+              <button
+                type="button"
+                onClick={() => setCurrentQuestionIndex((index) => Math.max(0, index - 1))}
+                disabled={currentQuestionIndex === 0}
+                className="min-h-11 rounded-md border border-gray-300 px-4 text-sm font-medium text-gray-800 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-40"
+              >Câu trước</button>
+              <span className="text-sm font-medium text-gray-600">Câu {currentQuestionIndex + 1} / {questions.length}</span>
+              <button
+                type="button"
+                onClick={() => setCurrentQuestionIndex((index) => Math.min(questions.length - 1, index + 1))}
+                disabled={currentQuestionIndex === questions.length - 1}
+                className="min-h-11 rounded-md border border-gray-300 px-4 text-sm font-medium text-gray-800 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-40"
+              >Câu tiếp</button>
+            </div>
+          )}
+          </>
         )}
 
-        <div className="flex flex-col sm:flex-row justify-between items-center gap-3 mt-4">
+        {!bankComplete && <div className="flex flex-col sm:flex-row justify-between items-center gap-3 mt-4">
           {fetchError ? (
             <button
               onClick={onClose}
@@ -475,23 +576,31 @@ const QuizPopup = ({ isOpen, onClose, apiUrl, onRequestExplanation }) => {
               Đóng
             </button>
           ) : !isSubmitted ? (
-            <button
-              onClick={handleSubmit}
-              className="bg-blue-600 text-white px-5 py-2 rounded hover:bg-blue-700"
-            >
-              Nộp Bài
-            </button>
+            <>
+              {batchInfo?.enabled && <span className="text-sm text-gray-600">Đã trả lời {Object.keys(answers).length}/{questions.length} câu</span>}
+              <button
+                onClick={handleSubmit}
+                disabled={batchInfo?.enabled && Object.keys(answers).length < questions.length}
+                className="bg-blue-600 text-white px-5 py-2 rounded hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                Nộp Bài
+              </button>
+            </>
           ) : (
             <>
               <p className="text-center font-bold">
                 ✅ Đúng {getScore()} / {questions.length} câu
               </p>
-              <button
+              {batchInfo?.enabled && canContinueBatch && <button onClick={handleNextBatch} className="bg-blue-600 text-white px-5 py-2 rounded hover:bg-blue-700">
+                Làm tiếp câu {batchInfo.completed_questions + 1}–{Math.min(batchInfo.completed_questions + (batchInfo.batch_size || 20), batchInfo.total_questions)}
+              </button>}
+              {batchInfo?.enabled && bankComplete && <p className="text-center font-semibold text-green-700">Bạn đã hoàn thành toàn bộ ngân hàng câu hỏi.</p>}
+              {!batchInfo?.enabled && <button
                 onClick={handleRetry}
                 className="bg-yellow-500 text-white px-5 py-2 rounded hover:bg-yellow-600"
               >
                 Làm Lại
-              </button>
+              </button>}
               {/* {hasWrongAnswers() && (
                 <button
                   onClick={() => {
@@ -505,7 +614,7 @@ const QuizPopup = ({ isOpen, onClose, apiUrl, onRequestExplanation }) => {
               )} */}
             </>
           )}
-        </div>
+        </div>}
 
         {isVideoLoading && (
           <div className="mt-8 flex justify-center items-center">

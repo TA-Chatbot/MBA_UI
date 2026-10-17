@@ -8,6 +8,7 @@ import rehypeKatex from 'rehype-katex';
 import { API_ENDPOINTS } from '../config/api';
 import QuizPopup from './QuizPopup';
 import { jwtDecode } from 'jwt-decode';
+import { Info, Minus, Plus, X } from 'lucide-react';
 
 const timestamp = `${Date.now()}-${uuidv4()}`;
 
@@ -137,7 +138,13 @@ const UnifiedChatbot = ({
   const [apiUrl, setApiUrl] = useState("");
   const [showChapterSelector, setShowChapterSelector] = useState(false);
   const [availableChapters, setAvailableChapters] = useState([]);
+  const [availableQuestionCount, setAvailableQuestionCount] = useState(0);
   const [selectedChapters, setSelectedChapters] = useState([]);
+  const [quizSelectionMode, setQuizSelectionMode] = useState("random");
+  const [quizQuestionCount, setQuizQuestionCount] = useState(10);
+  const [quizRangeStart, setQuizRangeStart] = useState(1);
+  const [answerDisplayMode, setAnswerDisplayMode] = useState("sequential");
+  const [orderedPracticeScope, setOrderedPracticeScope] = useState(null);
   const [isLoadingChapters, setIsLoadingChapters] = useState(false);
   const [chatHistory, setChatHistory] = useState([]);
   const [isLoadingHistory, setIsLoadingHistory] = useState(false);
@@ -342,40 +349,87 @@ const UnifiedChatbot = ({
     }
   }, [username, chatbotConfig.source, rememberSessionId, showToastNotification]);
 
-  const openQuizPractice = useCallback((chapters = []) => {
+  const openQuizPractice = useCallback((chapters = [], mode = "random", count = 10, rangeStart = null, rangeEnd = null) => {
     if (inactivityTimerRef.current) {
       clearTimeout(inactivityTimerRef.current);
       inactivityTimerRef.current = null;
     }
-    setApiUrl(API_ENDPOINTS.RANDOM_QUESTIONS(chatbotConfig.quizTopic, chapters));
+    if (mode === "ordered") {
+      setOrderedPracticeScope({ topic: chatbotConfig.quizTopic, chapters, range_start: rangeStart, range_end: rangeEnd });
+      setApiUrl(API_ENDPOINTS.ORDERED_PRACTICE_BATCH(chatbotConfig.quizTopic, chapters, count, rangeStart, rangeEnd));
+    } else {
+      setOrderedPracticeScope(null);
+      setApiUrl(API_ENDPOINTS.RANDOM_QUESTIONS(chatbotConfig.quizTopic, chapters, mode, count, rangeStart, rangeEnd));
+    }
     setIsQuizOpen(true);
   }, [chatbotConfig.quizTopic]);
 
-  const handleToggleChapter = useCallback((chapterValue) => {
-    setSelectedChapters((prev) => (
-      prev.includes(chapterValue)
-        ? prev.filter((value) => value !== chapterValue)
-        : [...prev, chapterValue]
-    ));
-  }, []);
+  const selectedChapter = availableChapters.find((chapter) => chapter.value === selectedChapters[0]);
+  const selectedQuestionTotal = selectedChapter?.count ?? availableQuestionCount;
+  const maxQuestionCount = selectedQuestionTotal > 0 ? selectedQuestionTotal : 50;
+  const enteredQuestionCount = Number(quizQuestionCount);
+  const effectiveQuestionBatchSize = Number.isInteger(enteredQuestionCount) && enteredQuestionCount > 0
+    ? Math.min(enteredQuestionCount, maxQuestionCount)
+    : Math.min(50, maxQuestionCount);
+  const selectedRangeEnd = selectedQuestionTotal > 0
+    ? Math.min(quizRangeStart + effectiveQuestionBatchSize - 1, selectedQuestionTotal)
+    : quizRangeStart + effectiveQuestionBatchSize - 1;
+  const selectedRangeCount = selectedRangeEnd == null
+    ? effectiveQuestionBatchSize
+    : Math.max(0, selectedRangeEnd - quizRangeStart + 1);
+  const questionCountError = quizQuestionCount === ""
+    ? "Nhập số câu hỏi cần luyện tập."
+    : !Number.isInteger(enteredQuestionCount) || enteredQuestionCount < 1
+      ? "Số câu hỏi phải là số nguyên lớn hơn 0."
+      : enteredQuestionCount > maxQuestionCount
+        ? `Bạn nhập ${enteredQuestionCount} câu nhưng ${selectedChapter ? selectedChapter.label : "môn này"} chỉ có ${maxQuestionCount} câu. Hãy nhập số không vượt quá ${maxQuestionCount}.`
+        : "";
+  const questionCountPresets = [...new Set([10, 20, 40, 50, 100, maxQuestionCount])]
+    .filter((count) => count <= maxQuestionCount && (count <= 100 || count === maxQuestionCount))
+    .sort((a, b) => a - b);
+  const questionRangeOptions = selectedQuestionTotal > 0
+    ? Array.from({ length: Math.ceil(selectedQuestionTotal / effectiveQuestionBatchSize) }, (_, index) => ({
+        start: index * effectiveQuestionBatchSize + 1,
+        end: Math.min((index + 1) * effectiveQuestionBatchSize, selectedQuestionTotal),
+      }))
+    : [];
 
-  const handleSelectAllChapters = useCallback(() => {
-    setSelectedChapters(availableChapters.map((chapter) => chapter.value));
-  }, [availableChapters]);
+  const updateQuestionCount = (value) => {
+    setQuizQuestionCount(value);
+    const nextCount = Number(value);
+    if (Number.isInteger(nextCount) && nextCount > 0) {
+      setQuizRangeStart((currentStart) => selectedQuestionTotal > 0
+        ? Math.floor((currentStart - 1) / nextCount) * nextCount + 1
+        : 1);
+    }
+  };
 
   const handleStartQuizWithSelectedChapters = useCallback(() => {
-    if (selectedChapters.length === 0) {
+    if (availableChapters.length > 0 && selectedChapters.length === 0) {
       showToastNotification("Vui lòng chọn ít nhất một chương để luyện tập.", "error");
+      return;
+    }
+    const requestedCount = Number(quizQuestionCount);
+    if (!Number.isInteger(requestedCount) || requestedCount < 1 || requestedCount > maxQuestionCount) {
+      showToastNotification(`Số câu phải từ 1 đến ${maxQuestionCount}.`, "error");
       return;
     }
 
     setShowChapterSelector(false);
-    openQuizPractice(selectedChapters);
-  }, [openQuizPractice, selectedChapters, showToastNotification]);
+    const hasQuestionRanges = quizSelectionMode !== "random" && (selectedChapter || availableQuestionCount > 0);
+    const rangeEnd = hasQuestionRanges ? Math.min(quizRangeStart + 49, selectedChapter?.count ?? availableQuestionCount) : null;
+    openQuizPractice(selectedChapters, quizSelectionMode, requestedCount, hasQuestionRanges ? quizRangeStart : null, rangeEnd);
+  }, [availableChapters, availableQuestionCount, maxQuestionCount, openQuizPractice, quizQuestionCount, quizRangeStart, quizSelectionMode, selectedChapter, selectedChapters, showToastNotification]);
 
   const handleOpenQuiz = useCallback(async () => {
     if (!chatbotConfig.quizTopic || chatbotConfig.quizTopic === "tonghop") {
-      openQuizPractice();
+      setAvailableChapters([]);
+      setAvailableQuestionCount(0);
+      setSelectedChapters([]);
+      setQuizSelectionMode("random");
+      setQuizQuestionCount(10);
+      setQuizRangeStart(1);
+      setShowChapterSelector(true);
       return;
     }
 
@@ -389,22 +443,25 @@ const UnifiedChatbot = ({
       }
 
       const chapters = data.chapters || [];
-      if (chapters.length === 0) {
-        openQuizPractice();
-        return;
-      }
-
       setAvailableChapters(chapters);
-      setSelectedChapters(chapters.map((chapter) => chapter.value));
+      setAvailableQuestionCount(data.total_questions || 0);
+      setSelectedChapters(chapters.length ? [chapters[0].value] : []);
+      setQuizSelectionMode("ordered");
+      setQuizQuestionCount(Math.min(50, chapters[0]?.count || data.total_questions || 10));
+      setQuizRangeStart(1);
+      setAnswerDisplayMode("sequential");
       setShowChapterSelector(true);
     } catch (error) {
       console.error("Error loading quiz chapters:", error);
-      showToastNotification("Không thể tải danh sách chương. Hệ thống sẽ mở toàn bộ câu hỏi của môn này.", "error");
-      openQuizPractice();
+      showToastNotification(error.message || "Không thể tải danh sách chương.", "error");
+      setAvailableChapters([]);
+      setAvailableQuestionCount(0);
+      setSelectedChapters([]);
+      setShowChapterSelector(false);
     } finally {
       setIsLoadingChapters(false);
     }
-  }, [chatbotConfig.quizTopic, openQuizPractice, showToastNotification]);
+  }, [chatbotConfig.quizTopic, showToastNotification]);
 
   const handleExplanationRequest = useCallback(async (explanationData) => {
     const dataToSend = { ...explanationData, source: chatbotConfig.source };
@@ -920,75 +977,192 @@ const UnifiedChatbot = ({
           isOpen={isQuizOpen}
           onClose={() => setIsQuizOpen(false)}
           apiUrl={apiUrl}
+          orderedPracticeScope={orderedPracticeScope}
+          answerDisplayMode={answerDisplayMode}
           onExplanationRequest={handleExplanationRequest}
         />
       )}
 
       {showChapterSelector && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-6 mx-4 max-w-lg w-full shadow-xl">
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">
-              Chọn chương luyện tập
-            </h3>
-            <p className="text-sm text-gray-500 mb-4">
-              Chọn một hoặc nhiều chương trắc nghiệm để hệ thống lấy câu hỏi luyện tập.
-            </p>
-
-            <div className="max-h-72 overflow-y-auto border border-gray-200 rounded-lg divide-y divide-gray-100">
-              {availableChapters.map((chapter) => {
-                const checked = selectedChapters.includes(chapter.value);
-                return (
-                  <label
-                    key={chapter.value}
-                    className="flex items-center justify-between px-4 py-3 cursor-pointer hover:bg-gray-50"
-                  >
-                    <div className="flex items-center space-x-3">
-                      <input
-                        type="checkbox"
-                        checked={checked}
-                        onChange={() => handleToggleChapter(chapter.value)}
-                        className="h-4 w-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
-                      />
-                      <span className="text-sm text-gray-800">{chapter.label}</span>
-                    </div>
-                    <span className="text-xs text-gray-500">
-                      {chapter.count} câu
-                    </span>
-                  </label>
-                );
-              })}
-            </div>
-
-            <div className="flex items-center justify-between mt-4 text-sm">
+        <div className="fixed inset-0 z-50 overflow-y-auto bg-black/55 p-3 sm:p-6">
+          <div className="mx-auto my-2 w-full max-w-[1440px] overflow-hidden rounded-xl bg-white shadow-2xl sm:my-4">
+            <header className="relative border-b border-gray-200 bg-white px-6 py-5 pr-16 text-gray-900 sm:px-8 sm:py-6 sm:pr-20">
               <button
                 type="button"
-                onClick={() => setSelectedChapters([])}
-                className="text-gray-600 hover:text-gray-800"
-              >
-                Bỏ chọn hết
-              </button>
-              <button
-                type="button"
-                onClick={handleSelectAllChapters}
-                className="text-blue-600 hover:text-blue-800"
-              >
-                Chọn tất cả
-              </button>
-            </div>
-
-            <div className="flex space-x-3 mt-6">
-              <button
                 onClick={() => setShowChapterSelector(false)}
-                className="flex-1 px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 border border-gray-300 rounded-md hover:bg-gray-200"
+                aria-label="Đóng thiết lập luyện tập"
+                title="Đóng"
+                className="absolute right-4 top-4 inline-flex h-10 w-10 items-center justify-center rounded-md text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-300 sm:right-6 sm:top-5"
               >
-                Hủy
+                <X size={21} aria-hidden="true" />
               </button>
-              <button
-                onClick={handleStartQuizWithSelectedChapters}
-                className="flex-1 px-4 py-2 text-sm font-medium text-white bg-green-600 border border-transparent rounded-md hover:bg-green-700"
-              >
-                Bắt đầu luyện tập
-              </button>
+              <p className="text-xs font-semibold uppercase tracking-[0.08em] text-[#b42318]">Phòng luyện tập</p>
+              <h2 className="mt-1 max-w-4xl text-xl font-bold sm:text-2xl">
+                Đề trắc nghiệm {chatbotConfig.name || chatbotConfig.quizTopic || "Tổng hợp"}
+              </h2>
+              <p className="mt-2 text-sm text-gray-600">Chọn chương và phạm vi câu hỏi muốn luyện tập.</p>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {selectedChapter && <span className="rounded-full bg-gray-100 px-3 py-1 text-sm text-gray-700">{selectedChapter.count} câu hỏi trong {selectedChapter.label}</span>}
+                {!selectedChapter && availableQuestionCount > 0 && <span className="rounded-full bg-gray-100 px-3 py-1 text-sm text-gray-700">{availableQuestionCount} câu hỏi · toàn môn</span>}
+                {chatbotConfig.quizTopic && <span className="rounded-full bg-gray-100 px-3 py-1 text-sm text-gray-700">{chatbotConfig.quizTopic}</span>}
+              </div>
+            </header>
+
+            <div className="space-y-0 px-5 sm:px-8">
+              <section className="flex flex-col gap-3 border-b border-gray-200 py-5 sm:flex-row sm:items-center sm:justify-between">
+                <label htmlFor="practice-chapter" className="text-base font-medium text-gray-800">Chọn chương</label>
+                <select
+                  id="practice-chapter"
+                  value={selectedChapters[0] || ""}
+                  onChange={(event) => {
+                    const chapter = availableChapters.find((item) => item.value === event.target.value);
+                    setSelectedChapters(chapter ? [chapter.value] : []);
+                    setQuizRangeStart(1);
+                    setQuizQuestionCount(Math.min(50, chapter?.count || 10));
+                  }}
+                  disabled={!availableChapters.length}
+                  className="min-h-12 w-full rounded-lg border border-[#c91f16] bg-white px-3 text-base text-gray-900 outline-none focus:ring-2 focus:ring-red-200 sm:max-w-[min(100%,520px)]"
+                >
+                  {availableChapters.length
+                    ? availableChapters.map((chapter) => <option key={chapter.value} value={chapter.value}>{chapter.label} · {chapter.count} câu</option>)
+                    : <option value="">Toàn bộ ngân hàng câu hỏi</option>}
+                </select>
+              </section>
+
+              <section className="border-b border-gray-200 py-5">
+                <h3 className="text-sm font-semibold uppercase tracking-[0.06em] text-gray-500">Chọn bộ câu hỏi</h3>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {questionRangeOptions.map((range) => (
+                    <button
+                      key={range.start}
+                      type="button"
+                      aria-pressed={quizSelectionMode === "ordered" && quizRangeStart === range.start}
+                      onClick={() => {
+                        setQuizRangeStart(range.start);
+                        setQuizSelectionMode("ordered");
+                      }}
+                      className={`min-h-11 rounded-full border px-5 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-300 ${quizSelectionMode === "ordered" && quizRangeStart === range.start ? "border-[#c91f16] bg-[#c91f16] text-white" : "border-gray-300 bg-white text-gray-800 hover:bg-gray-50"}`}
+                    >
+                      Câu {range.start}–{range.end}
+                    </button>
+                  ))}
+                  <button
+                    type="button"
+                    aria-pressed={quizSelectionMode === "random"}
+                    onClick={() => setQuizSelectionMode("random")}
+                    className={`min-h-11 rounded-full border px-5 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-300 ${quizSelectionMode === "random" ? "border-[#c91f16] bg-[#c91f16] text-white" : "border-gray-300 bg-white text-gray-800 hover:bg-gray-50"}`}
+                  >Random câu hỏi</button>
+                  {!selectedChapter && availableQuestionCount === 0 && <span className="text-sm text-gray-500">Chọn chương để xem các khoảng câu hỏi.</span>}
+                </div>
+                {selectedQuestionTotal > 0 && <div className="mt-4 flex items-start gap-3 rounded-lg bg-sky-50 px-4 py-3 text-sm text-sky-900">
+                  <Info size={19} className="mt-0.5 shrink-0 text-sky-600" aria-hidden="true" />
+                  <p>{selectedChapter ? <>{selectedChapter.label} có tổng <strong className="text-sky-700">{selectedChapter.count}</strong> câu hỏi.</> : <>Môn này chưa chia chương, ngân hàng có <strong className="text-sky-700">{availableQuestionCount}</strong> câu hỏi.</>} Chia thành các bộ tối đa <strong className="text-sky-700">{effectiveQuestionBatchSize}</strong> câu; bộ cuối có thể ít hơn.</p>
+                </div>}
+              </section>
+
+              <section className="border-b border-gray-200 py-5">
+                <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                  <div>
+                    <h3 className="text-base font-medium text-gray-800">Chọn số lượng câu hỏi</h3>
+                    <p className="mt-1 text-sm text-gray-500">Tối đa {maxQuestionCount} câu trong {selectedChapter ? selectedChapter.label : "toàn môn"}; số câu này quyết định kích thước mỗi bộ</p>
+                  </div>
+                  <div className={`inline-flex min-h-14 items-center self-start rounded-lg border bg-white p-1 shadow-sm sm:self-auto ${questionCountError && quizQuestionCount !== "" ? "border-red-400" : "border-gray-200"}`}>
+                    <button
+                      type="button"
+                      aria-label="Giảm số câu hỏi"
+                      title="Giảm 1 câu"
+                      disabled={quizQuestionCount <= 1}
+                      onClick={() => setQuizQuestionCount((count) => Math.max(1, count - 1))}
+                      className="inline-flex h-11 w-11 items-center justify-center rounded-md text-gray-700 hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-300"
+                    ><Minus size={18} aria-hidden="true" /></button>
+                    <div className="flex min-w-24 flex-col items-center px-2" aria-live="polite">
+                      <input
+                        id="practice-question-count"
+                        type="number"
+                        inputMode="numeric"
+                        min="1"
+                        max={maxQuestionCount}
+                        step="1"
+                        value={quizQuestionCount}
+                        aria-label={`Số câu hỏi, tối đa ${maxQuestionCount}`}
+                        onChange={(event) => {
+                          const rawValue = event.target.value;
+                          if (rawValue === "") {
+                            updateQuestionCount("");
+                            return;
+                          }
+                          const value = Number(rawValue);
+                          if (Number.isFinite(value)) {
+                            updateQuestionCount(value);
+                          }
+                        }}
+                        onBlur={() => {
+                          if (quizQuestionCount === "") setQuizQuestionCount(1);
+                        }}
+                        aria-invalid={Boolean(questionCountError)}
+                        aria-describedby={questionCountError ? "practice-question-count-error" : undefined}
+                        className="w-16 border-0 bg-transparent p-0 text-center text-xl font-bold leading-6 text-gray-900 outline-none focus:ring-0"
+                      />
+                      <span className="text-xs text-gray-500">câu hỏi</span>
+                    </div>
+                    <button
+                      type="button"
+                      aria-label="Tăng số câu hỏi"
+                      title="Tăng 1 câu"
+                      disabled={quizQuestionCount >= maxQuestionCount}
+                      onClick={() => setQuizQuestionCount((count) => Math.min(maxQuestionCount, count + 1))}
+                      className="inline-flex h-11 w-11 items-center justify-center rounded-md text-gray-700 hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-300"
+                    ><Plus size={18} aria-hidden="true" /></button>
+                  </div>
+                </div>
+                <div className="mt-4 flex flex-wrap gap-2" role="group" aria-label="Chọn nhanh số câu hỏi">
+                  {questionCountPresets.map((count) => (
+                    <button
+                      key={count}
+                      type="button"
+                      aria-pressed={quizQuestionCount === count}
+                      onClick={() => updateQuestionCount(count)}
+                      className={`min-h-10 min-w-14 rounded-md border px-4 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-300 ${quizQuestionCount === count ? "border-[#c91f16] bg-red-50 text-[#a91b14]" : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"}`}
+                    >{count}</button>
+                  ))}
+                </div>
+                {questionCountError && <p id="practice-question-count-error" role="alert" className="mt-3 text-sm font-medium text-red-700">{questionCountError}</p>}
+              </section>
+
+              <section className="flex flex-col gap-3 border-b border-gray-200 py-5 sm:flex-row sm:items-center sm:justify-between">
+                <label htmlFor="answer-display-mode" className="text-base font-medium text-gray-800">Kiểu hiển thị</label>
+                <select id="answer-display-mode" value={answerDisplayMode} onChange={(event) => setAnswerDisplayMode(event.target.value)} className="min-h-12 w-full rounded-lg border border-[#c91f16] bg-white px-3 text-base text-gray-900 outline-none focus:ring-2 focus:ring-red-200 sm:w-[310px]">
+                  <option value="sequential">Trả lời tuần tự từng câu hỏi</option>
+                  <option value="all">Hiển thị tất cả câu hỏi</option>
+                </select>
+              </section>
+
+              <footer className="flex flex-col gap-4 py-5 sm:flex-row sm:items-center">
+                <div className="flex flex-1 items-start gap-3 rounded-lg bg-sky-50 px-4 py-3 text-sm text-sky-900">
+                  <Info size={19} className="mt-0.5 shrink-0 text-sky-600" aria-hidden="true" />
+                  <p>
+                    {quizSelectionMode === "random" ? <>Hệ thống sẽ lấy ngẫu nhiên <strong className="text-sky-700">{Number.isFinite(enteredQuestionCount) ? enteredQuestionCount : 0}</strong> câu{selectedChapter ? <> trong <strong className="text-sky-700">{selectedChapter.label}</strong>.</> : " trong toàn môn."}</> : <>Hệ thống sẽ lấy <strong className="text-sky-700">{Math.min(Number.isFinite(enteredQuestionCount) ? enteredQuestionCount : 0, selectedRangeCount)}</strong> câu{selectedChapter ? <> trong <strong className="text-sky-700">{selectedChapter.label}</strong></> : null}{selectedQuestionTotal > 0 ? <> theo bộ <strong className="text-sky-700">Câu {quizRangeStart}–{selectedRangeEnd}</strong>{selectedChapter ? "." : " của toàn môn."}</> : " trong ngân hàng câu hỏi."}</>}
+                  </p>
+                </div>
+                <div className="flex shrink-0 gap-3">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setQuizRangeStart(1);
+                      setQuizQuestionCount(Math.min(50, selectedChapter?.count || availableQuestionCount || 10));
+                      setQuizSelectionMode("ordered");
+                      setAnswerDisplayMode("sequential");
+                    }}
+                    className="min-h-12 rounded-lg bg-gray-100 px-5 text-sm font-semibold text-gray-800 hover:bg-gray-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400"
+                  >Đặt lại</button>
+                  <button
+                    type="button"
+                    onClick={handleStartQuizWithSelectedChapters}
+                    disabled={Boolean((availableChapters.length && !selectedChapter) || questionCountError)}
+                    className="min-h-12 rounded-lg bg-[#c91f16] px-6 text-sm font-semibold text-white hover:bg-[#a91b14] disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-300"
+                  >Bắt đầu luyện tập</button>
+                </div>
+              </footer>
             </div>
           </div>
         </div>
