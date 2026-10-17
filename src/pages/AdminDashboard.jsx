@@ -15,6 +15,7 @@ import {
   FaSearch,
   FaTachometerAlt
 } from 'react-icons/fa';
+import { FileSpreadsheet } from 'lucide-react';
 
 const AdminDashboard = () => {
   const [chatbots, setChatbots] = useState([]);
@@ -431,6 +432,20 @@ const AdminDashboard = () => {
           </span>
         </a>
 
+        <a
+          href="/mini/admin/student-assignments"
+          className="group bg-white rounded-lg shadow-lg p-5 mb-4 flex flex-wrap sm:flex-nowrap items-center gap-4 hover:shadow-xl transition-shadow"
+        >
+          <div className="w-12 h-12 bg-red-600 rounded-lg flex items-center justify-center flex-none">
+            <FileSpreadsheet className="text-white" size={22} aria-hidden="true" />
+          </div>
+          <div className="flex-1 min-w-0">
+            <h2 className="text-lg font-bold text-gray-800">Phân môn cho sinh viên</h2>
+            <p className="text-sm text-gray-600">Tải danh sách Excel và thêm môn vào student_chatbots.</p>
+          </div>
+          <span className="text-sm font-semibold text-red-600 whitespace-nowrap group-hover:underline">Mở công cụ →</span>
+        </a>
+
         {/* ===== Section: Quản lý Chatbot (tách riêng) ===== */}
         <div className="bg-white rounded-lg shadow-lg p-6 mb-4">
           <div className="flex justify-between items-center">
@@ -767,4 +782,4 @@ const AdminDashboard = () => {
   );
 };
 
-export default AdminDashboard; 
+export default AdminDashboard;

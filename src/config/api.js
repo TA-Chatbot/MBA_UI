@@ -29,6 +29,13 @@ export const API_ENDPOINTS = {
   ADMIN_TERMS: `${AUTH_MINI_BASE}/admin/terms`,
   ADMIN_DEFAULT_TERM: `${AUTH_MINI_BASE}/admin/terms/default`,
   ADMIN_TERM_BY_KEY: (termKey) => `${AUTH_MINI_BASE}/admin/terms/${encodeURIComponent(termKey)}`,
+  ADMIN_STUDENT_ASSIGNMENT_PREVIEW: `${AUTH_MINI_BASE}/admin/student-assignments/preview`,
+  ADMIN_STUDENT_ASSIGNMENT_IMPORT: `${AUTH_MINI_BASE}/admin/student-assignments/import`,
+  ADMIN_STUDENT_ASSIGNMENT_HISTORY: `${AUTH_MINI_BASE}/admin/student-assignments/history`,
+  ADMIN_STUDENT_ASSIGNMENT_HISTORY_FILE: (uploadId) => `${AUTH_MINI_BASE}/admin/student-assignments/history/${encodeURIComponent(uploadId)}/file`,
+  ADMIN_STUDENT_ASSIGNMENT_HISTORY_ITEM: (uploadId) => `${AUTH_MINI_BASE}/admin/student-assignments/history/${encodeURIComponent(uploadId)}`,
+  ADMIN_STUDENT_ASSIGNMENT_DRIVE_FILES: `${AUTH_MINI_BASE}/admin/student-assignments/drive/files`,
+  ADMIN_STUDENT_ASSIGNMENT_DRIVE_DOWNLOAD: `${AUTH_MINI_BASE}/admin/student-assignments/drive/download`,
 
   // Files (auth_mini endpoints)
   FILE_UPLOAD: `${AUTH_MINI_BASE}/mba/upload`,

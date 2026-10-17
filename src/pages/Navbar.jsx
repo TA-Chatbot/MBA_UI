@@ -24,7 +24,8 @@ import {
   FaChartBar,
   FaTicketAlt,
   FaStar,
-  FaTachometerAlt
+  FaTachometerAlt,
+  FaFileExcel
 } from "react-icons/fa";
 import { isTokenValid, clearAuthData } from "../utils/auth";
 import { API_ENDPOINTS } from "../config/api";
@@ -261,6 +262,13 @@ const Navbar = () => {
                             onClick={() => setIsAdminDropdownOpen(false)}
                           >
                             <FaChartBar className="mr-2 text-sm inline" /> Quản lý phân tích sinh viên
+                          </a>
+                          <a
+                            href="/mini/admin/student-assignments"
+                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 transition-all duration-200"
+                            onClick={() => setIsAdminDropdownOpen(false)}
+                          >
+                            <FaFileExcel className="mr-2 text-sm inline" /> Upload phân môn sinh viên
                           </a>
                           <a
                             href="/mini/admin/terms"
@@ -564,6 +572,14 @@ const Navbar = () => {
                           >
                             <FaChartBar className="mr-3 text-sm" />
                             Quản lý phân tích sinh viên
+                          </a>
+                          <a
+                            href="/mini/admin/student-assignments"
+                            className="flex items-center px-4 py-3 text-gray-700 hover:bg-red-50 hover:text-red-600 rounded-lg transition-all duration-200"
+                            onClick={() => setIsMenuOpen(false)}
+                          >
+                            <FaFileExcel className="mr-3 text-sm" />
+                            Upload phân môn sinh viên
                           </a>
                           <a
                             href="/mini/admin/terms"
