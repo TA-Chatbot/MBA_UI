@@ -36,6 +36,8 @@ const TeacherQuizHistory = () => {
     // Filter states
     const [selectedTopic, setSelectedTopic] = useState('');
     const [searchUsername, setSearchUsername] = useState('');
+    const [fromDate, setFromDate] = useState('');
+    const [toDate, setToDate] = useState('');
     const [assignedTopics, setAssignedTopics] = useState([]);
 
     // Pagination
@@ -126,25 +128,38 @@ const TeacherQuizHistory = () => {
         }
     };
 
-    const fetchQuizHistory = async () => {
+    const fetchQuizHistory = async (page = currentPage, filterOverrides = {}) => {
         try {
             setLoading(true);
             setError('');
 
+            const topicFilter = filterOverrides.topic ?? selectedTopic;
+            const usernameFilter = filterOverrides.username ?? searchUsername;
+            const fromDateFilter = filterOverrides.fromDate ?? fromDate;
+            const toDateFilter = filterOverrides.toDate ?? toDate;
+
             // Build query params
             const params = new URLSearchParams({
-                skip: ((currentPage - 1) * itemsPerPage).toString(),
+                skip: ((page - 1) * itemsPerPage).toString(),
                 limit: itemsPerPage.toString(),
                 sort_by: 'timestamp',
                 sort_order: 'desc'
             });
 
-            if (selectedTopic) {
-                params.append('topic', selectedTopic);
+            if (topicFilter) {
+                params.append('topic', topicFilter);
             }
 
-            if (searchUsername.trim()) {
-                params.append('username', searchUsername.trim());
+            if (usernameFilter.trim()) {
+                params.append('username', usernameFilter.trim());
+            }
+
+            if (fromDateFilter) {
+                params.append('from_date', fromDateFilter);
+            }
+
+            if (toDateFilter) {
+                params.append('to_date', toDateFilter);
             }
 
             const response = await fetch(
@@ -236,15 +251,21 @@ const TeacherQuizHistory = () => {
     }, [selectedTopic]);
 
     const handleFilter = () => {
+        if (fromDate && toDate && fromDate > toDate) {
+            setError('Ngày bắt đầu không được sau ngày kết thúc');
+            return;
+        }
         setCurrentPage(1);
-        fetchQuizHistory();
+        fetchQuizHistory(1);
     };
 
     const handleReset = () => {
         setSelectedTopic('');
         setSearchUsername('');
+        setFromDate('');
+        setToDate('');
         setCurrentPage(1);
-        setTimeout(() => fetchQuizHistory(), 100);
+        fetchQuizHistory(1, { topic: '', username: '', fromDate: '', toDate: '' });
     };
 
     const formatDate = (timestamp) => {
@@ -367,7 +388,7 @@ const TeacherQuizHistory = () => {
                         Bộ Lọc
                     </h3>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-4 mb-4">
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-2">
                                 Môn Học
@@ -384,6 +405,32 @@ const TeacherQuizHistory = () => {
                                     </option>
                                 ))}
                             </select>
+                        </div>
+
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                                Từ Ngày
+                            </label>
+                            <input
+                                type="date"
+                                value={fromDate}
+                                max={toDate || undefined}
+                                onChange={(e) => setFromDate(e.target.value)}
+                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+                            />
+                        </div>
+
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                                Đến Ngày
+                            </label>
+                            <input
+                                type="date"
+                                value={toDate}
+                                min={fromDate || undefined}
+                                onChange={(e) => setToDate(e.target.value)}
+                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+                            />
                         </div>
 
                         <div>
@@ -649,7 +696,7 @@ const TeacherQuizHistory = () => {
                             <FaHistory className="w-24 h-24 mx-auto mb-4 text-gray-300" />
                             <h3 className="text-xl font-medium mb-2">Không có dữ liệu</h3>
                             <p className="text-gray-400">
-                                {selectedTopic || searchUsername
+                                {selectedTopic || searchUsername || fromDate || toDate
                                     ? 'Không tìm thấy kết quả với bộ lọc hiện tại'
                                     : 'Chưa có học sinh nào làm bài quiz'}
                             </p>
